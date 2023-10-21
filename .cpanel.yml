@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/humomark/repositories/online-shop/public_html/
+    - export DEPLOYPATH=/home/humomark/public_html/
     - /bin/cp -R * $DEPLOYPATH
