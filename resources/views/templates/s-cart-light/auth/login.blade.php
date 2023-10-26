@@ -9,14 +9,18 @@
             <h2>{{ sc_language_render('customer.title_login') }}</h2>
             <form action="{{ sc_route('postLogin') }}" method="post" class="box">
                 {!! csrf_field() !!}
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="control-label">{{ sc_language_render('customer.email') }}</label>
-                    <input class="is_required validate account_input form-control {{ ($errors->has('email'))?"input-error":"" }}"
-                        type="text" name="email" value="{{ old('email') }}">
-                    @if ($errors->has('email'))
-                    <span class="help-block">
-                        {{ $errors->first('email') }}
-                    </span>
+                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                    <label for="email" class="control-label">{{ sc_language_render('customer.phone') }}</label>
+                    <div class="input-group">
+                        <span class="input-group-text">+998</span>
+                        <input type="text"
+                               class="is_required validate account_input form-control {{ ($errors->has('phone'))?"input-error":"" }}"
+                               name="phone" placeholder="{{ sc_language_render('customer.phone') }}" value="{{ old('phone') }}">
+                    </div>
+                    @if ($errors->has('phone'))
+                        <span class="help-block">
+                            {{ $errors->first('phone') }}
+                        </span>
                     @endif
                 </div>
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">

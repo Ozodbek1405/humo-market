@@ -135,10 +135,9 @@
 
     <script src="{{ sc_file($sc_templateFile.'/js/core.min.js')}}"></script>
     <script src="{{ sc_file($sc_templateFile.'/js/script.js')}}"></script>
-    
     <!-- js default for item s-cart -->
     @include($sc_templatePath.'.common.js')
-    <!--//end js defaut -->
+    <!--end js defaut -->
     @stack('scripts')
 
 </body>

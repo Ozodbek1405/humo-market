@@ -83,9 +83,12 @@
             
                     @if (sc_config('customer_phone'))
                     <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                        <input type="text"
-                            class="is_required validate account_input form-control {{ ($errors->has('phone'))?"input-error":"" }}"
-                            name="phone" placeholder="{{ sc_language_render('customer.phone') }}" value="{{ old('phone') }}">
+                       <div class="input-group">
+                           <span class="input-group-text">+998</span>
+                           <input type="text"
+                                  class="is_required validate account_input form-control {{ ($errors->has('phone'))?"input-error":"" }}"
+                                  name="phone" placeholder="{{ sc_language_render('customer.phone') }}" value="{{ old('phone') }}">
+                       </div>
                         @if ($errors->has('phone'))
                         <span class="help-block">
                             {{ $errors->first('phone') }}

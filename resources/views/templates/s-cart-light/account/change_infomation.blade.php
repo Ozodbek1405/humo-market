@@ -90,16 +90,17 @@ $layout_page = shop_profile
                 </div>
                 @endif
 
-
                 @if (sc_config('customer_phone'))
                 <div class="form-group row {{ $errors->has('phone') ? ' has-error' : '' }}">
                     <label for="phone"
                         class="col-md-4 col-form-label text-md-right">{{ sc_language_render('customer.phone') }}</label>
 
                     <div class="col-md-6">
-                        <input id="phone" type="text" class="form-control" name="phone" 
-                            value="{{ (old('phone'))?old('phone'):$customer['phone']}}">
-
+                        <div class="input-group">
+                            <span class="input-group-text">+998</span>
+                            <input id="phone" type="text" class="form-control" name="phone"
+                                   value="{{ (old('phone'))?old('phone'):$customer['phone']}}">
+                        </div>
                         @if($errors->has('phone'))
                         <span class="help-block">{{ $errors->first('phone') }}</span>
                         @endif
