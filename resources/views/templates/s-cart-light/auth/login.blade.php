@@ -7,6 +7,17 @@
     <div class="row">
         <div class="col-12 col-sm-12">
             <h2>{{ sc_language_render('customer.title_login') }}</h2>
+
+            @if (!empty(sc_config('LoginSocialite')))
+                <div class="col-md-3 my-3 pl-0">
+                    <a href="{{ sc_route('login_socialite.index', ['provider' => 'google']) }}">
+                        <button class="btn btn-danger">
+                            <i class="fab fa-google"></i> {{ sc_language_render('front.login') }} google
+                        </button>
+                    </a>
+                </div>
+            @endif
+
             <form action="{{ sc_route('postLogin') }}" method="post" class="box">
                 {!! csrf_field() !!}
                 <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
@@ -34,22 +45,6 @@
                     @endif
             
                 </div>
-                @if (!empty(sc_config('LoginSocialite')))
-                    <ul>
-                    <li class="rd-dropdown-item">
-                      <a class="rd-dropdown-link" href="{{ sc_route('login_socialite.index', ['provider' => 'facebook']) }}"><i class="fab fa-facebook"></i>
-                         {{ sc_language_render('front.login') }} facebook</a>
-                    </li>
-                    <li class="rd-dropdown-item">
-                      <a class="rd-dropdown-link" href="{{ sc_route('login_socialite.index', ['provider' => 'google']) }}"><i class="fab fa-google-plus"></i>
-                         {{ sc_language_render('front.login') }} google</a>
-                    </li>
-                    <li class="rd-dropdown-item">
-                      <a class="rd-dropdown-link" href="{{ sc_route('login_socialite.index', ['provider' => 'github']) }}"><i class="fab fa-github"></i>
-                         {{ sc_language_render('front.login') }} github</a>
-                    </li>
-                    </ul>
-                @endif
                 <p class="lost_password form-group">
                     <a class="btn btn-link" href="{{ sc_route('forgot') }}">
                         {{ sc_language_render('customer.password_forgot') }}
