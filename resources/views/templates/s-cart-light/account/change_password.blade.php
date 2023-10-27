@@ -9,9 +9,8 @@ $layout_page = shop_profile
 @extends($sc_templatePath.'.account.layout')
 
 @section('block_main_profile')
-    <h6 class="title-store">{{ $title }}</h6>
-
-            <form method="POST" action="{{ sc_route('customer.post_change_password') }}">
+        <h6 class="title-store">{{ $title }}</h6>
+        <form method="POST" action="{{ sc_route('customer.post_change_password') }}">
                 @csrf
 
                 <div class="form-group row {{ Session::has('password_old_error') ? ' has-error' : '' }}">
