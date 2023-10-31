@@ -10,7 +10,7 @@ return [
         'address1_null'      => 'nullable|string|max:100',
         'address2_required'  => 'required|string|max:100',
         'address2_null'      => 'nullable|string|max:100',
-        'phone_required'     => 'required|numeric|unique:sc_shop_customer|digits:9',
+        'phone_required'     => 'numeric|unique:sc_shop_customer|digits:9',
         'phone_null'         => 'nullable',
         'address3_required'  => 'required|string|max:100',
         'address3_null'      => 'nullable|string|max:100',
