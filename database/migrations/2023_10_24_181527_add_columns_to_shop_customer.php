@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('sc_shop_customer', function (Blueprint $table) {
+        Schema::table('shop_customer', function (Blueprint $table) {
             $table->string('verify_code')->nullable();
             $table->timestamp('verify_expiration')->nullable();
         });
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('sc_shop_customer', function (Blueprint $table) {
+        Schema::table('shop_customer', function (Blueprint $table) {
             $table->dropColumn('verify_code');
             $table->dropColumn('verify_expiration');
         });

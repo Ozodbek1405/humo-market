@@ -261,17 +261,6 @@ $layout_page = shop_profile
                 </div>
                 @endif
 
-                {{-- Custom fields --}}
-                @php
-                    $customFields = isset($customFields) ? $customFields : [];
-                    $fields = !empty($customer) ? $customer->getCustomFields() : [];
-                @endphp
-                @php
-                    sc_check_view($sc_templatePath.'.common.render_form');
-                @endphp
-                @include($sc_templatePath.'.common.render_form', ['customFields' => $customFields, 'fields' => $fields])
-                {{-- //Custom fields --}}
-
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
                         @php
