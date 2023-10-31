@@ -35,7 +35,7 @@ class ForgotPasswordController extends Forgot
     public function sendResetLinkEmail(Request $request): RedirectResponse
     {
         $data = $request->all();
-        $dataMapping['phone'] = 'required|numeric|exists:sc_shop_customer|digits:9';
+        $dataMapping['phone'] = 'required|numeric|exists:shop_customer|digits:9';
         if (sc_captcha_method() && in_array('forgot', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
             $dataMapping['captcha_field'] = ['required', 'string', new CaptchaRule];
