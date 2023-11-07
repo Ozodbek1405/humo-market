@@ -219,17 +219,7 @@
                         @endif
                     </div>
                     @endif
-            
-                {{-- Custom fields --}}
-                @php
-                    $customFields = isset($customFields) ? $customFields : [];
-                    $fields = [];
-                @endphp
-                @php
-                    sc_check_view($sc_templatePath.'.common.render_form');
-                @endphp
-                @include($sc_templatePath.'.common.render_form', ['customFields' => $customFields, 'fields' => $fields])
-                {{-- //Custom fields --}}
+
 
 
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
