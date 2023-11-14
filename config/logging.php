@@ -3,6 +3,7 @@
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
+use Monolog\Processor\PsrLogMessageProcessor;
 
 return [
 
@@ -15,9 +16,9 @@ return [
     | messages to the logs. The name specified in this option should match
     | one of the channels defined in the "channels" configuration array.
     |
-     */
+    */
 
-    'default'  => env('LOG_CHANNEL', 'daily'),
+    'default' => env('LOG_CHANNEL', 'stack'),
 
     /*
     |--------------------------------------------------------------------------
@@ -48,48 +49,41 @@ return [
     |                    "errorlog", "monolog",
     |                    "custom", "stack"
     |
-     */
+    */
 
     'channels' => [
-        'stack'      => [
-            'driver'            => 'stack',
-            'channels'          => ['daily'],
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
 
-        'single'     => [
+        'single' => [
             'driver' => 'single',
-            'path'   => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
-            'permission' => 0775,
+            'replace_placeholders' => true,
         ],
 
-        'handle'      => [
+        'daily' => [
             'driver' => 'daily',
-            'path'   => storage_path('logs/handle/laravel.log'),
+            'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
-            'days'   => 14,
+            'days' => 14,
+            'replace_placeholders' => true,
         ],
 
-        'daily'      => [
-            'driver' => 'daily',
-            'path'   => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'days'   => 14,
-            'permission' => 0775,
-        ],
-
-        'slack'      => [
-            'driver'   => 'slack',
-            'url'      => env('LOG_SLACK_WEBHOOK_URL'),
-            'username' => 'S-Cart Log',
-            'emoji'    => ':boom:',
-
-            'level' => env('LOG_LEVEL', 'debug'),
+        'slack' => [
+            'driver' => 'slack',
+            'url' => env('LOG_SLACK_WEBHOOK_URL'),
+            'username' => 'Laravel Log',
+            'emoji' => ':boom:',
+            'level' => env('LOG_LEVEL', 'critical'),
+            'replace_placeholders' => true,
         ],
 
         'papertrail' => [
-            'driver'       => 'monolog',
+            'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
             'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class),
             'handler_with' => [
@@ -97,6 +91,7 @@ return [
                 'port' => env('PAPERTRAIL_PORT'),
                 'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
             ],
+            'processors' => [PsrLogMessageProcessor::class],
         ],
 
         'stderr' => [
@@ -107,16 +102,20 @@ return [
             'with' => [
                 'stream' => 'php://stderr',
             ],
+            'processors' => [PsrLogMessageProcessor::class],
         ],
 
         'syslog' => [
             'driver' => 'syslog',
             'level' => env('LOG_LEVEL', 'debug'),
+            'facility' => LOG_USER,
+            'replace_placeholders' => true,
         ],
 
         'errorlog' => [
             'driver' => 'errorlog',
             'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
         ],
 
         'null' => [
@@ -126,13 +125,6 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
-        ],
-
-        'install'     => [
-            'driver' => 'single',
-            'path'   => storage_path('logs/install.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'permission' => 0775,
         ],
     ],
 

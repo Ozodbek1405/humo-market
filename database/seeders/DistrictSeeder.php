@@ -211,17 +211,17 @@ class DistrictSeeder extends Seeder
             [
                 "district_id"=>"40",
                 "region_id"=>"7",
-                "name"=>"город Каган"
+                "name"=>"город Бухара"
             ],
             [
                 "district_id"=>"41",
                 "region_id"=>"7",
-                "name"=>"Бухарский район"
+                "name"=>"город Каган"
             ],
             [
                 "district_id"=>"42",
                 "region_id"=>"7",
-                "name"=>""
+                "name"=>"Бухарский район"
             ],
             [
                 "district_id"=>"43",

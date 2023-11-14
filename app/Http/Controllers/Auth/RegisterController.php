@@ -2,10 +2,23 @@
 
 namespace App\Http\Controllers\Auth;
 
-class RegisterController extends \SCart\Core\Front\Controllers\Auth\RegisterController
+use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
+use App\Models\User;
+
+class RegisterController extends Controller
 {
-    public function __construct()
+    public function register()
     {
-        parent::__construct();
+        return view('auth.register');
+    }
+
+    public function registerPost(RegisterRequest $request)
+    {
+        $data = $request->validated();
+        /** @var User $user */
+        $user = User::query()->create($data);
+        auth()->login($user);
+        return redirect()->route('home');
     }
 }

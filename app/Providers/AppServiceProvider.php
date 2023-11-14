@@ -3,30 +3,21 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\Paginator;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
-     *
-     * @return void
+     * Register any application services.
      */
-    // public function boot()
-    public function boot()
+    public function register(): void
     {
-        Paginator::useBootstrap();
-        //If env is production, then disable debug mode
-        if (config('app.env') === 'production') {
-            config(['app.debug' => false]);
-        }
+        //
     }
 
     /**
-     * Register any application services.
-     *
-     * @return void
+     * Bootstrap any application services.
      */
-    public function register()
+    public function boot(): void
     {
         //
     }

@@ -2,46 +2,68 @@
 
 namespace App\Http\Controllers\Auth;
 
-use SCart\Core\Front\Controllers\Auth\LoginController as Login;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
-class LoginController extends Login
+class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-     */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
-     */
-    public function username(): string
+    public function login()
     {
-        return 'phone';
+        return view('auth.login');
     }
 
-    protected function validateLogin(Request $request)
+    public function loginPost(Request $request)
     {
-        $messages = [
-            'phone.digits'       => sc_language_render('validation.digits', ['attribute'=> sc_language_render('customer.phone')]),
-            'phone.required'    => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.phone')]),
-            'phone.numeric'    => sc_language_render('validation.numeric', ['attribute'=> sc_language_render('customer.phone')]),
-            'password.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.password')]),
-        ];
-        $this->validate($request, [
-            'phone'    => 'required|numeric|digits:9',
-            'password' => 'required|string',
-        ], $messages);
+        $phone = $request->phone;
+        $password = $request->password;
+        /** @var User $user */
+        $user = User::query()->where('phone',$phone)->first();
+        if (!$user || !Hash::check($password, $user->password)) {
+            return redirect()->back()->with('error', 'The phone number or password is incorrect');
+        }
+        auth()->login($user);
+        return redirect()->route('home');
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('home');
+    }
+
+    public function redirectToGoogle()
+    {
+        try {
+            return Socialite::driver('google')->redirect();
+        }catch (Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $user = Socialite::driver('google')->user();
+            /** @var User $findUser */
+            $findUser = User::query()->where('google_id', $user->id)->first();
+            if($findUser){
+                Auth::login($findUser);
+            }else{
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'google_id'=> $user->id,
+                ]);
+                Auth::login($newUser);
+            }
+            return redirect()->route('home');
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
 }
