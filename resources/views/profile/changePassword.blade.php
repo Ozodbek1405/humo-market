@@ -34,14 +34,16 @@
                          @endif
                         <form action="{{route('changeProfile.password',$user->id)}}" method="POST">
                             @csrf
-                            <label class="block mt-4 text-sm">
-                                <span class="text-gray-700 dark:text-gray-400">Old Password</span>
-                                <input class="border w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input"
-                                       name="old_password" placeholder="***************" type="password"/>
-                                @error('old_password')
-                                <p class="text-red-600">{{ $message }}</p>
-                                @enderror
-                            </label>
+                            @if(!is_null($user->password))
+                                <label class="block mt-4 text-sm">
+                                    <span class="text-gray-700 dark:text-gray-400">Old Password</span>
+                                    <input class="border w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input"
+                                           name="old_password" placeholder="***************" type="password"/>
+                                    @error('old_password')
+                                    <p class="text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </label>
+                            @endif
                             <label class="block mt-4 text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Password</span>
                                 <input class="border w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input"

@@ -32,6 +32,9 @@ class ProfileController extends Controller
     {
         $data = $request->validated();
         $user = User::find($user_id);
+        if (!$data || (!isset($data['old_password']) && $user->password)){
+            return back()->with(['error' => 'Enter old password']);
+        }
         if (!Hash::check($data['old_password'], $user->password)){
             return back()->with(['error' => 'Old password is incorrect']);
         }
