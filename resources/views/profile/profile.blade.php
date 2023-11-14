@@ -38,6 +38,14 @@
                                 @enderror
                             </label>
                             <label class="block text-sm">
+                                <span class="text-gray-700 dark:text-gray-400">Email</span>
+                                <input class="border w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input"
+                                       name="email" placeholder="Email" value="{{old('email',auth()->user()->email)}}" required/>
+                                @error('email')
+                                <p class="text-red-600">{{ $message }}</p>
+                                @enderror
+                            </label>
+                            <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Phone</span>
                                 <input id="phone" class="w-full mt-1 text-sm focus:border-purple-400 focus:outline-none form-input border"
                                        name="phone" placeholder="Phone number" value="{{old('phone',auth()->user()->phone)}}" required/>

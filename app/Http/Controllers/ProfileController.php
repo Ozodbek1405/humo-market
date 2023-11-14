@@ -35,7 +35,7 @@ class ProfileController extends Controller
         if (!$data || (!isset($data['old_password']) && $user->password)){
             return back()->with(['error' => 'Enter old password']);
         }
-        if (!Hash::check($data['old_password'], $user->password)){
+        if (isset($data['old_password']) && !Hash::check($data['old_password'], $user->password)){
             return back()->with(['error' => 'Old password is incorrect']);
         }
         $data['password'] = Hash::make($data['password']);

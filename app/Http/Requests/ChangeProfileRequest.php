@@ -25,7 +25,8 @@ class ChangeProfileRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:25',
-            'phone' =>  ['required','numeric','digits:12',Rule::unique('users')->ignore(auth()->user()->id),]
+            'email' =>  ['required','email',Rule::unique('users')->ignore(auth()->user()->id)],
+            'phone' =>  ['required','numeric','digits:12',Rule::unique('users')->ignore(auth()->user()->id)]
         ];
     }
 
