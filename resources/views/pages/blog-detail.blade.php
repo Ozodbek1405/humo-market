@@ -34,7 +34,7 @@
                     <div class="p-r-45 p-r-0-lg">
                         <!--  -->
                         <div class="wrap-pic-w how-pos5-parent">
-                            <img src="images/blog-04.jpg" alt="IMG-BLOG">
+                            <img src="{{asset('images/blog-04.jpg')}}" alt="IMG-BLOG">
 
                             <div class="flex-col-c-m size-123 bg9 how-pos5">
 								<span class="ltext-107 cl2 txt-center">
@@ -48,27 +48,6 @@
                         </div>
 
                         <div class="p-t-32">
-							<span class="flex-w flex-m stext-111 cl2 p-b-19">
-								<span>
-									<span class="cl4">By</span> Admin
-									<span class="cl12 m-l-4 m-r-6">|</span>
-								</span>
-
-								<span>
-									22 Jan, 2018
-									<span class="cl12 m-l-4 m-r-6">|</span>
-								</span>
-
-								<span>
-									StreetStyle, Fashion, Couple
-									<span class="cl12 m-l-4 m-r-6">|</span>
-								</span>
-
-								<span>
-									8 Comments
-								</span>
-							</span>
-
                             <h4 class="ltext-109 cl2 p-b-28">
                                 8 Inspiring Ways to Wear Dresses in the Winter
                             </h4>
@@ -86,107 +65,59 @@
 
                 <div class="col-md-4 col-lg-3 p-b-80">
                     <div class="side-menu">
-                        <div class="bor17 of-hidden pos-relative">
-                            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+                        <h4 class="mtext-112 cl2 p-b-33">
+                            Featured Products
+                        </h4>
 
-                            <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-                                <i class="zmdi zmdi-search"></i>
-                            </button>
-                        </div>
+                        <ul>
+                            <li class="flex-w flex-t p-b-30">
+                                <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                    <img src="{{asset('images/product-min-01.jpg')}}" alt="PRODUCT">
+                                </a>
 
-                        <div class="p-t-55">
-                            <h4 class="mtext-112 cl2 p-b-33">
-                                Categories
-                            </h4>
-
-                            <ul>
-                                <li class="bor18">
-                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                        Fashion
-                                    </a>
-                                </li>
-
-                                <li class="bor18">
-                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                        Beauty
-                                    </a>
-                                </li>
-
-                                <li class="bor18">
-                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                        Street Style
-                                    </a>
-                                </li>
-
-                                <li class="bor18">
-                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                        Life Style
-                                    </a>
-                                </li>
-
-                                <li class="bor18">
-                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                        DIY & Crafts
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="p-t-65">
-                            <h4 class="mtext-112 cl2 p-b-33">
-                                Featured Products
-                            </h4>
-
-                            <ul>
-                                <li class="flex-w flex-t p-b-30">
-                                    <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                        <img src="images/product-min-01.jpg" alt="PRODUCT">
+                                <div class="size-215 flex-col-t p-t-8">
+                                    <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+                                        White Shirt With Pleat Detail Back
                                     </a>
 
-                                    <div class="size-215 flex-col-t p-t-8">
-                                        <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-                                            White Shirt With Pleat Detail Back
-                                        </a>
-
-                                        <span class="stext-116 cl6 p-t-20">
+                                    <span class="stext-116 cl6 p-t-20">
 											$19.00
 										</span>
-                                    </div>
-                                </li>
+                                </div>
+                            </li>
 
-                                <li class="flex-w flex-t p-b-30">
-                                    <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                        <img src="images/product-min-02.jpg" alt="PRODUCT">
+                            <li class="flex-w flex-t p-b-30">
+                                <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                    <img src="{{asset('images/product-min-02.jpg')}}" alt="PRODUCT">
+                                </a>
+
+                                <div class="size-215 flex-col-t p-t-8">
+                                    <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+                                        Converse All Star Hi Black Canvas
                                     </a>
 
-                                    <div class="size-215 flex-col-t p-t-8">
-                                        <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-                                            Converse All Star Hi Black Canvas
-                                        </a>
-
-                                        <span class="stext-116 cl6 p-t-20">
+                                    <span class="stext-116 cl6 p-t-20">
 											$39.00
 										</span>
-                                    </div>
-                                </li>
+                                </div>
+                            </li>
 
-                                <li class="flex-w flex-t p-b-30">
-                                    <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                        <img src="images/product-min-03.jpg" alt="PRODUCT">
+                            <li class="flex-w flex-t p-b-30">
+                                <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                    <img src="{{asset('images/product-min-03.jpg')}}" alt="PRODUCT">
+                                </a>
+
+                                <div class="size-215 flex-col-t p-t-8">
+                                    <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+                                        Nixon Porter Leather Watch In Tan
                                     </a>
 
-                                    <div class="size-215 flex-col-t p-t-8">
-                                        <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-                                            Nixon Porter Leather Watch In Tan
-                                        </a>
-
-                                        <span class="stext-116 cl6 p-t-20">
+                                    <span class="stext-116 cl6 p-t-20">
 											$17.00
 										</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

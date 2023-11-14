@@ -6,92 +6,6 @@
 
 @section('content')
 
-    <!-- Cart -->
-    <div class="wrap-header-cart js-panel-cart">
-        <div class="s-full js-hide-cart"></div>
-
-        <div class="header-cart flex-col-l p-l-65 p-r-25">
-            <div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Your Cart
-				</span>
-
-                <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-                    <i class="zmdi zmdi-close"></i>
-                </div>
-            </div>
-
-            <div class="header-cart-content flex-w js-pscroll">
-                <ul class="header-cart-wrapitem w-full">
-                    <li class="header-cart-item flex-w flex-t m-b-12">
-                        <div class="header-cart-item-img">
-                            <img src="images/item-cart-01.jpg" alt="IMG">
-                        </div>
-
-                        <div class="header-cart-item-txt p-t-8">
-                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                White Shirt Pleat
-                            </a>
-
-                            <span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-                        </div>
-                    </li>
-
-                    <li class="header-cart-item flex-w flex-t m-b-12">
-                        <div class="header-cart-item-img">
-                            <img src="images/item-cart-02.jpg" alt="IMG">
-                        </div>
-
-                        <div class="header-cart-item-txt p-t-8">
-                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                Converse All Star
-                            </a>
-
-                            <span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-                        </div>
-                    </li>
-
-                    <li class="header-cart-item flex-w flex-t m-b-12">
-                        <div class="header-cart-item-img">
-                            <img src="images/item-cart-03.jpg" alt="IMG">
-                        </div>
-
-                        <div class="header-cart-item-txt p-t-8">
-                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                Nixon Porter Leather
-                            </a>
-
-                            <span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-                        </div>
-                    </li>
-                </ul>
-
-                <div class="w-full">
-                    <div class="header-cart-total w-full p-tb-40">
-                        Total: $75.00
-                    </div>
-
-                    <div class="header-cart-buttons flex-w w-full">
-                        <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-                            View Cart
-                        </a>
-
-                        <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                            Check Out
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- Title page -->
     <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url({{asset('images/bg-02.jpg')}});">
         <h2 class="ltext-105 cl0 txt-center">
@@ -132,30 +46,6 @@
                                 <p class="stext-117 cl6">
                                     Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
                                 </p>
-
-                                <div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-                                    <a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                        Continue Reading
-
-                                        <i class="fa fa-long-arrow-right m-l-9"></i>
-                                    </a>
-                                </div>
                             </div>
                         </div>
 
@@ -185,30 +75,6 @@
                                 <p class="stext-117 cl6">
                                     Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
                                 </p>
-
-                                <div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-                                    <a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                        Continue Reading
-
-                                        <i class="fa fa-long-arrow-right m-l-9"></i>
-                                    </a>
-                                </div>
                             </div>
                         </div>
 
@@ -238,30 +104,6 @@
                                 <p class="stext-117 cl6">
                                     Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
                                 </p>
-
-                                <div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-                                    <a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                        Continue Reading
-
-                                        <i class="fa fa-long-arrow-right m-l-9"></i>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -269,107 +111,59 @@
 
                 <div class="col-md-4 col-lg-3 p-b-80">
                     <div class="side-menu">
-                        <div class="bor17 of-hidden pos-relative">
-                            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+                        <h4 class="mtext-112 cl2 p-b-33">
+                            Featured Products
+                        </h4>
 
-                            <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-                                <i class="zmdi zmdi-search"></i>
-                            </button>
-                        </div>
+                        <ul>
+                            <li class="flex-w flex-t p-b-30">
+                                <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                    <img src="images/product-min-01.jpg" alt="PRODUCT">
+                                </a>
 
-                        <div class="p-t-55">
-                            <h4 class="mtext-112 cl2 p-b-33">
-                                Categories
-                            </h4>
-
-                            <ul>
-                                <li class="bor18">
-                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                        Fashion
-                                    </a>
-                                </li>
-
-                                <li class="bor18">
-                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                        Beauty
-                                    </a>
-                                </li>
-
-                                <li class="bor18">
-                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                        Street Style
-                                    </a>
-                                </li>
-
-                                <li class="bor18">
-                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                        Life Style
-                                    </a>
-                                </li>
-
-                                <li class="bor18">
-                                    <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-                                        DIY & Crafts
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="p-t-65">
-                            <h4 class="mtext-112 cl2 p-b-33">
-                                Featured Products
-                            </h4>
-
-                            <ul>
-                                <li class="flex-w flex-t p-b-30">
-                                    <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                        <img src="images/product-min-01.jpg" alt="PRODUCT">
+                                <div class="size-215 flex-col-t p-t-8">
+                                    <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+                                        White Shirt With Pleat Detail Back
                                     </a>
 
-                                    <div class="size-215 flex-col-t p-t-8">
-                                        <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-                                            White Shirt With Pleat Detail Back
-                                        </a>
-
-                                        <span class="stext-116 cl6 p-t-20">
+                                    <span class="stext-116 cl6 p-t-20">
 											$19.00
 										</span>
-                                    </div>
-                                </li>
+                                </div>
+                            </li>
 
-                                <li class="flex-w flex-t p-b-30">
-                                    <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                        <img src="images/product-min-02.jpg" alt="PRODUCT">
+                            <li class="flex-w flex-t p-b-30">
+                                <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                    <img src="images/product-min-02.jpg" alt="PRODUCT">
+                                </a>
+
+                                <div class="size-215 flex-col-t p-t-8">
+                                    <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+                                        Converse All Star Hi Black Canvas
                                     </a>
 
-                                    <div class="size-215 flex-col-t p-t-8">
-                                        <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-                                            Converse All Star Hi Black Canvas
-                                        </a>
-
-                                        <span class="stext-116 cl6 p-t-20">
+                                    <span class="stext-116 cl6 p-t-20">
 											$39.00
 										</span>
-                                    </div>
-                                </li>
+                                </div>
+                            </li>
 
-                                <li class="flex-w flex-t p-b-30">
-                                    <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                        <img src="images/product-min-03.jpg" alt="PRODUCT">
+                            <li class="flex-w flex-t p-b-30">
+                                <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                    <img src="images/product-min-03.jpg" alt="PRODUCT">
+                                </a>
+
+                                <div class="size-215 flex-col-t p-t-8">
+                                    <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+                                        Nixon Porter Leather Watch In Tan
                                     </a>
 
-                                    <div class="size-215 flex-col-t p-t-8">
-                                        <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-                                            Nixon Porter Leather Watch In Tan
-                                        </a>
-
-                                        <span class="stext-116 cl6 p-t-20">
+                                    <span class="stext-116 cl6 p-t-20">
 											$17.00
 										</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
