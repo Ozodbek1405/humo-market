@@ -13,7 +13,7 @@
         </h2>
     </section>
 
-
+{{--@dd($blogs)--}}
     <!-- Content page -->
     <section class="bg0 p-t-62 p-b-60">
         <div class="container">
@@ -21,91 +21,31 @@
                 <div class="col-md-8 col-lg-9 p-b-80">
                     <div class="p-r-45 p-r-0-lg">
                         <!-- item blog -->
-                        <div class="p-b-63">
-                            <a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-                                <img src="images/blog-04.jpg" alt="IMG-BLOG">
-
-                                <div class="flex-col-c-m size-123 bg9 how-pos5">
+                        @foreach($blogs as $blog)
+                            <div class="p-b-63">
+                                <a href="{{route('blog.detail',$blog->id)}}" class="hov-img0 how-pos5-parent">
+                                    <img style="width: 900px; height: 500px" src="{{ asset('storage/'.$blog->image) }}" alt="IMG-BLOG">
+                                    <div class="flex-col-c-m size-123 bg9 how-pos5">
 									<span class="ltext-107 cl2 txt-center">
-										22
+										{{$blog->created_at->format('d')}}
 									</span>
-
                                     <span class="stext-109 cl3 txt-center">
-										Jan 2018
+										{{$blog->created_at->format('M Y')}}
 									</span>
+                                    </div>
+                                </a>
+                                <div class="p-t-32">
+                                    <h4 class="p-b-15">
+                                        <a href="{{route('blog.detail',$blog->id)}}" class="ltext-108 cl2 hov-cl1 trans-04">
+                                            {{$blog->title}}
+                                        </a>
+                                    </h4>
+                                    <p class="stext-117 cl6">
+                                        {{$blog->desc}}
+                                    </p>
                                 </div>
-                            </a>
-
-                            <div class="p-t-32">
-                                <h4 class="p-b-15">
-                                    <a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-                                        8 Inspiring Ways to Wear Dresses in the Winter
-                                    </a>
-                                </h4>
-
-                                <p class="stext-117 cl6">
-                                    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-                                </p>
                             </div>
-                        </div>
-
-                        <!-- item blog -->
-                        <div class="p-b-63">
-                            <a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-                                <img src="images/blog-05.jpg" alt="IMG-BLOG">
-
-                                <div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										18
-									</span>
-
-                                    <span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
-                                </div>
-                            </a>
-
-                            <div class="p-t-32">
-                                <h4 class="p-b-15">
-                                    <a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-                                        The Great Big List of Men’s Gifts for the Holidays
-                                    </a>
-                                </h4>
-
-                                <p class="stext-117 cl6">
-                                    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- item blog -->
-                        <div class="p-b-63">
-                            <a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-                                <img src="images/blog-06.jpg" alt="IMG-BLOG">
-
-                                <div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										16
-									</span>
-
-                                    <span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
-                                </div>
-                            </a>
-
-                            <div class="p-t-32">
-                                <h4 class="p-b-15">
-                                    <a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-                                        5 Winter-to-Spring Fashion Trends to Try Now
-                                    </a>
-                                </h4>
-
-                                <p class="stext-117 cl6">
-                                    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-                                </p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 

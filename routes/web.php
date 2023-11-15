@@ -58,6 +58,6 @@ Route::get('/product/detail',[ProductController::class,'product_detail'])->name(
 Route::get('/shopping-cart',[ShopController::class,'shopping_cart'])->name('shopping.cart');
 Route::get('/wishlist',[ShopController::class,'wishlist'])->name('wishlist');
 Route::get('/blog',[BlogController::class,'blog'])->name('blog');
-Route::get('/blog/detail',[BlogController::class,'blog_detail'])->name('blog.detail');
+Route::get('/blog/detail/{blog_id}',[BlogController::class,'blog_detail'])->name('blog.detail');
 
 
