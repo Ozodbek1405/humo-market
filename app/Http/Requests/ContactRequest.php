@@ -23,7 +23,7 @@ class ContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' =>  'required|numeric|digits:12',
+            'phone' =>  'required|starts_with:998|numeric|digits:12',
             'message' => 'required|min:5'
         ];
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Review;
+
 class ProductController extends Controller
 {
     public function product()
@@ -12,6 +14,7 @@ class ProductController extends Controller
 
     public function product_detail()
     {
-        return view('pages.product-detail');
+        $reviews = Review::query()->get();
+        return view('pages.product-detail',compact('reviews'));
     }
 }

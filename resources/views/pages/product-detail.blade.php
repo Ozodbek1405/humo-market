@@ -3,7 +3,9 @@
 
 @endsection
 
-
+@push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.css"/>
+@endpush
 @section('content')
 
     <!-- breadcrumb -->
@@ -176,22 +178,109 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item p-b-10">
-                            <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
+                            <a class="nav-link active" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
                         </li>
-
+                        <li class="nav-item p-b-10">
+                            <a class="nav-link" data-toggle="tab" href="#description" role="tab">Description</a>
+                        </li>
                         <li class="nav-item p-b-10">
                             <a class="nav-link" data-toggle="tab" href="#information" role="tab">Additional information</a>
-                        </li>
-
-                        <li class="nav-item p-b-10">
-                            <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
                         </li>
                     </ul>
 
                     <!-- Tab panes -->
                     <div class="tab-content p-t-43">
                         <!-- - -->
-                        <div class="tab-pane fade show active" id="description" role="tabpanel">
+                        <div class="tab-pane fade show active" id="reviews" role="tabpanel">
+                            <div class="row">
+                                <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+                                    <div class="p-b-30 m-lr-15-sm">
+                                        <!-- Review -->
+                                        @foreach($reviews as $review)
+                                            <div class="flex-w flex-t p-b-68">
+                                                <div class="size-207">
+                                                    <div class="flex-w flex-sb-m p-b-17">
+													<span class="mtext-107 cl2 p-r-20">
+														{{$review->name}}
+													</span>
+                                                    <div class="flex-row" id="stars{{$review->id}}"></div>
+                                                    </div>
+                                                    <p class="stext-102 cl6">
+                                                        {{$review->text}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @if (session('success'))
+                                            <div class="alert alert-success">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
+                                        <!-- Add review -->
+                                        <form action="{{route('review')}}" method="POST" class="w-full">
+                                            @csrf
+                                            <h5 class="mtext-108 cl2 p-b-7">
+                                                Add a review
+                                            </h5>
+                                            <p class="stext-102 cl6">
+                                                Your phone number will not be published.
+                                            </p>
+                                            <div class="flex-w flex-m p-t-50 p-b-23">
+												<span class="stext-102 cl3 m-r-16">
+													Your Rating
+												</span>
+                                                <span class="wrap-rating fs-18 cl11 pointer">
+													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+													<input class="dis-none" type="number" name="rate">
+												</span>
+                                                @error('rate')
+                                                    <p class="text-red-600">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+
+                                            <div class="row p-b-25">
+                                                <div class="col-12 p-b-5">
+                                                    <label class="stext-102 cl3" for="review">Your review</label>
+                                                    <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="text" required></textarea>
+                                                    @error('text')
+                                                    <p class="text-red-600">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-sm-6 p-b-5">
+                                                    <label class="stext-102 cl3" for="name">Name</label>
+                                                    <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name"
+                                                           type="text" name="name" required value="{{old('name')}}">
+                                                    @error('name')
+                                                    <p class="text-red-600">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-sm-6 p-b-5">
+                                                    <label class="stext-102 cl3" for="phone">Phone</label>
+                                                    <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="phone"
+                                                           type="text" name="phone" required value="{{old('phone')}}">
+                                                    @error('phone')
+                                                    <p class="text-red-600">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+                                                Submit
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- - -->
+                        <div class="tab-pane fade" id="description" role="tabpanel">
                             <div class="how-pos2 p-lr-15-md">
                                 <p class="stext-102 cl6">
                                     Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat, purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
@@ -254,89 +343,6 @@
 											</span>
                                         </li>
                                     </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- - -->
-                        <div class="tab-pane fade" id="reviews" role="tabpanel">
-                            <div class="row">
-                                <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-                                    <div class="p-b-30 m-lr-15-sm">
-                                        <!-- Review -->
-                                        <div class="flex-w flex-t p-b-68">
-                                            <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                                <img src="{{asset('images/avatar-01.jpg')}}" alt="AVATAR">
-                                            </div>
-
-                                            <div class="size-207">
-                                                <div class="flex-w flex-sb-m p-b-17">
-													<span class="mtext-107 cl2 p-r-20">
-														Ariana Grande
-													</span>
-
-                                                    <span class="fs-18 cl11">
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star-half"></i>
-													</span>
-                                                </div>
-
-                                                <p class="stext-102 cl6">
-                                                    Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <!-- Add review -->
-                                        <form class="w-full">
-                                            <h5 class="mtext-108 cl2 p-b-7">
-                                                Add a review
-                                            </h5>
-
-                                            <p class="stext-102 cl6">
-                                                Your email address will not be published. Required fields are marked *
-                                            </p>
-
-                                            <div class="flex-w flex-m p-t-50 p-b-23">
-												<span class="stext-102 cl3 m-r-16">
-													Your Rating
-												</span>
-
-                                                <span class="wrap-rating fs-18 cl11 pointer">
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<input class="dis-none" type="number" name="rating">
-												</span>
-                                            </div>
-
-                                            <div class="row p-b-25">
-                                                <div class="col-12 p-b-5">
-                                                    <label class="stext-102 cl3" for="review">Your review</label>
-                                                    <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
-                                                </div>
-
-                                                <div class="col-sm-6 p-b-5">
-                                                    <label class="stext-102 cl3" for="name">Name</label>
-                                                    <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
-                                                </div>
-
-                                                <div class="col-sm-6 p-b-5">
-                                                    <label class="stext-102 cl3" for="email">Email</label>
-                                                    <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
-                                                </div>
-                                            </div>
-
-                                            <button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
-                                                Submit
-                                            </button>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -628,4 +634,19 @@
             </div>
         </div>
     </section>
+
+
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/jquery-raty-js@2.8.0/lib/jquery.raty.min.js"></script>
+    <script>
+        @foreach ($reviews as $review)
+        $("#stars{{$review->id}}").raty({
+            path: 'https://cdn.jsdelivr.net/npm/jquery-raty-js@2.8.0/lib/images',
+            readOnly: true,
+            score: {{$review->rate ?? 0}},
+            size: 12
+        });
+        @endforeach
+    </script>
+@endpush

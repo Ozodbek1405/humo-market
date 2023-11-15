@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             PackagingTypesSeeder::class,
             SubmissionTypesSeeder::class,
             OrderStatusSeeder::class,
+            ProductSizeSeeder::class,
+            ProductColorSeeder::class,
         ]);
     }
 }

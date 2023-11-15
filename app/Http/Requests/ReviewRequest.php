@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResetRequest extends FormRequest
+class ReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,10 @@ class ResetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => 'required|starts_with:998|numeric|exists:users|digits:12',
+            'name' => 'required|min:3',
+            'phone' =>  'required|starts_with:998|numeric|digits:12',
+            'text' => 'required|min:5|max:255',
+            'rate' => 'required|numeric|gt:0'
         ];
     }
 
