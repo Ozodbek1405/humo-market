@@ -1,11 +1,11 @@
 @extends('layouts.master')
 @section('title')
-SHOP
+    SHOP
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="{{asset('asset/css/jquery-ui.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('asset/css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
 @endpush
 @section('content')
 
@@ -241,9 +241,9 @@ SHOP
                     <div class="row">
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('asset/img/shop/shop-1.jpg')}}">
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/shop-1.jpg')}}">
                                     <ul class="product__hover">
-                                        <li><a href="{{asset('asset/img/shop/shop-1.jpg')}}" class="image-popup"><i class="zmdi zmdi-eye"></i></a></li>
+                                        <li><a href="{{asset('images/shop-1.jpg')}}" class="image-popup"><i class="zmdi zmdi-eye"></i></a></li>
                                         <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
                                         <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a></li>
                                     </ul>
@@ -263,9 +263,9 @@ SHOP
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('asset/img/shop/shop-2.jpg')}}">
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/shop-2.jpg')}}">
                                     <ul class="product__hover">
-                                        <li><a href="{{asset('asset/img/shop/shop-2.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="{{asset('images/shop-2.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -285,9 +285,9 @@ SHOP
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('asset/img/shop/shop-3.jpg')}}">
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/shop-3.jpg')}}">
                                     <ul class="product__hover">
-                                        <li><a href="{{asset('asset/img/shop/shop-3.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="{{asset('images/shop-3.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -307,9 +307,9 @@ SHOP
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('asset/img/shop/shop-4.jpg')}}">
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/shop-4.jpg')}}">
                                     <ul class="product__hover">
-                                        <li><a href="{{asset('asset/img/shop/shop-4.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="{{asset('images/shop-4.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -329,10 +329,10 @@ SHOP
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('asset/img/shop/shop-5.jpg')}}">
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/shop-5.jpg')}}">
                                     <div class="label">Sale</div>
                                     <ul class="product__hover">
-                                        <li><a href="{{asset('asset/img/shop/shop-5.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="{{asset('images/shop-5.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -352,9 +352,9 @@ SHOP
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('asset/img/shop/shop-6.jpg')}}">
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/shop-6.jpg')}}">
                                     <ul class="product__hover">
-                                        <li><a href="{{asset('asset/img/shop/shop-6.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="{{asset('images/shop-6.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -374,9 +374,9 @@ SHOP
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('asset/img/shop/shop-7.jpg')}}">
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/shop-7.jpg')}}">
                                     <ul class="product__hover">
-                                        <li><a href="{{asset('asset/img/shop/shop-7.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="{{asset('images/shop-7.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -396,10 +396,10 @@ SHOP
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('asset/img/shop/shop-8.jpg')}}">
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/shop-8.jpg')}}">
                                     <div class="label stockout stockblue">Out Of Stock</div>
                                     <ul class="product__hover">
-                                        <li><a href="{{asset('asset/img/shop/shop-8.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="{{asset('images/shop-8.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -419,10 +419,10 @@ SHOP
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset('asset/img/shop/shop-9.jpg')}}">
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('images/shop-9.jpg')}}">
                                     <div class="label">Sale</div>
                                     <ul class="product__hover">
-                                        <li><a href="{{asset('asset/img/shop/shop-9.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="{{asset('images/shop-9.jpg')}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -458,11 +458,11 @@ SHOP
 @push('scripts')
     <!-- Js Plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{asset('asset/js/jquery.magnific-popup.min.js')}}"></script>
-    <script src="{{asset('asset/js/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('asset/js/jquery.countdown.min.js')}}"></script>
-    <script src="{{asset('asset/js/jquery.slicknav.js')}}"></script>
-    <script src="{{asset('asset/js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('asset/js/jquery.nicescroll.min.js')}}"></script>
-    <script src="{{asset('asset/js/main.js')}}"></script>
+    <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('js/jquery.countdown.min.js')}}"></script>
+    <script src="{{asset('js/jquery.slicknav.js')}}"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/jquery.nicescroll.min.js')}}"></script>
+    <script src="{{asset('js/product.js')}}"></script>
 @endpush

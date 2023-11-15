@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\{AboutController,
+    Auth\LoginController,
+    Auth\RegisterController,
+    Auth\ResetController,
+    BlogController,
+    ContactController,
+    HomeController,
+    ProductController,
+    ProfileController,
+    ShopController};
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 
