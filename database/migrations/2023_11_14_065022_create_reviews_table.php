@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('text')->nullable();
             $table->integer('rate')->nullable();
+            $table->integer('product_id')->nullable();
             $table->timestamps();
         });
     }

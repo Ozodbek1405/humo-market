@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->longText('images')->nullable();
-            $table->json('size_id');
-            $table->json('color_id');
+            $table->string('product_colors_id');
+            $table->string('product_sizes_id');
+            $table->integer('brand_id')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('views')->nullable();
             $table->integer('count');
             $table->integer('rate')->nullable();
             $table->string('dimensions')->nullable();

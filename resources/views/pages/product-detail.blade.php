@@ -197,7 +197,7 @@
                                     <div class="p-b-30 m-lr-15-sm">
                                         <!-- Review -->
                                         @foreach($reviews as $review)
-                                            <div class="flex-w flex-t p-b-68">
+                                            <div class="flex-w flex-t border p-4 my-2">
                                                 <div class="size-207">
                                                     <div class="flex-w flex-sb-m p-b-17">
 													<span class="mtext-107 cl2 p-r-20">
