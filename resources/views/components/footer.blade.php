@@ -8,7 +8,22 @@
                 </h4>
 
                 <p class="stext-107 cl7 size-201">
-                    Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien.
+                </p>
+            </div>
+            <div class="col-md-4 p-b-50">
+                <h4 class="stext-301 cl0 p-b-30">
+                    GET IN TOUCH
+                </h4>
+
+                <p class="stext-107 cl7 size-201">
+                    Toshkent shahri
+                </p>
+                <p class="stext-107 cl7 size-201 my-1">
+                    +998948480980
+                </p>
+                <p class="stext-107 cl7 size-201">
+                    humomarket@gmail.com
                 </p>
 
                 <div class="p-t-27">
@@ -27,62 +42,25 @@
             </div>
             <div class="col-md-4 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    Categories
-                </h4>
-
-                <ul>
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Women
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Men
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Shoes
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Watches
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-4 p-b-50">
-                <h4 class="stext-301 cl0 p-b-30">
                     Help
                 </h4>
 
                 <ul>
                     <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Track Order
+                        <a href="{{route('blog')}}" class="stext-107 cl7 hov-cl1 trans-04">
+                            Blog
                         </a>
                     </li>
 
                     <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Returns
+                        <a href="{{route('about')}}" class="stext-107 cl7 hov-cl1 trans-04">
+                            About
                         </a>
                     </li>
 
                     <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Shipping
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            FAQs
+                        <a href="{{route('contact')}}" class="stext-107 cl7 hov-cl1 trans-04">
+                            Contact
                         </a>
                     </li>
                 </ul>
