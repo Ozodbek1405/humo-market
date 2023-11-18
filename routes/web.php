@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{AboutController,
+    Admin\AdminProductController,
     Auth\LoginController,
     Auth\RegisterController,
     Auth\ResetController,
@@ -27,6 +28,13 @@ use TCG\Voyager\Facades\Voyager;
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+    Route::get('/products',[AdminProductController::class,'index'])->name('product.view');
+    Route::get('/products/create',[AdminProductController::class,'create'])->name('product.create');
+    Route::get('/get/childCategory',[AdminProductController::class,'getChildCategory'])->name('getChildCategory');
+    Route::post('/products/store',[AdminProductController::class,'productStore'])->name('products.store');
+    Route::get('/products/delete/{product_id}',[AdminProductController::class,'productDelete'])->name('products.delete');
+    Route::get('/products/edit/{product_id}',[AdminProductController::class,'edit'])->name('product.edit');
+    Route::post('/products/update/{product_id}',[AdminProductController::class,'update'])->name('product.update');
 });
 Route::group(['middleware' => 'auth'], static function () {
     Route::prefix('profile')->group(function () {

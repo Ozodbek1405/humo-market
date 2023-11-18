@@ -58,6 +58,20 @@
                             </div>
                         </div>
                         <form method="GET">
+                            <div class="sidebar__sizes">
+                                <div class="section-title">
+                                    <h4>Shop Brands</h4>
+                                </div>
+                                <div class="size__list">
+                                    @foreach($brands as $brand)
+                                        <label for="#{{$brand->name}}">
+                                            {{$brand->name}}
+                                            <input type="checkbox" id="#{{$brand->name}}" name="brands[]" value="{{$brand->id}}">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </div>
                             <div class="sidebar__filter">
                                 <div class="section-title">
                                     <h4>Shop by price</h4>

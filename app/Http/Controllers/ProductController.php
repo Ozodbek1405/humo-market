@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Brand;
 use App\Models\ChildCategory;
 use App\Models\ParentCategory;
 use App\Models\ProductColor;
@@ -13,11 +14,12 @@ class ProductController extends Controller
 {
     public function product()
     {
+        $brands = Brand::query()->get();
         $product_colors = ProductColor::query()->get();
         $product_sizes = ProductSize::query()->get();
         $parent_categories = ParentCategory::query()->get();
         $child_categories = ChildCategory::query()->get();
-        return view('pages.product',compact('product_colors','product_sizes','parent_categories','child_categories'));
+        return view('pages.product',compact('brands','product_colors','product_sizes','parent_categories','child_categories'));
     }
 
     public function product_detail()

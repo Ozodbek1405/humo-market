@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-4 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    GET IN TOUCH
+                    ABOUT
                 </h4>
 
                 <p class="stext-107 cl7 size-201">
@@ -13,7 +13,7 @@
             </div>
             <div class="col-md-4 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    GET IN TOUCH
+                    CONTACT
                 </h4>
 
                 <p class="stext-107 cl7 size-201">
