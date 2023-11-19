@@ -62,6 +62,7 @@ class AdminProductController extends Controller
             'count' =>  $data['count'],
             'dimensions' =>  $data['dimensions']??null,
             'weight' =>  $data['weight']??null,
+            'materials' =>  $data['materials']??null,
         ]);
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $uploadedImage) {
@@ -120,6 +121,7 @@ class AdminProductController extends Controller
             'count' =>  $data['count'],
             'dimensions' =>  $data['dimensions']??null,
             'weight' =>  $data['weight']??null,
+            'materials' =>  $data['materials']??null,
         ]);
         if (isset($data['images'])){
            $product->images = null;

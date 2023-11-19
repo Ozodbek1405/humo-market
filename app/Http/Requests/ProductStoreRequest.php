@@ -37,6 +37,7 @@ class ProductStoreRequest extends FormRequest
             'count' => 'required',
             'dimensions' => '',
             'weight' => '',
+            'materials' => '',
         ];
     }
 

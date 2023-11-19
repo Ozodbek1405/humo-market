@@ -37,37 +37,18 @@
                         <div class="wrap-slick3 flex-sb flex-w">
                             <div class="wrap-slick3-dots"></div>
                             <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
                             <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="{{asset('images/product-detail-01.jpg')}}">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="{{asset('images/product-detail-01.jpg')}}" alt="IMG-PRODUCT">
+                                @foreach($product->formatted_images as $image)
+                                    <div class="item-slick3" data-thumb="{{asset('storage/uploads/'.$image)}}">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img src="{{asset('storage/uploads/'.$image)}}" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('images/product-detail-01.jpg')}}">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('storage/uploads/'.$image)}}">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="item-slick3" data-thumb="{{asset('images/product-detail-02.jpg')}}">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="{{asset('images/product-detail-02.jpg')}}" alt="IMG-PRODUCT">
-
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('images/product-detail-02.jpg')}}">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="item-slick3" data-thumb="{{asset('images/product-detail-03.jpg')}}">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="{{asset('images/product-detail-03.jpg')}}" alt="IMG-PRODUCT">
-
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('images/product-detail-03.jpg')}}">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -76,15 +57,15 @@
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
                         <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                            Lightweight Jacket
+                            {{$product->name}}
                         </h4>
 
                         <span class="mtext-106 cl2">
-							$58.79
+							{{$product->formatted_price}} so'm
 						</span>
 
                         <p class="stext-102 cl3 p-t-23">
-                            Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+                            {{$product->title}}
                         </p>
 
                         <!--  -->
@@ -93,37 +74,24 @@
                                 <div class="size-203 flex-c-m respon6">
                                     Size
                                 </div>
-
                                 <div class="size-204 respon6-next">
                                     <div class="rs1-select2 bor8 bg0">
                                         <select class="js-select2" name="time">
                                             <option>Choose an option</option>
-                                            <option>Size S</option>
-                                            <option>Size M</option>
-                                            <option>Size L</option>
-                                            <option>Size XL</option>
+                                            @foreach(explode(',',$product->product_sizes_id) as $size)
+                                                <option value="{{$size}}">Size {{App\Models\ProductSize::find($size)->name}}</option>
+                                            @endforeach
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-203 flex-c-m respon6">
-                                    Color
+                                    Color :
                                 </div>
-
                                 <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Red</option>
-                                            <option>Blue</option>
-                                            <option>White</option>
-                                            <option>Grey</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
+                                    {{$product->product_color->name}}
                                 </div>
                             </div>
 
@@ -133,14 +101,11 @@
                                         <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-minus"></i>
                                         </div>
-
                                         <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
                                         <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-plus"></i>
                                         </div>
                                     </div>
-
                                     <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                         Add to cart
                                     </button>
@@ -155,16 +120,13 @@
                                     <i class="zmdi zmdi-favorite"></i>
                                 </a>
                             </div>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
                                 <i class="fa fa-facebook"></i>
                             </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                            <a target="_blank" href="https://twitter.com/intent/tweet?text={{ url()->current() }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
                                 <i class="fa fa-twitter"></i>
                             </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Telegram">
+                            <a target="_blank" href="https://t.me/share/url?url={{ url()->current() }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Telegram">
                                 <i class="fa fa-telegram"></i>
                             </a>
                         </div>
@@ -283,7 +245,7 @@
                         <div class="tab-pane fade" id="description" role="tabpanel">
                             <div class="how-pos2 p-lr-15-md">
                                 <p class="stext-102 cl6">
-                                    Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat, purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+                                    {{$product->description}}
                                 </p>
                             </div>
                         </div>
@@ -293,53 +255,52 @@
                             <div class="row">
                                 <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                     <ul class="p-lr-28 p-lr-15-sm">
-                                        <li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Weight
-											</span>
-
-                                            <span class="stext-102 cl6 size-206">
-												0.79 kg
-											</span>
-                                        </li>
-
-                                        <li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Dimensions
-											</span>
-
-                                            <span class="stext-102 cl6 size-206">
-												110 x 33 x 100 cm
-											</span>
-                                        </li>
-
-                                        <li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Materials
-											</span>
-
-                                            <span class="stext-102 cl6 size-206">
-												60% cotton
-											</span>
-                                        </li>
-
+                                        @isset($product->weight)
+                                            <li class="flex-w flex-t p-b-7">
+                                                <span class="stext-102 cl3 size-205">
+                                                    Weight
+                                                </span>
+                                                <span class="stext-102 cl6 size-206">
+                                                    {{$product->weight}} kg
+                                                </span>
+                                            </li>
+                                        @endisset
+                                        @isset($product->dimensions)
+                                            <li class="flex-w flex-t p-b-7">
+                                                <span class="stext-102 cl3 size-205">
+                                                    Dimensions
+                                                </span>
+                                                <span class="stext-102 cl6 size-206">
+                                                    {{$product->dimensions}}
+                                                </span>
+                                            </li>
+                                        @endisset
+                                        @isset($product->materials)
+                                            <li class="flex-w flex-t p-b-7">
+                                                <span class="stext-102 cl3 size-205">
+                                                    Materials
+                                                </span>
+                                                <span class="stext-102 cl6 size-206">
+                                                    {{$product->materials}}
+                                                </span>
+                                            </li>
+                                        @endisset
                                         <li class="flex-w flex-t p-b-7">
 											<span class="stext-102 cl3 size-205">
 												Color
 											</span>
-
                                             <span class="stext-102 cl6 size-206">
-												Black, Blue, Grey, Green, Red, White
+												{{$product->product_color->name}}
 											</span>
                                         </li>
-
                                         <li class="flex-w flex-t p-b-7">
 											<span class="stext-102 cl3 size-205">
 												Size
 											</span>
-
                                             <span class="stext-102 cl6 size-206">
-												XL, L, M, S
+												@foreach(explode(',',$product->product_sizes_id) as $size)
+                                                     {{App\Models\ProductSize::find($size)->name}},
+                                                @endforeach
 											</span>
                                         </li>
                                     </ul>
@@ -349,16 +310,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-			<span class="stext-107 cl6 p-lr-25">
-				SKU: JAK-01
-			</span>
-
-            <span class="stext-107 cl6 p-lr-25">
-				Categories: Jacket, Men
-			</span>
         </div>
     </section>
 

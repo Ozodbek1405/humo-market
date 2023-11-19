@@ -27,6 +27,16 @@ class Product extends Model
         'weight',
     ];
 
+    public function product_color()
+    {
+        return $this->belongsTo(ProductColor::class,'product_colors_id','id');
+    }
+
+    public function product_size()
+    {
+        return $this->belongsTo(ProductSize::class,'product_sizes_id','id');
+    }
+
     public function getFormattedImagesAttribute()
     {
         return json_decode($this->images);

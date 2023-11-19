@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Blog;
+use App\Models\Product;
 
 class BlogController extends Controller
 {
     public function blog()
     {
         $blogs = Blog::query()->get();
-        return view('pages.blog',compact('blogs'));
+        $products = Product::query()->orderByDesc('rate')->take(5)->get();
+        return view('pages.blog',compact('blogs','products'));
     }
 
     public function blog_detail($blog_id)
     {
         $blog = Blog::find($blog_id);
-        return view('pages.blog-detail',compact('blog'));
+        $products = Product::query()->orderByDesc('rate')->take(5)->get();
+        return view('pages.blog-detail',compact('blog','products'));
     }
 }

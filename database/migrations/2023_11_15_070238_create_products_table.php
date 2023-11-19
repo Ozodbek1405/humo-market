@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('rate')->nullable();
             $table->string('dimensions')->nullable();
             $table->string('weight')->nullable();
+            $table->string('materials')->nullable();
             $table->timestamps();
         });
     }

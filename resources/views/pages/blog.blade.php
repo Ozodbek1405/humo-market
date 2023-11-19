@@ -54,55 +54,22 @@
                         <h4 class="mtext-112 cl2 p-b-33">
                             Featured Products
                         </h4>
-
                         <ul>
-                            <li class="flex-w flex-t p-b-30">
-                                <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="images/product-min-01.jpg" alt="PRODUCT">
-                                </a>
-
-                                <div class="size-215 flex-col-t p-t-8">
-                                    <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-                                        White Shirt With Pleat Detail Back
+                            @foreach($products as $product)
+                                <li class="flex-w flex-t p-b-30">
+                                    <a href="{{route('product.detail',$product->id)}}" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                        <img style="height: 110px;width: 90px;" class="border" src="{{asset('storage/uploads/'.$product->formatted_images[0])}}" alt="PRODUCT">
                                     </a>
-
-                                    <span class="stext-116 cl6 p-t-20">
-											$19.00
+                                    <div class="size-215 flex-col-t p-t-8">
+                                        <a href="{{route('product.detail',$product->id)}}" class="stext-116 cl8 hov-cl1 trans-04">
+                                            {{$product->name}}
+                                        </a>
+                                        <span class="stext-116 cl6 p-t-20">
+											{{$product->formatted_price}} so'm
 										</span>
-                                </div>
-                            </li>
-
-                            <li class="flex-w flex-t p-b-30">
-                                <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="images/product-min-02.jpg" alt="PRODUCT">
-                                </a>
-
-                                <div class="size-215 flex-col-t p-t-8">
-                                    <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-                                        Converse All Star Hi Black Canvas
-                                    </a>
-
-                                    <span class="stext-116 cl6 p-t-20">
-											$39.00
-										</span>
-                                </div>
-                            </li>
-
-                            <li class="flex-w flex-t p-b-30">
-                                <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="images/product-min-03.jpg" alt="PRODUCT">
-                                </a>
-
-                                <div class="size-215 flex-col-t p-t-8">
-                                    <a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-                                        Nixon Porter Leather Watch In Tan
-                                    </a>
-
-                                    <span class="stext-116 cl6 p-t-20">
-											$17.00
-										</span>
-                                </div>
-                            </li>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

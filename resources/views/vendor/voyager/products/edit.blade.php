@@ -57,6 +57,13 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="materials">Materials</label>
+                <input type="text" class="form-control" id="materials" name="materials" placeholder="materials" value="{{old('materials',$product->materials)}}">
+                @error('materials')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="product_color">Product color</label>
                 <select class="form-control" id="product_color" name="product_colors_id">
                     <option value="">Tanlang</option>
