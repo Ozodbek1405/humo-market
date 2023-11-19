@@ -17,25 +17,25 @@
                 </h4>
 
                 <p class="stext-107 cl7 size-201">
-                    Toshkent shahri
+                    {{setting('footer.site_address')}}
                 </p>
                 <p class="stext-107 cl7 size-201 my-1">
-                    +998948480980
+                    {{setting('footer.site_phone')}}
                 </p>
                 <p class="stext-107 cl7 size-201">
-                    humomarket@gmail.com
+                    {{setting('footer.site_email')}}
                 </p>
 
                 <div class="p-t-27">
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                    <a href="{{setting('footer.facebook_url')}}" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
                         <i class="fa fa-facebook"></i>
                     </a>
 
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                    <a href="{{setting('footer.instagram_url')}}" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
                         <i class="fa fa-instagram"></i>
                     </a>
 
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                    <a href="{{setting('footer.telegram_url')}}" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
                         <i class="fa fa-telegram"></i>
                     </a>
                 </div>
