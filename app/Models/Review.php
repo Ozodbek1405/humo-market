@@ -12,6 +12,7 @@ class Review extends Model
         'name',
         'phone',
         'text',
-        'rate'
+        'rate',
+        'product_id'
     ];
 }

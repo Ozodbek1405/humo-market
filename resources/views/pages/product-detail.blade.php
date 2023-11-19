@@ -178,7 +178,7 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item p-b-10">
-                            <a class="nav-link active" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+                            <a class="nav-link active" data-toggle="tab" href="#reviews" role="tab">Reviews ({{count($reviews)}})</a>
                         </li>
                         <li class="nav-item p-b-10">
                             <a class="nav-link" data-toggle="tab" href="#description" role="tab">Description</a>
@@ -269,7 +269,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-
+                                            <input type="hidden" name="product_id" value="{{$product->id}}">
                                             <button type="submit" class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
                                                 Submit
                                             </button>

@@ -10,7 +10,7 @@ class ReviewController extends Controller
     public function review(ReviewRequest $request)
     {
         $data = $request->validated();
-        Review::query()->create($data);
+        Review::query()->updateOrCreate(['phone'=>$data['phone']],$data);
         return redirect()->back()->with(['success' => 'Saved successfully']);
     }
 }

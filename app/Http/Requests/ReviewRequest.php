@@ -24,6 +24,7 @@ class ReviewRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
+            'product_id' => 'required',
             'phone' =>  'required|starts_with:998|numeric|digits:12',
             'text' => 'required|min:5|max:255',
             'rate' => 'required|numeric|gt:0'

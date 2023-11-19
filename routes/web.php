@@ -63,7 +63,7 @@ Route::get('/about',[AboutController::class,'about'])->name('about');
 Route::get('/contact',[ContactController::class,'contact'])->name('contact');
 Route::post('/contact/message',[ContactController::class,'send_message'])->name('contact.message');
 Route::get('/product',[ProductController::class,'product'])->name('product');
-Route::get('/product/detail',[ProductController::class,'product_detail'])->name('product.detail');
+Route::get('/product/detail/{product_id}',[ProductController::class,'product_detail'])->name('product.detail');
 Route::get('/shopping-cart',[ShopController::class,'shopping_cart'])->name('shopping.cart');
 Route::get('/wishlist',[ShopController::class,'wishlist'])->name('wishlist');
 Route::get('/blog',[BlogController::class,'blog'])->name('blog');

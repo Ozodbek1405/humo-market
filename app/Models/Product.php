@@ -26,4 +26,19 @@ class Product extends Model
         'dimensions',
         'weight',
     ];
+
+    public function getFormattedImagesAttribute()
+    {
+        return json_decode($this->images);
+    }
+
+    public function getFormattedDiscountAttribute()
+    {
+        return $this->discount == null ? $this->discount : $this->price . " so'm";
+    }
+
+    public function getFormattedPriceAttribute()
+    {
+        return $this->discount == null ? $this->price : $this->discount;
+    }
 }
