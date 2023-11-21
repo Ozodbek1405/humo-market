@@ -11,7 +11,8 @@ use App\Http\Controllers\{AboutController,
     ProductController,
     ProfileController,
     ReviewController,
-    ShopController};
+    ShopController,
+    WishlistController};
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 
@@ -45,33 +46,48 @@ Route::group(['middleware' => 'auth'], static function () {
     });
 });
 
-Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/login',[LoginController::class,'login'])->name('login');
 Route::post('/login/post',[LoginController::class,'loginPost'])->name('loginPost');
 Route::get('/register',[RegisterController::class,'register'])->name('register');
 Route::post('/register/post',[RegisterController::class,'registerPost'])->name('post.register');
 Route::get('/logout', [LoginController::class,'logout'])->name('logout.perform');
+Route::get('auth/google', [LoginController::class, 'redirectToGoogle'])->name('redirectToGoogle');
+Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
+
+
 Route::get('/reset',[ResetController::class,'reset'])->name('reset');
 Route::post('/reset/submit',[ResetController::class,'resetSubmit'])->name('reset.submit');
 Route::get('/code',[ResetController::class,'code'])->name('code');
 Route::post('/code/submit',[ResetController::class,'codeSubmit'])->name('reset.code');
 Route::get('/change',[ResetController::class,'change'])->name('change');
 Route::post('/change/password',[ResetController::class,'changePassword'])->name('change.password');
-Route::get('auth/google', [LoginController::class, 'redirectToGoogle'])->name('redirectToGoogle');
-Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
+
+
+Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/about',[AboutController::class,'about'])->name('about');
 Route::get('/contact',[ContactController::class,'contact'])->name('contact');
 Route::post('/contact/message',[ContactController::class,'send_message'])->name('contact.message');
-Route::get('/product',[ProductController::class,'product'])->name('product');
-Route::get('/product/detail/{product_id}',[ProductController::class,'product_detail'])->name('product.detail');
-Route::get('/shopping-cart',[ShopController::class,'shopping_cart'])->name('shopping.cart');
-Route::post('/addToCart/{product_id}',[ShopController::class,'addToCart'])->name('addToCart');
-Route::get('/clearCart',[ShopController::class,'clearCart'])->name('clearCart');
-Route::put('/updateCart',[ShopController::class,'updateCart'])->name('updateCart');
-Route::get('/removeItem/{rowId}',[ShopController::class,'removeItem'])->name('removeItem');
-Route::get('/wishlist',[ShopController::class,'wishlist'])->name('wishlist');
 Route::get('/blog',[BlogController::class,'blog'])->name('blog');
 Route::get('/blog/detail/{blog_id}',[BlogController::class,'blog_detail'])->name('blog.detail');
+
+
+Route::get('/product',[ProductController::class,'product'])->name('product');
+Route::get('/product/detail/{product_id}',[ProductController::class,'product_detail'])->name('product.detail');
 Route::post('/review',[ReviewController::class,'review'])->name('review');
+
+Route::group(['prefix' => 'cart'], function () {
+    Route::get('/',[ShopController::class,'shopping_cart'])->name('shopping.cart');
+    Route::post('/add/{product_id}',[ShopController::class,'addToCart'])->name('addToCart');
+    Route::get('/clear',[ShopController::class,'clearCart'])->name('clearCart');
+    Route::put('/update',[ShopController::class,'updateCart'])->name('updateCart');
+    Route::get('/removeItem/{rowId}',[ShopController::class,'removeItem'])->name('removeItem');
+});
+
+Route::group(['prefix' => 'wishlist'], function () {
+    Route::get('/',[WishlistController::class,'wishlist'])->name('wishlist');
+    Route::get('/removeItem/{rowId}',[WishlistController::class,'removeItem'])->name('removeItem.wishlist');
+    Route::get('/add/{product_id}',[WishlistController::class,'addWishlist'])->name('addWishlist');
+});
+
 
 

@@ -69,7 +69,8 @@
                         <a href="{{route('shopping.cart')}}"> <i class="zmdi zmdi-shopping-cart"></i></a>
                     </div>
 
-                    <a href="{{route('wishlist')}}" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                    <a href="{{route('wishlist')}}" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
+                       data-notify="{{Gloudemans\Shoppingcart\Facades\Cart::instance('wishlist')->content()->count()}}">
                         <i class="zmdi zmdi-favorite-outline"></i>
                     </a>
                 </div>

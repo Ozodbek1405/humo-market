@@ -159,7 +159,6 @@
                                         <div class="block2">
                                             <div class="block2-pic hov-img0">
                                                 <img style="width: 290px; height: 395px" src="{{asset('storage/uploads/'.$related_product->formatted_images[0])}}" alt="IMG-PRODUCT">
-
                                                 <a href="{{route('product.detail',$related_product->id)}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                                     Quick View
                                                 </a>
@@ -171,12 +170,11 @@
                                                         {{$related_product->name}}
                                                     </a>
                                                     <span class="stext-105 cl3">
-										    {{$related_product->formatted_price}} so'm
-									    </span>
+                                                        {{$related_product->formatted_price}} so'm
+                                                    </span>
                                                 </div>
-
                                                 <div class="block2-txt-child2 flex-r p-t-3">
-                                                    <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                                    <a href="{{route('addWishlist',$related_product->id)}}">
                                                         <img class="icon-heart1 dis-block trans-04" src="{{asset('images/icons/icon-heart-01.png')}}" alt="ICON">
                                                     </a>
                                                 </div>

@@ -84,7 +84,7 @@
                                                     <i class="zmdi zmdi-shopping-cart"></i>
                                                 </a>
                                             </li>
-                                            <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a></li>
+                                            <li><a href="{{route('addWishlist',$product->id)}}"><i class="zmdi zmdi-favorite-outline"></i></a></li>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">

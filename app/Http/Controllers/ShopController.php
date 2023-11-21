@@ -46,9 +46,4 @@ class ShopController extends Controller
         Cart::instance('cart')->update($request->rowId,$request->quantity);
         return redirect()->route('shopping.cart')->with('message','Item has been updated!');
     }
-
-    public function wishlist()
-    {
-        return view('pages.wishlist');
-    }
 }
