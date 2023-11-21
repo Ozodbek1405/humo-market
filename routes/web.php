@@ -65,6 +65,10 @@ Route::post('/contact/message',[ContactController::class,'send_message'])->name(
 Route::get('/product',[ProductController::class,'product'])->name('product');
 Route::get('/product/detail/{product_id}',[ProductController::class,'product_detail'])->name('product.detail');
 Route::get('/shopping-cart',[ShopController::class,'shopping_cart'])->name('shopping.cart');
+Route::post('/addToCart/{product_id}',[ShopController::class,'addToCart'])->name('addToCart');
+Route::get('/clearCart',[ShopController::class,'clearCart'])->name('clearCart');
+Route::put('/updateCart',[ShopController::class,'updateCart'])->name('updateCart');
+Route::get('/removeItem/{rowId}',[ShopController::class,'removeItem'])->name('removeItem');
 Route::get('/wishlist',[ShopController::class,'wishlist'])->name('wishlist');
 Route::get('/blog',[BlogController::class,'blog'])->name('blog');
 Route::get('/blog/detail/{blog_id}',[BlogController::class,'blog_detail'])->name('blog.detail');

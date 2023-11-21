@@ -57,69 +57,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form method="GET">
-                            <div class="sidebar__sizes">
-                                <div class="section-title">
-                                    <h4>Shop Brands</h4>
-                                </div>
-                                <div class="size__list">
-                                    @foreach($brands as $brand)
-                                        <label for="#{{$brand->name}}">
-                                            {{$brand->name}}
-                                            <input type="checkbox" id="#{{$brand->name}}" name="brands[]" value="{{$brand->id}}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="sidebar__filter">
-                                <div class="section-title">
-                                    <h4>Shop by price</h4>
-                                </div>
-                                <div class="filter-range-wrap">
-                                    <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                         data-min="0" data-max="10000000"></div>
-                                    <div class="range-slider">
-                                        <div class="price-input">
-                                            <p>Price:</p>
-                                            <input type="text" id="minamount" class="border py-1 px-2" name="minamount">
-                                            <input type="text" id="maxamount" class="border py-1 px-2" name="maxamount">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sidebar__sizes">
-                                <div class="section-title">
-                                    <h4>Shop by size</h4>
-                                </div>
-                                <div class="size__list">
-                                    @foreach($product_sizes as $product_size)
-                                        <label for="#{{$product_size->id}}">
-                                            {{$product_size->name}}
-                                            <input type="checkbox" id="#{{$product_size->id}}" name="product_size[]" value="{{$product_size->id}}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="sidebar__color">
-                                <div class="section-title">
-                                    <h4>Shop by Color</h4>
-                                </div>
-                                <div class="size__list color__list">
-                                    @foreach($product_colors as $product_color)
-                                        <label for="{{$product_color->name}}">
-                                            {{$product_color->name}}
-                                            <input type="checkbox" id="{{$product_color->name}}" name="product_color[]" value="{{$product_color->id}}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </form>
-                        <div>
-                            <button type="submit" class="btn btn-danger">Filter</button>
-                        </div>
+                        @include('pages.filters.productFilter')
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-9">
@@ -141,7 +79,11 @@
                                     <div class="product__item__pic set-bg" data-setbg="{{asset('storage/uploads/'.$product->formatted_images[0])}}">
                                         <ul class="product__hover">
                                             <li><a href="{{asset('storage/uploads/'.$product->formatted_images[0])}}" class="image-popup"><i class="zmdi zmdi-eye"></i></a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
+                                            <li>
+                                                <a href="javascript:void(0)" onclick="event.preventDefault();document.getElementById('addToCart{{$product->name}}').submit()">
+                                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                                </a>
+                                            </li>
                                             <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a></li>
                                         </ul>
                                     </div>
@@ -158,6 +100,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <form id="addToCart{{$product->name}}" action="{{route('addToCart',$product->id)}}" method="POST" class="hidden">
+                                @csrf
+                                <input type="number" name="product_count" value="1">
+                            </form>
                         @endforeach
                     </div>
                 </div>

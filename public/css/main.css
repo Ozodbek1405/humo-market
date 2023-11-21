@@ -1784,9 +1784,9 @@ button.mfp-close {
 .wrap-num-product {
   width: 140px;
   height: 45px;
-  border: 1px solid #e6e6e6;
   border-radius: 3px;
   overflow: hidden;
+  justify-content: center;
 }
 
 .btn-num-product-up,
@@ -1799,21 +1799,8 @@ button.mfp-close {
 .num-product {
   width: calc(100% - 90px);
   height: 100%;
-  border-left: 1px solid #e6e6e6;
-  border-right: 1px solid #e6e6e6;
+  border: 1px solid #e6e6e6;
   background-color: #f7f7f7;
-}
-
-input.num-product {
-  -moz-appearance: textfield;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-input.num-product::-webkit-outer-spin-button,
-input.num-product::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -1923,7 +1910,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .table-shopping-cart .column-1 {
   width: 133px;
-  padding-left: 50px;
+  padding-left: 20px;
 }
 
 .table-shopping-cart .column-2 {
@@ -1943,9 +1930,13 @@ input.num-product::-webkit-inner-spin-button {
 
 .table-shopping-cart .column-5 {
   width: 172px;
-  padding-right: 50px;
   text-align: right;
   font-size: 16px;
+}
+.table-shopping-cart .column-6 {
+    padding-right: 5px;
+    text-align: center;
+    font-size: 16px;
 }
 
 .table-shopping-cart .table_row {
@@ -1968,6 +1959,7 @@ input.num-product::-webkit-inner-spin-button {
   line-height: 1.6;
   padding-top: 15px;
   padding-bottom: 15px;
+  text-align: center;
 }
 
 .table-shopping-cart td {
@@ -2965,34 +2957,6 @@ input.num-product::-webkit-inner-spin-button {
   width: 100%;
 }
 
-.how-itemcart1::after {
-  content: '\e870';
-  font-family: Linearicons-Free;
-  font-size: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0,0,0,0.5);
-  color: #fff;
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  opacity: 0;
-}
-
-.how-itemcart1:hover:after {
-  opacity: 1;
-}
 
 /*---------------------------------------------*/
 .how-bor2,
