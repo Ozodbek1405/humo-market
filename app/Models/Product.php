@@ -15,8 +15,8 @@ class Product extends Model
         'description',
         'title',
         'images',
-        'product_colors_id',
-        'product_sizes_id',
+        'color_id',
+        'size_id',
         'brand_id',
         'parent_category_id',
         'child_category_id',
@@ -29,12 +29,12 @@ class Product extends Model
 
     public function product_color()
     {
-        return $this->belongsTo(ProductColor::class,'product_colors_id','id');
+        return $this->belongsTo(Color::class,'color_id','id');
     }
 
     public function product_size()
     {
-        return $this->belongsTo(ProductSize::class,'product_sizes_id','id');
+        return $this->belongsTo(Size::class,'size_id','id');
     }
 
     public function getFormattedImagesAttribute()

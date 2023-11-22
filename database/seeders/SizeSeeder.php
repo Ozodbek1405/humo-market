@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\ProductSize;
+use App\Models\Size;
 use Illuminate\Database\Seeder;
 
-class ProductSizeSeeder extends Seeder
+class SizeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -40,7 +40,7 @@ class ProductSizeSeeder extends Seeder
         ];
 
         foreach ($productSizes as $item){
-            ProductSize::query()->firstOrCreate(['name' => $item['name']], [
+            Size::query()->firstOrCreate(['name' => $item['name']], [
                 'name' => $item['name']
             ]);
         }

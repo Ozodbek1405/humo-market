@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\ProductColor;
+use App\Models\Color;
 use Illuminate\Database\Seeder;
 
-class ProductColorSeeder extends Seeder
+class ColorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -37,7 +37,7 @@ class ProductColorSeeder extends Seeder
         ];
 
         foreach ($productColors as $item){
-            ProductColor::query()->firstOrCreate(['name' => $item['name']], [
+            Color::query()->firstOrCreate(['name' => $item['name']], [
                 'name' => $item['name']
             ]);
         }

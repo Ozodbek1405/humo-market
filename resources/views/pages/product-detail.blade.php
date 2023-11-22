@@ -76,8 +76,8 @@
                                     <div class="rs1-select2 bor8 bg0">
                                         <select class="js-select2" name="time">
                                             <option>Choose an option</option>
-                                            @foreach(explode(',',$product->product_sizes_id) as $size)
-                                                <option value="{{$size}}">Size {{App\Models\ProductSize::find($size)->name}}</option>
+                                            @foreach(explode(',',$product->size_id) as $size)
+                                                <option value="{{$size}}">Size {{App\Models\Size::find($size)->name}}</option>
                                             @endforeach
                                         </select>
                                         <div class="dropDownSelect2"></div>
@@ -299,8 +299,8 @@
 												Size
 											</span>
                                             <span class="stext-102 cl6 size-206">
-												@foreach(explode(',',$product->product_sizes_id) as $size)
-                                                     {{App\Models\ProductSize::find($size)->name}},
+												@foreach(explode(',',$product->size_id) as $size)
+                                                     {{App\Models\Size::find($size)->name}},
                                                 @endforeach
 											</span>
                                         </li>

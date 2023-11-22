@@ -65,13 +65,13 @@
             </div>
             <div class="form-group">
                 <label for="product_color">Product color</label>
-                <select class="form-control" id="product_color" name="product_colors_id">
+                <select class="form-control" id="product_color" name="color_id">
                     <option value="">Tanlang</option>
                     @foreach($product_colors as $product_color)
-                        <option @selected($product->product_colors_id == $product_color->id) value="{{$product_color->id}}">{{$product_color->name}}</option>
+                        <option @selected($product->color_id == $product_color->id) value="{{$product_color->id}}">{{$product_color->name}}</option>
                     @endforeach
                 </select>
-                @error('product_colors_id')
+                @error('color_id')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>
@@ -84,12 +84,12 @@
             </div>
             <div class="form-group">
                 <label for="product_size">Product size</label>
-                <select multiple class="form-control" id="product_size" name="product_sizes_id[]">
+                <select multiple class="form-control" id="product_size" name="size_id[]">
                     @foreach($product_sizes as $product_size)
-                        <option @selected(in_array($product_size->id,explode(',',$product->product_sizes_id))) value="{{$product_size->id}}">{{$product_size->name}}</option>
+                        <option @selected(in_array($product_size->id,explode(',',$product->size_id))) value="{{$product_size->id}}">{{$product_size->name}}</option>
                     @endforeach
                 </select>
-                @error('product_sizes_id')
+                @error('size_id')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>

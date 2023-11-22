@@ -9,8 +9,8 @@ use App\Models\Brand;
 use App\Models\ChildCategory;
 use App\Models\ParentCategory;
 use App\Models\Product;
-use App\Models\ProductColor;
-use App\Models\ProductSize;
+use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
@@ -24,8 +24,8 @@ class AdminProductController extends Controller
     public function create()
     {
         $brands = Brand::query()->get();
-        $product_colors = ProductColor::query()->get();
-        $product_sizes = ProductSize::query()->get();
+        $product_colors = Color::query()->get();
+        $product_sizes = Size::query()->get();
         $parent_categories = ParentCategory::query()->get();
         $child_categories = ChildCategory::query()->get();
 
@@ -54,8 +54,8 @@ class AdminProductController extends Controller
             'discount' => $data['discount']??null,
             'description' => $data['description'],
             'title' =>  $data['title'],
-            'product_colors_id' =>  $data['product_colors_id'],
-            'product_sizes_id' =>  implode(',',$data['product_sizes_id']),
+            'color_id' =>  $data['color_id'],
+            'size_id' =>  implode(',',$data['size_id']),
             'brand_id' =>  $data['brand_id'],
             'parent_category_id' =>  $data['parent_category_id'],
             'child_category_id' =>  $data['child_category_id'],
@@ -87,8 +87,8 @@ class AdminProductController extends Controller
     public function edit($product_id)
     {
         $brands = Brand::query()->get();
-        $product_colors = ProductColor::query()->get();
-        $product_sizes = ProductSize::query()->get();
+        $product_colors = Color::query()->get();
+        $product_sizes = Size::query()->get();
         $parent_categories = ParentCategory::query()->get();
         $child_categories = ChildCategory::query()->get();
         $product = Product::query()->where('id',$product_id)->first();
@@ -113,8 +113,8 @@ class AdminProductController extends Controller
             'discount' => $data['discount']??null,
             'description' => $data['description'],
             'title' =>  $data['title'],
-            'product_colors_id' =>  $data['product_colors_id'],
-            'product_sizes_id' =>  implode(',',$data['product_sizes_id']),
+            'color_id' =>  $data['color_id'],
+            'size_id' =>  implode(',',$data['size_id']),
             'brand_id' =>  $data['brand_id'],
             'parent_category_id' =>  $data['parent_category_id'],
             'child_category_id' =>  $data['child_category_id'],

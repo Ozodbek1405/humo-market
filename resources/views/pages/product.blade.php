@@ -39,7 +39,9 @@
                                     @foreach($parent_categories as $parent_category)
                                         <div class="card">
                                             <div class="card-heading">
-                                                <a data-toggle="collapse" data-target="#collapse{{$parent_category->id}}">{{$parent_category->name}}</a>
+                                                <a data-toggle="collapse" data-target="#collapse{{$parent_category->id}}">
+                                                    {{$parent_category->name}}
+                                                </a>
                                             </div>
                                             <div id="collapse{{$parent_category->id}}" class="collapse" data-parent="#accordionExample">
                                                 <div class="card-body">
@@ -62,14 +64,20 @@
                 </div>
                 <div class="col-lg-9 col-md-9">
                     <div class="dropdown mb-4">
-                        <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                        <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                             Sort by
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                            <a class="dropdown-item" href="#">Latest</a>
-                            <a class="dropdown-item" href="#">Popularity</a>
-                            <a class="dropdown-item" href="#">Best Rating</a>
+                            <button class="dropdown-item" id="latest">
+                                Latest
+                            </button>
+                            <button class="dropdown-item" id="popular">
+                                Popularity
+                            </button>
+                            <button class="dropdown-item" id="rating">
+                                Best Rating
+                            </button>
                         </div>
                     </div>
                     <div class="row">
@@ -107,13 +115,18 @@
                         @endforeach
                     </div>
                     <div class="container d-flex justify-center">
-                        {{ $products->links() }}
+                        {{ $products->withQueryString()->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Shop Section End -->
+    <form id="productFilter" action="{{route('product')}}" method="GET">
+        <input type="hidden" name="sort" id="sortable" value="0">
+        <input type="hidden" name="brands" id="brands" value="{{$q_brands}}">
+        <input type="hidden" name="colors" id="colors" value="{{$q_colors}}">
+    </form>
 @endsection
 @push('scripts')
     <!-- Js Plugins -->
@@ -128,12 +141,49 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-raty-js@2.8.0/lib/jquery.raty.min.js"></script>
     <script>
         @foreach ($products as $product)
-        $("#stars{{$product->id}}").raty({
-            path: 'https://cdn.jsdelivr.net/npm/jquery-raty-js@2.8.0/lib/images',
-            readOnly: true,
-            score: {{$product->rate ?? 0}},
-            size: 12
-        });
+            $("#stars{{$product->id}}").raty({
+                path: 'https://cdn.jsdelivr.net/npm/jquery-raty-js@2.8.0/lib/images',
+                readOnly: true,
+                score: {{$product->rate ?? 0}},
+                size: 12
+            });
         @endforeach
+
+        $('#latest').on('click',function (){
+            $('#sortable').val(1);
+            $('#productFilter').submit();
+        });
+        $('#popular').on('click',function (){
+            $('#sortable').val(2);
+            $('#productFilter').submit();
+        });
+        $('#rating').on('click',function (){
+            $('#sortable').val(3);
+            $('#productFilter').submit();
+        });
+        function productByFilterBrands(){
+            let brands = "";
+            $("input[name='brands']:checked").each(function (){
+               if(brands === ""){
+                   brands +=this.value;
+               }else{
+                   brands += "," + this.value;
+               }
+            });
+            $('#brands').val(brands);
+            $('#productFilter').submit();
+        }
+        function productByFilterColors(){
+            let colors = "";
+            $("input[name='product_color']:checked").each(function (){
+                if(colors === ""){
+                    colors += this.value;
+                }else{
+                    colors += "," + this.value;
+                }
+            });
+            $('#colors').val(colors);
+            $('#productFilter').submit();
+        }
     </script>
 @endpush

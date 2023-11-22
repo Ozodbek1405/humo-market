@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->longText('images')->nullable();
-            $table->string('product_colors_id');
-            $table->string('product_sizes_id');
+            $table->string('color_id');
+            $table->string('size_id');
             $table->integer('brand_id')->nullable();
             $table->integer('parent_category_id')->nullable();
             $table->integer('child_category_id')->nullable();
