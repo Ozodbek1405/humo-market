@@ -24,7 +24,7 @@ class ProductController extends Controller
         $product_sizes = ProductSize::query()->get();
         $parent_categories = ParentCategory::query()->get();
         $child_categories = ChildCategory::query()->get();
-        $products = $this->product->all();
+        $products = $this->product->paginate(15);
         return view('pages.product',compact('products','brands','product_colors','product_sizes','parent_categories','child_categories'));
     }
 

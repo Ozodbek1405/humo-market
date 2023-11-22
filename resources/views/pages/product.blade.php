@@ -106,6 +106,9 @@
                             </form>
                         @endforeach
                     </div>
+                    <div class="container d-flex justify-center">
+                        {{ $products->links() }}
+                    </div>
                 </div>
             </div>
         </div>

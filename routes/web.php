@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/products/edit/{product_id}',[AdminProductController::class,'edit'])->name('product.edit');
     Route::post('/products/update/{product_id}',[AdminProductController::class,'update'])->name('product.update');
 });
+
 Route::group(['middleware' => 'auth'], static function () {
     Route::prefix('profile')->group(function () {
         Route::get('/{user_id}',[ProfileController::class,'profile'])->name('profile');
@@ -46,22 +47,24 @@ Route::group(['middleware' => 'auth'], static function () {
     });
 });
 
-Route::get('/login',[LoginController::class,'login'])->name('login');
-Route::post('/login/post',[LoginController::class,'loginPost'])->name('loginPost');
-Route::get('/register',[RegisterController::class,'register'])->name('register');
-Route::post('/register/post',[RegisterController::class,'registerPost'])->name('post.register');
-Route::get('/logout', [LoginController::class,'logout'])->name('logout.perform');
-Route::get('auth/google', [LoginController::class, 'redirectToGoogle'])->name('redirectToGoogle');
-Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('/login',[LoginController::class,'login'])->name('login');
+    Route::post('/loginPost',[LoginController::class,'loginPost'])->name('loginPost');
+    Route::get('/register',[RegisterController::class,'register'])->name('register');
+    Route::post('/registerPost',[RegisterController::class,'registerPost'])->name('post.register');
+    Route::get('/logout', [LoginController::class,'logout'])->name('logout.perform');
+    Route::get('google', [LoginController::class, 'redirectToGoogle'])->name('redirectToGoogle');
+    Route::get('google/callback', [LoginController::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
+});
 
-
-Route::get('/reset',[ResetController::class,'reset'])->name('reset');
-Route::post('/reset/submit',[ResetController::class,'resetSubmit'])->name('reset.submit');
-Route::get('/code',[ResetController::class,'code'])->name('code');
-Route::post('/code/submit',[ResetController::class,'codeSubmit'])->name('reset.code');
-Route::get('/change',[ResetController::class,'change'])->name('change');
-Route::post('/change/password',[ResetController::class,'changePassword'])->name('change.password');
-
+Route::group(['prefix' => 'reset'], function () {
+    Route::get('/',[ResetController::class,'reset'])->name('reset');
+    Route::post('/submit',[ResetController::class,'resetSubmit'])->name('reset.submit');
+    Route::get('/code',[ResetController::class,'code'])->name('code');
+    Route::post('/code/submit',[ResetController::class,'codeSubmit'])->name('reset.code');
+    Route::get('/change',[ResetController::class,'change'])->name('change');
+    Route::post('/change/password',[ResetController::class,'changePassword'])->name('change.password');
+});
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/about',[AboutController::class,'about'])->name('about');
