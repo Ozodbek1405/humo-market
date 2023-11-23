@@ -36,8 +36,10 @@
     <div class="size__list">
         @foreach($product_sizes as $product_size)
             <label for="#{{$product_size->id}}">
-                {{$product_size->name}}
-                <input type="checkbox" id="#{{$product_size->id}}" name="product_size[]" value="{{$product_size->id}}">
+                {{$product_size->name}} ({{$product_size->getProductSize()->count()}})
+                <input type="checkbox" @if(in_array($product_size->id, explode(',',$q_sizes))) checked="checked" @endif
+                       id="#{{$product_size->id}}" name="product_size" value="{{$product_size->id}}"
+                       onchange="productByFilterSizes()">
                 <span class="checkmark"></span>
             </label>
         @endforeach
@@ -52,7 +54,8 @@
             <label for="{{$product_color->name}}">
                 {{$product_color->name}} ({{$product_color->products->count()}})
                 <input type="checkbox" @if(in_array($product_color->id, explode(',',$q_colors))) checked="checked" @endif
-                       id="{{$product_color->name}}" name="product_color" value="{{$product_color->id}}" onchange="productByFilterColors()">
+                       id="{{$product_color->name}}" name="product_color" value="{{$product_color->id}}"
+                       onchange="productByFilterColors()">
                 <span class="checkmark"></span>
             </label>
         @endforeach

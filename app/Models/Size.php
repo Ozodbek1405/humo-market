@@ -12,4 +12,9 @@ class Size extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function getProductSize()
+    {
+        return ProductSize::query()->where('size_id',$this->id)->get();
+    }
 }

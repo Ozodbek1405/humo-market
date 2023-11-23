@@ -126,6 +126,7 @@
         <input type="hidden" name="sort" id="sortable" value="0">
         <input type="hidden" name="brands" id="brands" value="{{$q_brands}}">
         <input type="hidden" name="colors" id="colors" value="{{$q_colors}}">
+        <input type="hidden" name="q_sizes" id="q_sizes" value="{{$q_sizes}}">
     </form>
 @endsection
 @push('scripts')
@@ -183,6 +184,18 @@
                 }
             });
             $('#colors').val(colors);
+            $('#productFilter').submit();
+        }
+        function productByFilterSizes(){
+            let sizes = "";
+            $("input[name='product_size']:checked").each(function (){
+                if(sizes === ""){
+                    sizes += this.value;
+                }else{
+                    sizes += "," + this.value;
+                }
+            });
+            $('#q_sizes').val(sizes);
             $('#productFilter').submit();
         }
     </script>

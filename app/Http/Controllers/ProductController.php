@@ -23,6 +23,7 @@ class ProductController extends Controller
         $q_brands = $request->query('brands');
         $q_colors = $request->query('colors');
         $q_sort = $request->query('sort');
+        $q_sizes = $request->query('q_sizes');
         $products = $this->product;
         $products = match ((int)$q_sort) {
             1 => $products->latest(),
@@ -35,6 +36,9 @@ class ProductController extends Controller
         });
         $products = $products->where(function ($query) use ($q_colors){
             $query->whereIn('color_id',explode(',',$q_colors))->orWhereRaw("'".$q_colors."'=''");
+        });
+        $products = $products->whereHas('size',function ($query) use ($q_sizes){
+            $query->whereIn('size_id',explode(',',$q_sizes))->orWhereRaw("'".$q_sizes."'=''");
         });
         $products = $products->paginate(15);
         $brands = Brand::query()->get();
@@ -52,6 +56,7 @@ class ProductController extends Controller
             'child_categories' => $child_categories,
             'q_brands' => $q_brands,
             'q_colors' => $q_colors,
+            'q_sizes' => $q_sizes,
         ]);
     }
 
