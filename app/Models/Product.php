@@ -42,6 +42,11 @@ class Product extends Model
         return ProductSize::query()->where('product_id',$this->id)->get();
     }
 
+    public function getProductSizeArray()
+    {
+        return $this->getProductSize()->pluck('size_id')->toArray();
+    }
+
     public function getFormattedImagesAttribute()
     {
         return json_decode($this->images);
