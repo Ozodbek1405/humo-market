@@ -27,14 +27,19 @@ class Product extends Model
         'weight',
     ];
 
-    public function product_color()
+    public function color()
     {
         return $this->belongsTo(Color::class,'color_id','id');
     }
 
-    public function product_size()
+    public function size()
     {
-        return $this->belongsTo(Size::class,'size_id','id');
+        return $this->belongsToMany(Size::class, 'product_sizes', 'product_id')->withPivot(['product_id', 'size_id'])->withTimestamps();
+    }
+
+    public function getProductSize()
+    {
+        return ProductSize::query()->where('product_id',$this->id)->get();
     }
 
     public function getFormattedImagesAttribute()

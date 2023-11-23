@@ -55,8 +55,8 @@
                                             </td>
                                             <td class="column-3">{{$cartItem->price}} so'm</td>
                                             <td class="column-4">
-                                                <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                                    <input class="mtext-104 cl3 text-center num-product" data-rowid="{{$cartItem->rowId}}"
+                                                <div class="wrap-num-products flex-w m-l-auto m-r-0">
+                                                    <input class="mtext-104 cl3 text-center num-products" data-rowid="{{$cartItem->rowId}}"
                                                            onchange="updateData(this)" type="number" name="num-product1" value="{{$cartItem->qty}}">
                                                 </div>
                                             </td>

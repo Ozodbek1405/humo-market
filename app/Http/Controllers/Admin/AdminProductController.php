@@ -48,14 +48,13 @@ class AdminProductController extends Controller
     public function productStore(ProductStoreRequest $request)
     {
         $data = $request->validated();
-        $products = Product::query()->create([
+        $product = Product::query()->create([
             'name' => $data['name'],
             'price' => $data['price'],
             'discount' => $data['discount']??null,
             'description' => $data['description'],
             'title' =>  $data['title'],
             'color_id' =>  $data['color_id'],
-            'size_id' =>  implode(',',$data['size_id']),
             'brand_id' =>  $data['brand_id'],
             'parent_category_id' =>  $data['parent_category_id'],
             'child_category_id' =>  $data['child_category_id'],
@@ -64,14 +63,18 @@ class AdminProductController extends Controller
             'weight' =>  $data['weight']??null,
             'materials' =>  $data['materials']??null,
         ]);
+        $product->size()->detach();
+        if(isset($data['size_id'])){
+            $product->size()->attach($data['size_id']);
+        }
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $uploadedImage) {
                 $fileName = time() . '_' . $uploadedImage->getClientOriginalName();
                 $uploadedImage->move(public_path("storage/uploads/"), $fileName);
                 $imgData[] = $fileName;
             }
-            $products->images = json_encode($imgData);
-            $products->save();
+            $product->images = json_encode($imgData);
+            $product->save();
         }
         return redirect()->route('product.view');
     }
@@ -114,7 +117,6 @@ class AdminProductController extends Controller
             'description' => $data['description'],
             'title' =>  $data['title'],
             'color_id' =>  $data['color_id'],
-            'size_id' =>  implode(',',$data['size_id']),
             'brand_id' =>  $data['brand_id'],
             'parent_category_id' =>  $data['parent_category_id'],
             'child_category_id' =>  $data['child_category_id'],
@@ -123,6 +125,10 @@ class AdminProductController extends Controller
             'weight' =>  $data['weight']??null,
             'materials' =>  $data['materials']??null,
         ]);
+        $product->size()->detach();
+        if(isset($data['size_id'])){
+            $product->size()->attach($data['size_id']);
+        }
         if (isset($data['images'])){
            $product->images = null;
            $product->save();

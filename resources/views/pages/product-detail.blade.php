@@ -76,8 +76,8 @@
                                     <div class="rs1-select2 bor8 bg0">
                                         <select class="js-select2" name="time">
                                             <option>Choose an option</option>
-                                            @foreach(explode(',',$product->size_id) as $size)
-                                                <option value="{{$size}}">Size {{App\Models\Size::find($size)->name}}</option>
+                                            @foreach($product->getProductSize() as $item)
+                                                <option value="{{$item->size_id}}">Size {{$item->size->name}}</option>
                                             @endforeach
                                         </select>
                                         <div class="dropDownSelect2"></div>
@@ -89,7 +89,7 @@
                                     Color :
                                 </div>
                                 <div class="size-204 respon6-next">
-                                    {{$product->product_color->name}}
+                                    {{$product->color->name}}
                                 </div>
                             </div>
 
@@ -291,7 +291,7 @@
 												Color
 											</span>
                                             <span class="stext-102 cl6 size-206">
-												{{$product->product_color->name}}
+												{{$product->color->name}}
 											</span>
                                         </li>
                                         <li class="flex-w flex-t p-b-7">
@@ -299,8 +299,8 @@
 												Size
 											</span>
                                             <span class="stext-102 cl6 size-206">
-												@foreach(explode(',',$product->size_id) as $size)
-                                                     {{App\Models\Size::find($size)->name}},
+												 @foreach($product->getProductSize() as $item)
+                                                    {{$item->size->name}},
                                                 @endforeach
 											</span>
                                         </li>

@@ -1781,7 +1781,7 @@ button.mfp-close {
 
 /*//////////////////////////////////////////////////////////////////
 [ Num Product ]*/
-.wrap-num-product {
+.wrap-num-products {
   width: 140px;
   height: 45px;
   border-radius: 3px;
@@ -1789,18 +1789,48 @@ button.mfp-close {
   justify-content: center;
 }
 
-.btn-num-product-up,
-.btn-num-product-down {
-  width: 45px;
-  height: 100%;
-  cursor: pointer;
-}
-
-.num-product {
+.num-products {
   width: calc(100% - 90px);
   height: 100%;
   border: 1px solid #e6e6e6;
   background-color: #f7f7f7;
+}
+
+/*/////////////////////////////////////////////////////////////////*/
+
+.wrap-num-product {
+    width: 140px;
+    height: 45px;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.btn-num-product-up,
+.btn-num-product-down {
+    width: 45px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.num-product {
+    width: calc(100% - 90px);
+    height: 100%;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    background-color: #f7f7f7;
+}
+
+input.num-product {
+    -moz-appearance: textfield;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+input.num-product::-webkit-outer-spin-button,
+input.num-product::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /*//////////////////////////////////////////////////////////////////
