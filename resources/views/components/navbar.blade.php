@@ -1,4 +1,10 @@
 <!-- Header -->
+<style>
+    .show_category {
+        transition: opacity 1s;
+        opacity: 0;
+    }
+</style>
 <header class="header-v4">
     <!-- Header desktop -->
     <div class="container-menu-desktop">
@@ -22,9 +28,6 @@
                             Register
                         </a>
                     @endif
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        RU | EN | UZ
-                    </a>
                 </div>
             </div>
         </div>
@@ -40,19 +43,21 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li class="home">
+                        <li id="shop">
+                            <button class="btn btn-primary" id="show-hidden-menu">
+                                <span class="mr-2">Shop Category</span> <i id="fas-fa" class="fa fa-bars"></i>
+                            </button>
+                        </li>
+                        <li id="home">
                             <a href="{{route('home')}}">Home</a>
                         </li>
-                        <li class="shop">
-                            <a href="{{route('product')}}">Shop</a>
-                        </li>
-                        <li class="blog">
+                        <li id="blog">
                             <a href="{{route('blog')}}">Blog</a>
                         </li>
-                        <li class="about">
+                        <li id="about">
                             <a href="{{route('about')}}">About</a>
                         </li>
-                        <li class="contact">
+                        <li id="contact">
                             <a href="{{route('contact')}}">Contact</a>
                         </li>
                     </ul>
@@ -102,9 +107,9 @@
 
         <!-- Button show menu -->
         <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-				<span class="hamburger-box">
-					<span class="hamburger-inner"></span>
-				</span>
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
         </div>
     </div>
 
@@ -132,9 +137,6 @@
                             Register
                         </a>
                     @endif
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        RU | EN | UZ
-                    </a>
                 </div>
             </li>
         </ul>
@@ -144,19 +146,19 @@
                 <a href="{{route('home')}}">Home</a>
             </li>
 
-            <li class="shop">
-                <a href="{{route('product')}}">Shop</a>
+            <li id="shop">
+                <a href="#">Shop</a>
             </li>
 
-            <li class="blog">
+            <li id="blog">
                 <a href="{{route('blog')}}">Blog</a>
             </li>
 
-            <li class="about">
+            <li id="about">
                 <a href="{{route('about')}}">About</a>
             </li>
 
-            <li class="contact">
+            <li id="contact">
                 <a href="{{route('contact')}}">Contact</a>
             </li>
         </ul>
@@ -178,27 +180,58 @@
         </div>
     </div>
 </header>
+@php
+    $parent_categories = App\Services\GetCategories::getParentCategory();
+    $child_categories = App\Services\GetCategories::getChildCategory();
+@endphp
+<div class="container hidden" id="toggle_category">
+    <div class="row my-3">
+        @foreach($parent_categories as $parent_category)
+            <div class="m-all-20">
+                <h1 class="font-bold text-xl my-2">{{$parent_category->name}}</h1>
+                <div>
+                    @foreach($child_categories as $child_category)
+                        @if($parent_category->id == $child_category->parent_id)
+                            <h1 class="font-medium my-3">
+                                <a href="{{route('product.view',['parentSlug'=>$parent_category->slug,'childSlug'=>$child_category->slug])}}">
+                                    {{$child_category->name}}
+                                </a>
+                            </h1>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
 
 @push('scripts')
     <script>
-        var link = document.location.href.split('/');
+        $(document).ready(function() {
+            $('#show-hidden-menu').click(function() {
+                $('#toggle_category').slideToggle("slow");
+                $('#fas-fa').toggleClass('fa-bars fa-times');
+            });
+        });
+
+        let link = document.location.href.split('/');
         if (link[3] == '') {
-            $(".home").addClass("active-menu");
+            $("#home").addClass("active-menu");
         }
         else if (link[3] == 'product') {
-            $(".shop").addClass("active-menu");
+            $("#shop").addClass("active-menu");
         }
         else if (link[3] == 'blog') {
-            $(".blog").addClass("active-menu");
+            $("#blog").addClass("active-menu");
         }
         else if (link[3] == 'about') {
-            $(".about").addClass("active-menu");
+            $("#about").addClass("active-menu");
         }
         else if (link[3] == 'blog') {
-            $(".blog").addClass("active-menu");
+            $("#blog").addClass("active-menu");
         }
         else if (link[3] == 'contact') {
-            $(".contact").addClass("active-menu");
+            $("#contact").addClass("active-menu");
         }
     </script>
 @endpush

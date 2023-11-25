@@ -48,7 +48,11 @@
                                                     <ul>
                                                         @foreach($child_categories as $child_category)
                                                             @if($parent_category->id == $child_category->parent_id)
-                                                                <li><a href="#">{{$child_category->name}}</a></li>
+                                                                <li>
+                                                                    <a href="{{route('product.view',['parentSlug'=>$parent_category->slug,'childSlug'=>$child_category->slug])}}">
+                                                                        {{$child_category->name}}
+                                                                    </a>
+                                                                </li>
                                                             @endif
                                                         @endforeach
                                                     </ul>
@@ -103,7 +107,7 @@
                                         </h6>
                                         <div class="flex-row inline-flex my-1" id="stars{{$product->id}}"></div>
                                         <div class="product__price">
-                                            {{$product->formatted_price}} so'm <br><span> {{$product->formatted_discount}}</span>
+                                            {{$product->formatted_price}} so'm <br><span> {{$product->formatted_discount}} so'm</span>
                                         </div>
                                     </div>
                                 </div>
@@ -122,11 +126,13 @@
         </div>
     </section>
     <!-- Shop Section End -->
-    <form id="productFilter" action="{{route('product')}}" method="GET">
+    <form id="productFilter" action="{{route('product.view')}}" method="GET">
         <input type="hidden" name="sort" id="sortable" value="0">
         <input type="hidden" name="brands" id="brands" value="{{$q_brands}}">
         <input type="hidden" name="colors" id="colors" value="{{$q_colors}}">
         <input type="hidden" name="q_sizes" id="q_sizes" value="{{$q_sizes}}">
+        <input type="hidden" name="q_min" id="q_min" value="{{$q_min}}">
+        <input type="hidden" name="q_max" id="q_max" value="{{$q_max}}">
     </form>
 @endsection
 @push('scripts')
@@ -150,6 +156,47 @@
             });
         @endforeach
 
+        /*-------------------
+            Range Slider
+        --------------------- */
+        var rangeSlider = $(".price-range"),
+            minamount = $("#minamount"),
+            maxamount = $("#maxamount"),
+            minPrice = rangeSlider.data('min'),
+            maxPrice = rangeSlider.data('max');
+        rangeSlider.slider({
+            range: true,
+            min: minPrice,
+            max: maxPrice,
+            @if($q_min !=null && $q_max!=null)
+            values: [{{$q_min}}, {{$q_max}}],
+            @else
+            values: [minPrice, maxPrice],
+            @endif
+            slide: function (event, ui) {
+                minamount.val( ui.values[0]);
+                maxamount.val( ui.values[1]);
+                $('#q_min').val(ui.values[0]);
+                $('#q_max').val(ui.values[1]);
+                setTimeout(()=>{
+                    $('#productFilter').submit();
+                },1000);
+            }
+        });
+        minamount.val(rangeSlider.slider("values", 0));
+        maxamount.val(rangeSlider.slider("values", 1));
+
+        $('#minamount').on('change',function (){
+            $('#q_min').val($(this).val());
+            $('#productFilter').submit();
+        })
+        $('#maxamount').on('change',function (){
+            $('#q_max').val($(this).val());
+            $('#productFilter').submit();
+        })
+        /*------------------
+            Single Product
+        --------------------*/
         $('#latest').on('click',function (){
             $('#sortable').val(1);
             $('#productFilter').submit();

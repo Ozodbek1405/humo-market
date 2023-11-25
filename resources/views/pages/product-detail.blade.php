@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-
+    {{$product->name}}
 @endsection
 
 @push('styles')
@@ -16,7 +16,7 @@
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
 
-            <a href="{{route('product')}}" class="stext-109 cl8 hov-cl1 trans-04">
+            <a href="" class="stext-109 cl8 hov-cl1 trans-04">
                 Men
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
@@ -62,7 +62,6 @@
                         <span class="mtext-106 cl2">
 							{{$product->formatted_price}} so'm
 						</span>
-
                         <p class="stext-102 cl3 p-t-23">
                             {{$product->title}}
                         </p>

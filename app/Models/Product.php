@@ -54,7 +54,7 @@ class Product extends Model
 
     public function getFormattedDiscountAttribute()
     {
-        return $this->discount == null ? $this->discount : $this->price . " so'm";
+        return $this->discount == null ? $this->discount : $this->price;
     }
 
     public function getFormattedPriceAttribute()

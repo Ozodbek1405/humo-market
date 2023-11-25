@@ -11,11 +11,15 @@ class ProductController extends Controller
 
     protected Product $product;
     protected Review $review;
+    protected ParentCategory $parent_categories;
+    protected ChildCategory $child_categories;
 
     public function __construct()
     {
         $this->product = new Product();
         $this->review = new Review();
+        $this->parent_categories = new ParentCategory();
+        $this->child_categories = new ChildCategory();
     }
 
     public function product(Request $request)
@@ -24,7 +28,10 @@ class ProductController extends Controller
         $q_colors = $request->query('colors');
         $q_sort = $request->query('sort');
         $q_sizes = $request->query('q_sizes');
+        $q_min = (int)$request->query('q_min');
+        $q_max = (int)$request->query('q_max');
         $products = $this->product;
+
         $products = match ((int)$q_sort) {
             1 => $products->latest(),
             2 => $products->orderByDesc('views'),
@@ -44,8 +51,8 @@ class ProductController extends Controller
         $brands = Brand::query()->get();
         $product_colors = Color::query()->get();
         $product_sizes = Size::query()->get();
-        $parent_categories = ParentCategory::query()->get();
-        $child_categories = ChildCategory::query()->get();
+        $parent_categories = $this->parent_categories->get();
+        $child_categories = $this->child_categories->get();
 
         return view('pages.product',[
             'products' => $products,
@@ -57,6 +64,8 @@ class ProductController extends Controller
             'q_brands' => $q_brands,
             'q_colors' => $q_colors,
             'q_sizes' => $q_sizes,
+            'q_min' => $q_min,
+            'q_max' => $q_max,
         ]);
     }
 
