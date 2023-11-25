@@ -66,3 +66,11 @@
         <button type="button" class="btn btn-danger">Clear</button>
     </a>
 </div>
+<form id="productFilter" action="{{route('product.view')}}" method="GET">
+    <input type="hidden" name="sort" id="sortable" value="0">
+    <input type="hidden" name="brands" id="brands" value="{{$q_brands}}">
+    <input type="hidden" name="colors" id="colors" value="{{$q_colors}}">
+    <input type="hidden" name="q_sizes" id="q_sizes" value="{{$q_sizes}}">
+    <input type="hidden" name="q_min" id="q_min" value="{{$q_min}}">
+    <input type="hidden" name="q_max" id="q_max" value="{{$q_max}}">
+</form>
