@@ -37,6 +37,11 @@ class Product extends Model
         return $this->belongsToMany(Size::class, 'product_sizes', 'product_id')->withPivot(['product_id', 'size_id'])->withTimestamps();
     }
 
+    public function shoe_size()
+    {
+        return $this->belongsToMany(ShoeSize::class, 'product_shoe_sizes', 'product_id')->withPivot(['product_id', 'shoe_size_id'])->withTimestamps();
+    }
+
     public function getProductSize()
     {
         return ProductSize::query()->where('product_id',$this->id)->get();
@@ -45,6 +50,16 @@ class Product extends Model
     public function getProductSizeArray()
     {
         return $this->getProductSize()->pluck('size_id')->toArray();
+    }
+
+    public function getProductShoeSize()
+    {
+        return ProductShoeSize::query()->where('product_id',$this->id)->get();
+    }
+
+    public function getProductShoeSizeArray()
+    {
+        return $this->getProductShoeSize()->pluck('shoe_size_id')->toArray();
     }
 
     public function getFormattedImagesAttribute()

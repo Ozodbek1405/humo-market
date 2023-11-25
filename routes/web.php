@@ -29,7 +29,7 @@ use TCG\Voyager\Facades\Voyager;
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
-    Route::get('/products',[AdminProductController::class,'index'])->name('product.view');
+    Route::get('/products',[AdminProductController::class,'index'])->name('product.admin.view');
     Route::get('/products/create',[AdminProductController::class,'create'])->name('product.create');
     Route::get('/get/childCategory',[AdminProductController::class,'getChildCategory'])->name('getChildCategory');
     Route::post('/products/store',[AdminProductController::class,'productStore'])->name('products.store');

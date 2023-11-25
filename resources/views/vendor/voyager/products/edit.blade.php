@@ -103,6 +103,19 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="product_shoe_size">Product shoe size</label>
+                <select multiple class="form-control" id="product_shoe_size" name="shoe_size_id[]">
+                    @foreach($product_shoe_sizes as $shoe_size)
+                        <option value="{{$shoe_size->id}}"  @selected(in_array($shoe_size->id,$product->getProductShoeSizeArray()))>
+                            {{$shoe_size->name}}
+                        </option>
+                    @endforeach
+                </select>
+                @error('shoe_size_id')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="brand">Brands</label>
                 <select class="form-control" id="brand" name="brand_id">
                     <option value="">Tanlang</option>

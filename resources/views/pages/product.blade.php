@@ -237,5 +237,17 @@
             $('#q_sizes').val(sizes);
             $('#productFilter').submit();
         }
+        function productByFilterShoeSizes(){
+            let shoeSizes = "";
+            $("input[name='product_shoe_size']:checked").each(function (){
+                if(shoeSizes === ""){
+                    shoeSizes += this.value;
+                }else{
+                    shoeSizes += "," + this.value;
+                }
+            });
+            $('#q_shoe_sizes').val(shoeSizes);
+            $('#productFilter').submit();
+        }
     </script>
 @endpush

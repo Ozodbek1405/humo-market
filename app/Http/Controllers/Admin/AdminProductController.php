@@ -10,6 +10,7 @@ use App\Models\ChildCategory;
 use App\Models\ParentCategory;
 use App\Models\Product;
 use App\Models\Color;
+use App\Models\ShoeSize;
 use App\Models\Size;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,7 @@ class AdminProductController extends Controller
         $brands = Brand::query()->get();
         $product_colors = Color::query()->get();
         $product_sizes = Size::query()->get();
+        $product_shoe_sizes = ShoeSize::query()->get();
         $parent_categories = ParentCategory::query()->get();
         $child_categories = ChildCategory::query()->get();
 
@@ -33,6 +35,7 @@ class AdminProductController extends Controller
             'brands' => $brands,
             'product_colors' => $product_colors,
             'product_sizes' => $product_sizes,
+            'product_shoe_sizes' => $product_shoe_sizes,
             'parent_categories' => $parent_categories,
             'child_categories' => $child_categories,
         ]);
@@ -67,6 +70,10 @@ class AdminProductController extends Controller
         if(isset($data['size_id'])){
             $product->size()->attach($data['size_id']);
         }
+        $product->shoe_size()->detach();
+        if(isset($data['shoe_size_id'])){
+            $product->shoe_size()->attach($data['shoe_size_id']);
+        }
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $uploadedImage) {
                 $fileName = time() . '_' . $uploadedImage->getClientOriginalName();
@@ -76,7 +83,7 @@ class AdminProductController extends Controller
             $product->images = json_encode($imgData);
             $product->save();
         }
-        return redirect()->route('product.view');
+        return redirect()->route('product.admin.view');
     }
 
     public function productDelete($product_id)
@@ -92,6 +99,7 @@ class AdminProductController extends Controller
         $brands = Brand::query()->get();
         $product_colors = Color::query()->get();
         $product_sizes = Size::query()->get();
+        $product_shoe_sizes = ShoeSize::query()->get();
         $parent_categories = ParentCategory::query()->get();
         $child_categories = ChildCategory::query()->get();
         $product = Product::query()->where('id',$product_id)->first();
@@ -100,6 +108,7 @@ class AdminProductController extends Controller
             'brands' => $brands,
             'product_colors' => $product_colors,
             'product_sizes' => $product_sizes,
+            'product_shoe_sizes' => $product_shoe_sizes,
             'parent_categories' => $parent_categories,
             'child_categories' => $child_categories,
             'product' => $product
@@ -129,6 +138,10 @@ class AdminProductController extends Controller
         if(isset($data['size_id'])){
             $product->size()->attach($data['size_id']);
         }
+        $product->shoe_size()->detach();
+        if(isset($data['shoe_size_id'])){
+            $product->shoe_size()->attach($data['shoe_size_id']);
+        }
         if (isset($data['images'])){
            $product->images = null;
            $product->save();
@@ -143,7 +156,7 @@ class AdminProductController extends Controller
             }
         }
 
-        return redirect()->route('product.view');
+        return redirect()->route('product.admin.view');
     }
 
 }
