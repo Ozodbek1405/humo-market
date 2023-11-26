@@ -41,6 +41,12 @@ class Product extends Model
         return $this->belongsToMany(Color::class, 'product_colors', 'product_id')->withPivot(['product_id', 'color_id'])->withTimestamps();
     }
 
+    public function child_category()
+    {
+        return $this->belongsTo(ChildCategory::class);
+    }
+
+
     public function getProductSize()
     {
         return ProductSize::query()->where('product_id',$this->id)->get();

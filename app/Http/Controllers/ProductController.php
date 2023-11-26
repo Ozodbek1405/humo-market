@@ -11,6 +11,10 @@ class ProductController extends Controller
 
     protected Product $product;
     protected Review $review;
+    protected Brand $brand;
+    protected Color $color;
+    protected Size $size;
+    protected ShoeSize $shoeSize;
     protected ParentCategory $parent_categories;
     protected ChildCategory $child_categories;
 
@@ -18,6 +22,10 @@ class ProductController extends Controller
     {
         $this->product = new Product();
         $this->review = new Review();
+        $this->brand = new Brand();
+        $this->color = new Color();
+        $this->size = new Size();
+        $this->shoeSize = new ShoeSize();
         $this->parent_categories = new ParentCategory();
         $this->child_categories = new ChildCategory();
     }
@@ -52,8 +60,8 @@ class ProductController extends Controller
             $products = $products->wherebetween('price',[$q_min,$q_max]);
         }
         $products = $products->paginate(21);
-        $brands = Brand::query()->get();
-        $product_colors = Color::query()->get();
+        $brands = $this->brand->get();
+        $product_colors = $this->color->get();
         $parent_categories = $this->parent_categories->get();
         $child_categories = $this->child_categories->get();
 
@@ -72,6 +80,7 @@ class ProductController extends Controller
 
     public function product(Request $request)
     {
+        $child_id = $request->get('category');
         $q_brands = $request->query('brands');
         $q_colors = $request->query('colors');
         $q_sort = $request->query('sort');
@@ -79,38 +88,51 @@ class ProductController extends Controller
         $q_shoe_sizes = $request->query('q_shoe_sizes');
         $q_min = (int)$request->query('q_min');
         $q_max = (int)$request->query('q_max');
+
+        $child_category = $this->child_categories->find($child_id);
+        $parent_category = $this->parent_categories->where('id',$child_category->parent_id)->first();
+        $child_categories = $this->child_categories->where('parent_id',$child_category->parent_id)->get();
         $products = $this->product;
-        if (empty($request)){
+        if (isset($q_sort)){
             $products = match ((int)$q_sort) {
                 1 => $products->latest(),
                 2 => $products->orderByDesc('views'),
                 3 => $products->orderByDesc('rate'),
                 default => $products->orderBy('created_at'),
             };
+        }
+        if (isset($q_brands)){
             $products = $products->where(function ($query) use ($q_brands){
                 $query->whereIn('brand_id',explode(',',$q_brands))->orWhereRaw("'".$q_brands."'=''");
             });
-            $products = $products->where(function ($query) use ($q_colors){
+        }
+        if (isset($q_colors)){
+            $products = $products->whereHas("product_color", function ($query) use ($q_colors){
                 $query->whereIn('color_id',explode(',',$q_colors))->orWhereRaw("'".$q_colors."'=''");
             });
+        }
+        if (isset($q_sizes)){
             $products = $products->whereHas('size',function ($query) use ($q_sizes){
                 $query->whereIn('size_id',explode(',',$q_sizes))->orWhereRaw("'".$q_sizes."'=''");
             });
+        }
+        if (isset($q_shoe_sizes)){
             $products = $products->whereHas('shoe_size',function ($query) use ($q_shoe_sizes){
                 $query->whereIn('shoe_size_id',explode(',',$q_shoe_sizes))->orWhereRaw("'".$q_shoe_sizes."'=''");
             });
-            if ($q_min != null && $q_max != null){
-                $products = $products->wherebetween('price',[$q_min,$q_max]);
-            }
+        }
+        if ($q_min != null && $q_max != null){
+            $products = $products->wherebetween('price',[$q_min,$q_max]);
         }
 
-        $products = $products->paginate(15);
-        $brands = Brand::query()->get();
-        $product_colors = Color::query()->get();
-        $product_sizes = Size::query()->get();
-        $product_shoe_sizes = ShoeSize::query()->get();
-        $parent_categories = $this->parent_categories->get();
-        $child_categories = $this->child_categories->get();
+        $products = $products
+            ->where('parent_category_id',$child_category->parent_id)
+            ->where('child_category_id',$child_id)
+            ->paginate(15);
+        $brands = $this->brand->get();
+        $product_colors = $this->color->get();
+        $product_sizes = $this->size->get();
+        $product_shoe_sizes = $this->shoeSize->get();
 
         return view('pages.product',[
             'products' => $products,
@@ -118,7 +140,7 @@ class ProductController extends Controller
             'product_colors' => $product_colors,
             'product_sizes' => $product_sizes,
             'product_shoe_sizes' => $product_shoe_sizes,
-            'parent_categories' => $parent_categories,
+            'parent_category' => $parent_category,
             'child_categories' => $child_categories,
             'q_brands' => $q_brands,
             'q_colors' => $q_colors,

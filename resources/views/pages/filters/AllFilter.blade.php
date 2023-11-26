@@ -17,7 +17,7 @@
                                 @foreach($child_categories as $child_category)
                                     @if($parent_category->id == $child_category->parent_id)
                                         <li>
-                                            <a href="#">
+                                            <a href="{{route('product.view',['category' => $child_category->id])}}">
                                                 {{$child_category->name}}
                                             </a>
                                         </li>

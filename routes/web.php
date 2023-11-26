@@ -83,7 +83,7 @@ Route::get('/blog/detail/{blog_id}',[BlogController::class,'blog_detail'])->name
 
 
 Route::get('/product/category/all',[ProductController::class,'productAll'])->name('product.category.all');
-Route::get('/product/',[ProductController::class,'product'])->name('product.view');
+Route::get('/products',[ProductController::class,'product'])->name('product.view');
 Route::get('/products/detail/{product_id}',[ProductController::class,'product_detail'])->name('product.detail');
 Route::post('/review',[ReviewController::class,'review'])->name('review');
 
