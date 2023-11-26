@@ -124,9 +124,13 @@
                         <!--  -->
                         <div class="flex-w flex-m p-l-100 p-t-40 respon7">
                             <div class="flex-m bor9 p-r-10 m-r-11">
-                                <a href="{{route('addWishlist',$product->id)}}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 tooltip100" data-tooltip="Add to Wishlist">
-                                    <i class="zmdi zmdi-favorite"></i>
-                                </a>
+                                @if($product->IssetWishlist())
+                                    <i class="fa fa-heart" style="color: red"></i>
+                                @else
+                                    <a href="{{route('addWishlist',$product->id)}}">
+                                        <i class="fa fa-heart-o"></i>
+                                    </a>
+                                @endif
                             </div>
                             <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
                                 <i class="fa fa-facebook"></i>
@@ -359,9 +363,13 @@
                                     </div>
 
                                     <div class="block2-txt-child2 flex-r p-t-3">
-                                        <a href="{{route('addWishlist',$related_product->id)}}" class="dis-block pos-relative">
-                                            <img class="icon-heart1 dis-block trans-04" src="{{asset('images/icons/icon-heart-01.png')}}" alt="ICON">
-                                        </a>
+                                        @if($related_product->IssetWishlist())
+                                            <i class="fa fa-heart" style="color: red"></i>
+                                        @else
+                                            <a href="{{route('addWishlist',$related_product->id)}}">
+                                                <i class="fa fa-heart-o"></i>
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

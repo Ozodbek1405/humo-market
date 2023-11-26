@@ -34,6 +34,9 @@
                     @endif
                     @if(count($wishlistItems) > 0)
                         <div class="table-wishlist">
+                            <a href="{{route('clear.wishlist')}}">
+                                <button class="btn btn-danger mb-2">Clear wishlist</button>
+                            </a>
                             <table>
                                 <thead>
                                 <tr>

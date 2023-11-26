@@ -63,7 +63,14 @@
                                                     <i class="zmdi zmdi-shopping-cart"></i>
                                                 </a>
                                             </li>
-                                            <li><a href="{{route('addWishlist',$product->id)}}"><i class="zmdi zmdi-favorite-outline"></i></a></li>
+                                            @if($product->IssetWishlist())
+                                            @else
+                                                <li>
+                                                    <a href="{{route('addWishlist',$product->id)}}">
+                                                        <i class="zmdi zmdi-favorite-outline"></i>
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                     <div class="product__item__text">

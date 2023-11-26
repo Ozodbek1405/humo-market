@@ -99,6 +99,7 @@ Route::group(['prefix' => 'wishlist'], function () {
     Route::get('/',[WishlistController::class,'wishlist'])->name('wishlist');
     Route::get('/removeItem/{rowId}',[WishlistController::class,'removeItem'])->name('removeItem.wishlist');
     Route::get('/add/{product_id}',[WishlistController::class,'addWishlist'])->name('addWishlist');
+    Route::get('/clear',[WishlistController::class,'clear'])->name('clear.wishlist');
 });
 
 

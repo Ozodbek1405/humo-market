@@ -174,9 +174,13 @@
                                                     </span>
                                                 </div>
                                                 <div class="block2-txt-child2 flex-r p-t-3">
-                                                    <a href="{{route('addWishlist',$related_product->id)}}">
-                                                        <img class="icon-heart1 dis-block trans-04" src="{{asset('images/icons/icon-heart-01.png')}}" alt="ICON">
-                                                    </a>
+                                                    @if($related_product->IssetWishlist())
+                                                        <i class="fa fa-heart" style="color: red"></i>
+                                                    @else
+                                                        <a href="{{route('addWishlist',$related_product->id)}}">
+                                                            <i class="fa fa-heart-o"></i>
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

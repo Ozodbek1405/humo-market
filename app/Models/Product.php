@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -83,5 +84,10 @@ class Product extends Model
     public function getFormattedPriceAttribute()
     {
         return $this->discount == null ? $this->price : $this->discount;
+    }
+
+    public function IssetWishlist()
+    {
+        return Cart::instance('wishlist')->content()->where('id',$this->id)->first();
     }
 }
