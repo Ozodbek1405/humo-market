@@ -57,7 +57,6 @@ class AdminProductController extends Controller
             'discount' => $data['discount']??null,
             'description' => $data['description'],
             'title' =>  $data['title'],
-            'color_id' =>  $data['color_id'],
             'brand_id' =>  $data['brand_id'],
             'parent_category_id' =>  $data['parent_category_id'],
             'child_category_id' =>  $data['child_category_id'],
@@ -73,6 +72,10 @@ class AdminProductController extends Controller
         $product->shoe_size()->detach();
         if(isset($data['shoe_size_id'])){
             $product->shoe_size()->attach($data['shoe_size_id']);
+        }
+        $product->product_color()->detach();
+        if(isset($data['color_id'])){
+            $product->product_color()->attach($data['color_id']);
         }
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $uploadedImage) {
@@ -125,7 +128,6 @@ class AdminProductController extends Controller
             'discount' => $data['discount']??null,
             'description' => $data['description'],
             'title' =>  $data['title'],
-            'color_id' =>  $data['color_id'],
             'brand_id' =>  $data['brand_id'],
             'parent_category_id' =>  $data['parent_category_id'],
             'child_category_id' =>  $data['child_category_id'],
@@ -141,6 +143,10 @@ class AdminProductController extends Controller
         $product->shoe_size()->detach();
         if(isset($data['shoe_size_id'])){
             $product->shoe_size()->attach($data['shoe_size_id']);
+        }
+        $product->product_color()->detach();
+        if(isset($data['color_id'])){
+            $product->product_color()->attach($data['color_id']);
         }
         if (isset($data['images'])){
            $product->images = null;

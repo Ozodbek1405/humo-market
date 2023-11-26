@@ -184,6 +184,7 @@
     $parent_categories = App\Services\GetCategories::getParentCategory();
     $child_categories = App\Services\GetCategories::getChildCategory();
 @endphp
+
 <div class="container hidden" id="toggle_category">
     <div class="row my-3">
         @foreach($parent_categories as $parent_category)

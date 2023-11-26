@@ -15,8 +15,6 @@ class Product extends Model
         'description',
         'title',
         'images',
-        'color_id',
-        'size_id',
         'brand_id',
         'parent_category_id',
         'child_category_id',
@@ -27,11 +25,6 @@ class Product extends Model
         'weight',
     ];
 
-    public function color()
-    {
-        return $this->belongsTo(Color::class,'color_id','id');
-    }
-
     public function size()
     {
         return $this->belongsToMany(Size::class, 'product_sizes', 'product_id')->withPivot(['product_id', 'size_id'])->withTimestamps();
@@ -40,6 +33,11 @@ class Product extends Model
     public function shoe_size()
     {
         return $this->belongsToMany(ShoeSize::class, 'product_shoe_sizes', 'product_id')->withPivot(['product_id', 'shoe_size_id'])->withTimestamps();
+    }
+
+    public function product_color()
+    {
+        return $this->belongsToMany(Color::class, 'product_colors', 'product_id')->withPivot(['product_id', 'color_id'])->withTimestamps();
     }
 
     public function getProductSize()
@@ -60,6 +58,16 @@ class Product extends Model
     public function getProductShoeSizeArray()
     {
         return $this->getProductShoeSize()->pluck('shoe_size_id')->toArray();
+    }
+
+    public function getProductColor()
+    {
+        return ProductColor::query()->where('product_id',$this->id)->get();
+    }
+
+    public function getProductColorArray()
+    {
+        return $this->getProductColor()->pluck('color_id')->toArray();
     }
 
     public function getFormattedImagesAttribute()

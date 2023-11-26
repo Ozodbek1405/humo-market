@@ -22,6 +22,56 @@ class ProductController extends Controller
         $this->child_categories = new ChildCategory();
     }
 
+    public function productAll(Request $request)
+    {
+        $q_brands = $request->query('brands');
+        $q_colors = $request->query('colors');
+        $q_sort = $request->query('sort');
+        $q_min = $request->query('q_min');
+        $q_max = $request->query('q_max');
+        $products = $this->product;
+        if (isset($q_sort)){
+            $products = match ((int)$q_sort) {
+                1 => $products->latest(),
+                2 => $products->orderByDesc('views'),
+                3 => $products->orderByDesc('rate'),
+                default => $products->orderBy('created_at'),
+            };
+        }
+        if (isset($q_brands)){
+            $products = $products->where(function ($query) use ($q_brands){
+                $query->whereIn('brand_id',explode(',',$q_brands))->orWhereRaw("'".$q_brands."'=''");
+            });
+        }
+        if (isset($q_colors)){
+            $products = $products->whereHas("product_color", function ($query) use ($q_colors){
+                $query->whereIn('color_id',explode(',',$q_colors))->orWhereRaw("'".$q_colors."'=''");
+            });
+        }
+
+        if ($q_min != null && $q_max != null){
+            $products = $products->wherebetween('price',[$q_min,$q_max]);
+        }
+
+        $products = $products->paginate(21);
+        $brands = Brand::query()->get();
+        $product_colors = Color::query()->get();
+        $parent_categories = $this->parent_categories->get();
+        $child_categories = $this->child_categories->get();
+
+        return view('pages.productAll',[
+            'products' => $products,
+            'brands' => $brands,
+            'product_colors' => $product_colors,
+            'parent_categories' => $parent_categories,
+            'child_categories' => $child_categories,
+            'q_brands' => $q_brands,
+            'q_colors' => $q_colors,
+            'q_min' => $q_min,
+            'q_max' => $q_max,
+        ]);
+    }
+
     public function product(Request $request)
     {
         $q_brands = $request->query('brands');

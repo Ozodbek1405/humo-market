@@ -1,6 +1,7 @@
 @extends('voyager::master')
 
 @section('content')
+    <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet">
     <section class="container">
         <div style="margin-bottom: 30px">
             <h2>Create <b>Products</b></h2>
@@ -69,10 +70,10 @@
             </div>
             <div class="form-group">
                 <label for="product_color">Product color</label>
-                <select class="form-control" id="product_color" name="color_id">
+                <select multiple class="form-control" id="product_color" name="color_id[]">
                     <option value="">Tanlang</option>
                     @foreach($product_colors as $product_color)
-                        <option @selected($product->color_id == $product_color->id) value="{{$product_color->id}}">
+                        <option value="{{$product_color->id}}" @selected(in_array($product_color->id,$product->getProductColorArray()))>
                             {{$product_color->name}}
                         </option>
                     @endforeach
@@ -163,39 +164,5 @@
             </div>
         </form>
     </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script>
-        $('#parent_category').on('change', function() {
-            var parent_id = $(this).val();
-            if (parent_id !== "") {
-                fetchData(parent_id);
-            }
-        });
-        function fetchData(parent_id) {
-            $.ajax({
-                url: "{{route('getChildCategory')}}",
-                method: 'GET',
-                data: { parent_id: parent_id },
-                dataType: 'json',
-                success: function(data) {
-                    getChildCategories(data);
-                },
-                error: function() {
-                    console.log('Error retrieving data.');
-                }
-            });
-        }
-        function getChildCategories(data) {
-            var child_category = $('#child_category');
-            child_category.empty();
-            for (var i = 0; i < data.data.length; i++) {
-                var option = $('<option></option>').attr('value', data.data[i].id).text(data.data[i].name);
-                child_category.append(option);
-            }
-        }
-        $(document).ready(function() {
-            var parent_id = $('#parent_category').val();
-            fetchData(parent_id);
-        });
-    </script>
+    @include('vendor.voyager.products.script')
 @endsection

@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="shop__sidebar">
-                        @include('pages.filters.productFilter')
+                        @include('pages.filters.AllFilter')
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-9">
@@ -107,12 +107,12 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-raty-js@2.8.0/lib/jquery.raty.min.js"></script>
     <script>
         @foreach ($products as $product)
-            $("#stars{{$product->id}}").raty({
-                path: 'https://cdn.jsdelivr.net/npm/jquery-raty-js@2.8.0/lib/images',
-                readOnly: true,
-                score: {{$product->rate ?? 0}},
-                size: 12
-            });
+        $("#stars{{$product->id}}").raty({
+            path: 'https://cdn.jsdelivr.net/npm/jquery-raty-js@2.8.0/lib/images',
+            readOnly: true,
+            score: {{$product->rate ?? 0}},
+            size: 12
+        });
         @endforeach
 
         /*-------------------
@@ -171,11 +171,11 @@
         function productByFilterBrands(){
             let brands = "";
             $("input[name='brands']:checked").each(function (){
-               if(brands === ""){
-                   brands +=this.value;
-               }else{
-                   brands += "," + this.value;
-               }
+                if(brands === ""){
+                    brands +=this.value;
+                }else{
+                    brands += "," + this.value;
+                }
             });
             $('#brands').val(brands);
             $('#productFilter').submit();

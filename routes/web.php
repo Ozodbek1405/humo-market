@@ -74,7 +74,8 @@ Route::get('/blog',[BlogController::class,'blog'])->name('blog');
 Route::get('/blog/detail/{blog_id}',[BlogController::class,'blog_detail'])->name('blog.detail');
 
 
-Route::get('/product/category/all',[ProductController::class,'product'])->name('product.view');
+Route::get('/product/category/all',[ProductController::class,'productAll'])->name('product.category.all');
+Route::get('/product/',[ProductController::class,'product'])->name('product.view');
 Route::get('/products/detail/{product_id}',[ProductController::class,'product_detail'])->name('product.detail');
 Route::post('/review',[ReviewController::class,'review'])->name('review');
 

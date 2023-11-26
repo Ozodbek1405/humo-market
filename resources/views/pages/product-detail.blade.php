@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="size-204 respon6-next">
                                     <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
+                                        <select class="js-select2" name="size">
                                             <option>Choose an option</option>
                                             @foreach($product->getProductSize() as $item)
                                                 <option value="{{$item->size_id}}">Size {{$item->size->name}}</option>
@@ -85,10 +85,18 @@
                             </div>
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-203 flex-c-m respon6">
-                                    Color :
+                                    Color
                                 </div>
                                 <div class="size-204 respon6-next">
-                                    {{$product->color->name}}
+                                    <div class="rs1-select2 bor8 bg0">
+                                        <select class="js-select2" name="color">
+                                            <option>Choose an option</option>
+                                            @foreach($product->getProductColor() as $item)
+                                                <option value="{{$item->color_id}}">{{$item->color->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -290,7 +298,9 @@
 												Color
 											</span>
                                             <span class="stext-102 cl6 size-206">
-												{{$product->color->name}}
+												 @foreach($product->getProductColor() as $item)
+                                                    {{$item->color->name}},
+                                                 @endforeach
 											</span>
                                         </li>
                                         <li class="flex-w flex-t p-b-7">

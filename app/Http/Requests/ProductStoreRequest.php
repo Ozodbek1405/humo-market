@@ -29,7 +29,7 @@ class ProductStoreRequest extends FormRequest
             'description' => 'required|min:10',
             'title' => 'required|string|min:3|max:255',
             'images' => 'required|array|min:3',
-            'color_id' => 'required',
+            'color_id' => 'sometimes|array',
             'size_id' => 'sometimes|array',
             'shoe_size_id' => 'sometimes|array',
             'brand_id' => 'required',
