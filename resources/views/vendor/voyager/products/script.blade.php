@@ -22,6 +22,13 @@
                 allowClear: Boolean($(this).data('allow-clear')),
             });
         });
+        $('#parent_id').each(function () {
+            $(this).select2({
+                theme: 'bootstrap4',
+                width: 'style',
+                allowClear: Boolean($(this).data('allow-clear')),
+            });
+        });
     });
     $('#parent_category').on('change', function() {
         var parent_id = $(this).val();

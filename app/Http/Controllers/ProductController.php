@@ -48,11 +48,9 @@ class ProductController extends Controller
                 $query->whereIn('color_id',explode(',',$q_colors))->orWhereRaw("'".$q_colors."'=''");
             });
         }
-
         if ($q_min != null && $q_max != null){
             $products = $products->wherebetween('price',[$q_min,$q_max]);
         }
-
         $products = $products->paginate(21);
         $brands = Brand::query()->get();
         $product_colors = Color::query()->get();

@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('brands', function (Blueprint $table) {
-            $table->integer('parent_category_id')->nullable();
+        Schema::create('brand_parent_categories', function (Blueprint $table) {
+            $table->id();
+            $table->integer('brand_id');
+            $table->integer('parent_id');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('brands', function (Blueprint $table) {
-            $table->dropColumn('parent_category_id');
-        });
+        Schema::dropIfExists('brand_parent_categories');
     }
 };

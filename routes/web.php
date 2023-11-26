@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{AboutController,
+    Admin\AdminBrandsController,
     Admin\AdminProductController,
     Auth\LoginController,
     Auth\RegisterController,
@@ -36,6 +37,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/products/delete/{product_id}',[AdminProductController::class,'productDelete'])->name('products.delete');
     Route::get('/products/edit/{product_id}',[AdminProductController::class,'edit'])->name('product.edit');
     Route::post('/products/update/{product_id}',[AdminProductController::class,'update'])->name('product.update');
+
+    Route::get('brands',[AdminBrandsController::class,'brands'])->name('brands.admin.view');
+    Route::get('/brands/create',[AdminBrandsController::class,'create'])->name('brands.admin.create');
+    Route::post('/brands/store',[AdminBrandsController::class,'store'])->name('brands.admin.store');
+    Route::get('/brands/delete/{brand_id}',[AdminBrandsController::class,'delete'])->name('brands.admin.delete');
+    Route::get('/brands/edit/{brand_id}',[AdminBrandsController::class,'edit'])->name('brands.admin.edit');
+    Route::post('/brands/update/{brand_id}',[AdminBrandsController::class,'update'])->name('brands.admin.update');
 });
 
 Route::group(['middleware' => 'auth'], static function () {

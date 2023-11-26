@@ -107,7 +107,7 @@
                 <label for="product_shoe_size">Product shoe size</label>
                 <select multiple class="form-control" id="product_shoe_size" name="shoe_size_id[]">
                     @foreach($product_shoe_sizes as $shoe_size)
-                        <option value="{{$shoe_size->id}}"  @selected(in_array($shoe_size->id,$product->getProductShoeSizeArray()))>
+                        <option value="{{$shoe_size->id}}" @selected(in_array($shoe_size->id,$product->getProductShoeSizeArray()))>
                             {{$shoe_size->name}}
                         </option>
                     @endforeach
