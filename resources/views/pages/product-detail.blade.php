@@ -155,7 +155,7 @@
                             <a class="nav-link active" data-toggle="tab" href="#reviews" role="tab">Reviews ({{count($reviews)}})</a>
                         </li>
                         <li class="nav-item p-b-10">
-                            <a class="nav-link" data-toggle="tab" href="#description" role="tab">Description</a>
+                            <a class="nav-link" data-toggle="tab" href="#description" role="tab">Product about</a>
                         </li>
                         <li class="nav-item p-b-10">
                             <a class="nav-link" data-toggle="tab" href="#information" role="tab">Additional information</a>
@@ -257,7 +257,7 @@
                         <div class="tab-pane fade" id="description" role="tabpanel">
                             <div class="how-pos2 p-lr-15-md">
                                 <p class="stext-102 cl6">
-                                    {{$product->description}}
+                                    {!! $product->description !!}
                                 </p>
                             </div>
                         </div>

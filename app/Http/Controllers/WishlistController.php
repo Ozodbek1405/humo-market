@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class WishlistController extends Controller
 {
@@ -25,7 +24,6 @@ class WishlistController extends Controller
                 'qty' => 1,
                 'options' => ['image' => $product->formatted_images[0]]
             ])->associate('App\Models\Product');
-        Alert::success('Saved Successfully');
         return redirect()->back()->with('message','Item has been successfully!');
     }
 
