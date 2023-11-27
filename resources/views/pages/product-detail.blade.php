@@ -10,6 +10,11 @@
 
     <!-- breadcrumb -->
     <div class="container">
+        @if (session('message'))
+            <div class="alert alert-info mt-2">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
             <a href="{{route('home')}}" class="stext-109 cl8 hov-cl1 trans-04">
                 Home
@@ -125,7 +130,9 @@
                         <div class="flex-w flex-m p-l-100 p-t-40 respon7">
                             <div class="flex-m bor9 p-r-10 m-r-11">
                                 @if($product->IssetWishlist())
-                                    <i class="fa fa-heart" style="color: red"></i>
+                                    <a href="{{route('removeItem.wishlist',$product->IssetWishlist()->rowId)}}">
+                                        <i class="fa fa-heart" style="color: red"></i>
+                                    </a>
                                 @else
                                     <a href="{{route('addWishlist',$product->id)}}">
                                         <i class="fa fa-heart-o"></i>
@@ -364,7 +371,9 @@
 
                                     <div class="block2-txt-child2 flex-r p-t-3">
                                         @if($related_product->IssetWishlist())
-                                            <i class="fa fa-heart" style="color: red"></i>
+                                            <a href="{{route('removeItem.wishlist',$related_product->IssetWishlist()->rowId)}}">
+                                                <i class="fa fa-heart" style="color: red"></i>
+                                            </a>
                                         @else
                                             <a href="{{route('addWishlist',$related_product->id)}}">
                                                 <i class="fa fa-heart-o"></i>

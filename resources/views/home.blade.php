@@ -5,8 +5,12 @@
 
 
 @section('content')
-
     <section class="section-slide">
+        @if (session('message'))
+            <div class="alert alert-info mt-2">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="wrap-slick1 rs1-slick1">
             <div class="slick1">
                 <div class="item-slick1" style="background-image: url({{asset('images/slide-02.jpg')}});">
@@ -175,7 +179,9 @@
                                                 </div>
                                                 <div class="block2-txt-child2 flex-r p-t-3">
                                                     @if($related_product->IssetWishlist())
-                                                        <i class="fa fa-heart" style="color: red"></i>
+                                                        <a href="{{route('removeItem.wishlist',$related_product->IssetWishlist()->rowId)}}">
+                                                            <i class="fa fa-heart" style="color: red"></i>
+                                                        </a>
                                                     @else
                                                         <a href="{{route('addWishlist',$related_product->id)}}">
                                                             <i class="fa fa-heart-o"></i>
