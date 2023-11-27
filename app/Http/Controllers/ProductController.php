@@ -37,6 +37,7 @@ class ProductController extends Controller
         $q_sort = $request->query('sort');
         $q_min = $request->query('q_min');
         $q_max = $request->query('q_max');
+        $search = $request->query('search');
         $products = $this->product;
         if (isset($q_sort)){
             $products = match ((int)$q_sort) {
@@ -58,6 +59,9 @@ class ProductController extends Controller
         }
         if ($q_min != null && $q_max != null){
             $products = $products->wherebetween('price',[$q_min,$q_max]);
+        }
+        if (isset($search)){
+            $products = $products->where('name', 'LIKE', "%{$search}%");
         }
         $products = $products->paginate(21);
         $brands = $this->brand->get();

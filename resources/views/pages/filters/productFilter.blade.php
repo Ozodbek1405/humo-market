@@ -2,6 +2,9 @@
     <div class="section-title">
         <h4>Categories</h4>
     </div>
+    <div class="mb-2">
+        <a href="{{route('product.category.all')}}">Barcha kategoriyalar</a>
+    </div>
     <div class="categories__accordion">
         <div class="accordion" id="accordionExample">
             <div class="card">
