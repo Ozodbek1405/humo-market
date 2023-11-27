@@ -1,8 +1,11 @@
 <!-- Header -->
 <style>
-    .show_category {
-        transition: opacity 1s;
-        opacity: 0;
+    .dropdown {
+        position: static !important;
+    }
+    .dropdown-menu {
+        margin-top: 20px !important;
+        width: 100% !important;
     }
 </style>
 <header class="header-v4">
@@ -43,10 +46,38 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li id="shop">
-                            <button class="btn btn-primary" id="show-hidden-menu">
-                                <span class="mr-2">Shop Category</span> <i id="fas-fa" class="fa fa-bars"></i>
-                            </button>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Shop Category
+                            </a>
+                            <!--dropdown sub items of menu-->
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @php
+                                    $parent_categories = App\Services\GetCategories::getParentCategory();
+                                    $child_categories = App\Services\GetCategories::getChildCategory();
+                                @endphp
+
+                                <div class="container">
+                                    <div class="row my-3">
+                                        @foreach($parent_categories as $parent_category)
+                                            <div class="m-all-20">
+                                                <h1 class="font-bold text-xl my-2">{{$parent_category->name}}</h1>
+                                                <div>
+                                                    @foreach($child_categories as $child_category)
+                                                        @if($parent_category->id == $child_category->parent_id)
+                                                            <h1 class="font-medium my-3">
+                                                                <a href="{{route('product.view',['category' => $child_category->id])}}">
+                                                                    {{$child_category->name}}
+                                                                </a>
+                                                            </h1>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                         <li id="home">
                             <a href="{{route('home')}}">Home</a>
@@ -149,7 +180,7 @@
             </li>
 
             <li id="shop">
-                <a href="#">Shop</a>
+                <a href="{{route('product.category.all')}}">Shop</a>
             </li>
 
             <li id="blog">
@@ -170,7 +201,7 @@
     <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
         <div class="container-search-header">
             <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                <img src="images/icons/icon-close2.png" alt="CLOSE">
+                <img src="{{asset('images/icons/icon-close2.png')}}" alt="CLOSE">
             </button>
 
             <form action="{{route('product.category.all')}}" method="GET" class="wrap-search-header flex-w p-l-15">
@@ -182,41 +213,8 @@
         </div>
     </div>
 </header>
-@php
-    $parent_categories = App\Services\GetCategories::getParentCategory();
-    $child_categories = App\Services\GetCategories::getChildCategory();
-@endphp
-
-<div class="container hidden" id="toggle_category">
-    <div class="row my-3">
-        @foreach($parent_categories as $parent_category)
-            <div class="m-all-20">
-                <h1 class="font-bold text-xl my-2">{{$parent_category->name}}</h1>
-                <div>
-                    @foreach($child_categories as $child_category)
-                        @if($parent_category->id == $child_category->parent_id)
-                            <h1 class="font-medium my-3">
-                                <a href="{{route('product.view',['category' => $child_category->id])}}">
-                                    {{$child_category->name}}
-                                </a>
-                            </h1>
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-        @endforeach
-    </div>
-</div>
-
 @push('scripts')
     <script>
-        $(document).ready(function() {
-            $('#show-hidden-menu').click(function() {
-                $('#toggle_category').slideToggle("slow");
-                $('#fas-fa').toggleClass('fa-bars fa-times');
-            });
-        });
-
         let link = document.location.href.split('/');
         if (link[3] == '') {
             $("#home").addClass("active-menu");
