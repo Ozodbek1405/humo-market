@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStoreRequest;
-use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Brand;
 use App\Models\ChildCategory;
+use App\Models\Company;
 use App\Models\ParentCategory;
 use App\Models\Product;
 use App\Models\Color;
@@ -30,6 +30,7 @@ class AdminProductController extends Controller
         $product_shoe_sizes = ShoeSize::query()->get();
         $parent_categories = ParentCategory::query()->get();
         $child_categories = ChildCategory::query()->get();
+        $companies = Company::query()->get();
 
         return view('vendor.voyager.products.create',[
             'brands' => $brands,
@@ -38,6 +39,7 @@ class AdminProductController extends Controller
             'product_shoe_sizes' => $product_shoe_sizes,
             'parent_categories' => $parent_categories,
             'child_categories' => $child_categories,
+            'companies' => $companies,
         ]);
     }
 
@@ -64,6 +66,7 @@ class AdminProductController extends Controller
             'dimensions' =>  $data['dimensions']??null,
             'weight' =>  $data['weight']??null,
             'materials' =>  $data['materials']??null,
+            'company_id' =>  $data['company_id']??null,
         ]);
         $product->size()->detach();
         if(isset($data['size_id'])){
@@ -106,6 +109,7 @@ class AdminProductController extends Controller
         $parent_categories = ParentCategory::query()->get();
         $child_categories = ChildCategory::query()->get();
         $product = Product::query()->where('id',$product_id)->first();
+        $companies = Company::query()->get();
 
         return view('vendor.voyager.products.edit',[
             'brands' => $brands,
@@ -114,11 +118,12 @@ class AdminProductController extends Controller
             'product_shoe_sizes' => $product_shoe_sizes,
             'parent_categories' => $parent_categories,
             'child_categories' => $child_categories,
-            'product' => $product
+            'product' => $product,
+            'companies' => $companies
         ]);
     }
 
-    public function update(ProductUpdateRequest $request, $product_id)
+    public function update(ProductStoreRequest $request, $product_id)
     {
         $data = $request->validated();
         $product = Product::find($product_id);
@@ -135,6 +140,7 @@ class AdminProductController extends Controller
             'dimensions' =>  $data['dimensions']??null,
             'weight' =>  $data['weight']??null,
             'materials' =>  $data['materials']??null,
+            'company_id' =>  $data['company_id']??null,
         ]);
         $product->size()->detach();
         if(isset($data['size_id'])){

@@ -24,6 +24,7 @@ class Product extends Model
         'rate',
         'dimensions',
         'weight',
+        'company_id',
     ];
 
     public function size()

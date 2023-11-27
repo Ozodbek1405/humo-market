@@ -16,6 +16,43 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="company_id">Company name</label>
+                <select class="form-control" id="company_id" name="company_id">
+                    <option value="">Tanlang</option>
+                    @foreach($companies as $company)
+                        <option value="{{$company->id}}" @selected($product->company_id == $company->id)>
+                            {{$company->name}}
+                        </option>
+                    @endforeach
+                </select>
+                @error('company_id')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="parent_category">Parent category</label>
+                <select class="form-control" id="parent_category" name="parent_category_id">
+                    <option value="">Tanlang</option>
+                    @foreach($parent_categories as $parent_category)
+                        <option @selected($product->parent_category_id == $parent_category->id) value="{{$parent_category->id}}">
+                            {{$parent_category->name}}
+                        </option>
+                    @endforeach
+                </select>
+                @error('parent_category_id')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="child_category">Child category</label>
+                <select class="form-control" id="child_category" name="child_category_id">
+                    <option value="">Tanlang</option>
+                </select>
+                @error('child_category_id')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="price">Price</label>
                 <input type="number" class="form-control" id="price" name="price" placeholder="price" value="{{old('price',$product->price)}}">
                 @error('price')
@@ -132,30 +169,6 @@
                 <label for="images">Images</label>
                 <input class="form-control-file" name="images[]" type="file" id="images" multiple="multiple" accept=".jpg,.png,.jpeg">
                 @error('images')
-                <p style="color: #f11313">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="parent_category">Parent category</label>
-                <select class="form-control" id="parent_category" name="parent_category_id">
-                    <option value="">Tanlang</option>
-                    @foreach($parent_categories as $parent_category)
-                        <option @selected($product->parent_category_id == $parent_category->id) value="{{$parent_category->id}}">
-                            {{$parent_category->name}}
-                        </option>
-                    @endforeach
-                </select>
-                @error('parent_category_id')
-                <p style="color: #f11313">{{ $message }}</p>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="child_category">Child category</label>
-                <select class="form-control" id="child_category" name="child_category_id">
-                    <option value="">Tanlang</option>
-                </select>
-                @error('child_category_id')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>

@@ -28,7 +28,7 @@ class ProductStoreRequest extends FormRequest
             'discount' => '',
             'description' => 'required|min:10',
             'title' => 'required|string|min:3|max:255',
-            'images' => 'required|array|min:3',
+            'images' => 'sometimes|array|min:3',
             'color_id' => 'sometimes|array',
             'size_id' => 'sometimes|array',
             'shoe_size_id' => 'sometimes|array',
@@ -39,6 +39,7 @@ class ProductStoreRequest extends FormRequest
             'dimensions' => '',
             'weight' => '',
             'materials' => '',
+            'company_id' => 'required',
         ];
     }
 

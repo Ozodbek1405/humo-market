@@ -46,6 +46,9 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
+                        <li id="home">
+                            <a href="{{route('home')}}">Home</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Shop Category
@@ -78,9 +81,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li id="home">
-                            <a href="{{route('home')}}">Home</a>
                         </li>
                         <li id="blog">
                             <a href="{{route('blog')}}">Blog</a>

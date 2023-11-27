@@ -27,6 +27,8 @@ return new class extends Migration
         Schema::table('parent_categories', function (Blueprint $table) {
             $table->dropColumn('min');
             $table->dropColumn('max');
+            $table->dropColumn('dress_size');
+            $table->dropColumn('shoe_size');
         });
     }
 };

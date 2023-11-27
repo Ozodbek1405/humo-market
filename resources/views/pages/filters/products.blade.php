@@ -1,9 +1,15 @@
+<style>
+    .menu_item {
+        margin-top: 20px !important;
+        width: 30% !important;
+    }
+</style>
 <div class="dropdown mb-4">
     <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
         Sort by
     </button>
-    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="triggerId">
+    <div class="dropdown-menu dropdown-menu-left menu_item" aria-labelledby="triggerId">
         <button class="dropdown-item" id="latest">
             Latest
         </button>

@@ -128,12 +128,14 @@ class ProductController extends Controller
         if ($q_min != null && $q_max != null){
             $products = $products->wherebetween('price',[$q_min,$q_max]);
         }
-
         $products = $products
             ->where('parent_category_id',$child_category->parent_id)
             ->where('child_category_id',$child_id)
             ->paginate(15);
-        $brands = $this->brand->get();
+        $parent_id = $child_category->parent_id;
+        $brands = $this->brand->whereHas('parent',function ($query) use ($parent_id){
+            $query->where('parent_id',$parent_id)->orWhereRaw("'".$parent_id."'=''");
+        })->get();
         $product_colors = $this->color->get();
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
