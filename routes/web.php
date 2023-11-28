@@ -93,6 +93,8 @@ Route::group(['prefix' => 'cart'], function () {
     Route::get('/clear',[ShopController::class,'clearCart'])->name('clearCart');
     Route::put('/update',[ShopController::class,'updateCart'])->name('updateCart');
     Route::get('/removeItem/{rowId}',[ShopController::class,'removeItem'])->name('removeItem');
+    Route::get('/districts',[ShopController::class,'getDistricts'])->name('cart.districts');
+    Route::get('/calculateData',[ShopController::class,'getCalculateData'])->name('calculate.data');
 });
 
 Route::group(['prefix' => 'wishlist'], function () {

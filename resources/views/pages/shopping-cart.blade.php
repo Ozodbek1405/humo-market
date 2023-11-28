@@ -102,27 +102,26 @@
                                     <p class="stext-111 cl6 p-t-2">
                                         There are no shipping methods available. Please double check your address, or contact us if you need any help.
                                     </p>
-
                                     <div class="p-t-15">
 									<span class="stext-112 cl8">
 										Calculate Shipping
 									</span>
-
                                         <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                                            <select class="js-select2" name="time">
-                                                <option>Select a country...</option>
-                                                <option>USA</option>
-                                                <option>UK</option>
+                                            <label for="region_id"></label>
+                                            <select class="js-select2" name="region_id" id="region_id" required>
+                                                <option value="">Tanlang</option>
+                                                @foreach($regions as $region)
+                                                    <option value="{{$region->region_id}}">{{$region->name}}</option>
+                                                @endforeach
                                             </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>
-
-                                        <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
-                                        </div>
-
-                                        <div class="bor8 bg0 m-b-22">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
+                                        <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+                                            <label for="districts"></label>
+                                            <select class="js-select2" name="district_id" id="districts" required>
+                                                <option value="">Tanlang</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
                                         </div>
 
                                         <div class="flex-w">
@@ -184,5 +183,37 @@
             $('#quantity').val($(qty).val())
             $('#updateCart').submit();
         }
+        $('#region_id').on('change', function() {
+            var region_id = $(this).val();
+            if (region_id !== "") {
+                fetchData(region_id);
+            }
+        });
+        function fetchData(region_id) {
+            $.ajax({
+                url: "{{route('cart.districts')}}",
+                method: 'GET',
+                data: { region_id: region_id },
+                dataType: 'json',
+                success: function(data) {
+                    getChildCategories(data);
+                },
+                error: function() {
+                    console.log('Error retrieving data.');
+                }
+            });
+        }
+        function getChildCategories(data) {
+            var districts = $('#districts');
+            districts.empty();
+            for (var i = 0; i < data.data.length; i++) {
+                var option = $('<option></option>').attr('value', data.data[i].district_id).text(data.data[i].name);
+                districts.append(option);
+            }
+        }
+        $(document).ready(function() {
+            var region_id = $('#region_id').val();
+            fetchData(region_id);
+        });
     </script>
 @endpush
