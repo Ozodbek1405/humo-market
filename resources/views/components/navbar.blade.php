@@ -127,7 +127,7 @@
                 <i class="zmdi zmdi-search"></i>
             </div>
 
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
                  data-notify="{{Gloudemans\Shoppingcart\Facades\Cart::instance('cart')->content()->count()}}">
                 <a href="{{route('shopping.cart')}}"> <i class="zmdi zmdi-shopping-cart"></i></a>
             </div>

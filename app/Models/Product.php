@@ -47,6 +47,11 @@ class Product extends Model
         return $this->belongsTo(ChildCategory::class);
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
 
     public function getProductSize()
     {

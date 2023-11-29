@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddToCartRequest;
 use App\Models\District;
 use App\Models\Product;
 use App\Models\Region;
@@ -19,9 +20,11 @@ class ShopController extends Controller
         return view('pages.shopping-cart',compact('cartItems','regions'));
     }
 
-    public function addToCart(Request $request,$product_id)
+    public function addToCart(AddToCartRequest $request,$product_id)
     {
         $product_count = $request->product_count;
+        $product_color_id = $request->color;
+        $product_size = $request->size;
         $product = Product::find($product_id);
         Cart::instance('cart')
               ->add([
@@ -29,7 +32,11 @@ class ShopController extends Controller
                   'name' => $product->name,
                   'qty' => $product_count,
                   'price' => $product->formatted_price,
-                  'options' => ['image' => $product->formatted_images[0]]
+                  'options' => [
+                      'image' => $product->formatted_images[0],
+                      'color_id' => $product_color_id,
+                      'size_id' => $product_size,
+                  ]
                 ])->associate('App\Models\Product');
         return redirect()->route('shopping.cart')->with('message','Item has been successfully!');
     }
