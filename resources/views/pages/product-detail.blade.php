@@ -63,59 +63,81 @@
                         <h4 class="mtext-105 cl2 js-name-detail p-b-14">
                             {{$product->name}}
                         </h4>
-
                         <span class="mtext-106 cl2">
 							{{$product->formatted_price}} so'm
 						</span>
                         <p class="stext-102 cl3 p-t-23">
                             {{$product->title}}
                         </p>
-
                         <p class="stext-102 cl3 p-t-23">
                             Brand name : {{$product->brand->name}}
                         </p>
-
                         <div class="p-t-33">
                             <form action="{{route('addToCart',$product->id)}}" method="POST">
                                 @csrf
-                                <div class="flex-w flex-r-m p-b-10">
-                                    <div class="size-203 flex-c-m respon6">
-                                        Size
-                                    </div>
-                                    <div class="size-204 respon6-next">
-                                        <div class="rs1-select2 bor8 bg0">
-                                            <select class="js-select2" name="size">
-                                                <option value="">Choose an option</option>
-                                                @foreach($product->getProductSize() as $item)
-                                                    <option value="{{$item->size_id}}">Size {{$item->size->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
+                                @if($product->parent_category->dress_size == 1)
+                                    <div class="flex-w flex-r-m p-b-10">
+                                        <div class="size-203 flex-c-m respon6">
+                                            Size
                                         </div>
-                                        @error('size')
-                                        <p style="color: #f11313">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="flex-w flex-r-m p-b-10">
-                                    <div class="size-203 flex-c-m respon6">
-                                        Color
-                                    </div>
-                                    <div class="size-204 respon6-next">
-                                        <div class="rs1-select2 bor8 bg0">
-                                            <select class="js-select2" name="color">
-                                                <option value="">Choose an option</option>
-                                                @foreach($product->getProductColor() as $item)
-                                                    <option value="{{$item->color_id}}">{{$item->color->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
+                                        <div class="size-204 respon6-next">
+                                            <div class="rs1-select2 bor8 bg0">
+                                                <select class="js-select2" name="size" required>
+                                                    <option value="">Choose an option</option>
+                                                    @foreach($product->getProductSize() as $item)
+                                                        <option value="{{$item->size_id}}">Size {{$item->size->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="dropDownSelect2"></div>
+                                            </div>
+                                            @error('size')
+                                            <p style="color: #f11313">{{ $message }}</p>
+                                            @enderror
                                         </div>
-                                        @error('color')
-                                        <p style="color: #f11313">{{ $message }}</p>
-                                        @enderror
                                     </div>
-                                </div>
+                                @endif
+                                @if($product->parent_category->shoe_size == 1)
+                                    <div class="flex-w flex-r-m p-b-10">
+                                        <div class="size-203 flex-c-m respon6">
+                                            Shoe Size
+                                        </div>
+                                        <div class="size-204 respon6-next">
+                                            <div class="rs1-select2 bor8 bg0">
+                                                <select class="js-select2" name="shoe_size" required>
+                                                    <option value="">Choose an option</option>
+                                                    @foreach($product->getProductShoeSize() as $item)
+                                                        <option value="{{$item->shoe_size_id}}">Size {{$item->shoe_size->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="dropDownSelect2"></div>
+                                            </div>
+                                            @error('shoe_size')
+                                            <p style="color: #f11313">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                @endif
+                                @if(count($product->getProductColor())>0)
+                                    <div class="flex-w flex-r-m p-b-10">
+                                        <div class="size-203 flex-c-m respon6">
+                                            Color
+                                        </div>
+                                        <div class="size-204 respon6-next">
+                                            <div class="rs1-select2 bor8 bg0">
+                                                <select class="js-select2" name="color" required>
+                                                    <option value="">Choose an option</option>
+                                                    @foreach($product->getProductColor() as $item)
+                                                        <option value="{{$item->color_id}}">{{$item->color->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="dropDownSelect2"></div>
+                                            </div>
+                                            @error('color')
+                                            <p style="color: #f11313">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-204 flex-w flex-m respon6-next">
                                     <div class="wrap-num-product flex-w m-r-20 m-tb-10">
@@ -316,26 +338,42 @@
                                                 </span>
                                             </li>
                                         @endisset
-                                        <li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Color
-											</span>
-                                            <span class="stext-102 cl6 size-206">
-												 @foreach($product->getProductColor() as $item)
-                                                    {{$item->color->name}},
-                                                 @endforeach
-											</span>
-                                        </li>
-                                        <li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Size
-											</span>
-                                            <span class="stext-102 cl6 size-206">
-												 @foreach($product->getProductSize() as $item)
-                                                    {{$item->size->name}},
+                                        @if(count($product->getProductColor())>0)
+                                            <li class="flex-w flex-t p-b-7">
+                                                <span class="stext-102 cl3 size-205">
+                                                    Color
+                                                </span>
+                                                <span class="stext-102 cl6 size-206">
+												@foreach($product->getProductColor() as $item)
+                                                     {{$item->color->name}},
                                                 @endforeach
-											</span>
-                                        </li>
+											    </span>
+                                            </li>
+                                        @endif
+                                        @if(count($product->getProductSize())>0)
+                                            <li class="flex-w flex-t p-b-7">
+                                                <span class="stext-102 cl3 size-205">
+                                                    Size
+                                                </span>
+                                                <span class="stext-102 cl6 size-206">
+												 @foreach($product->getProductSize() as $item)
+                                                     {{$item->size->name}},
+                                                 @endforeach
+											    </span>
+                                            </li>
+                                        @endisset
+                                        @if(count($product->getProductShoeSize())>0)
+                                            <li class="flex-w flex-t p-b-7">
+                                                <span class="stext-102 cl3 size-205">
+                                                    Shoe Size
+                                                </span>
+                                                <span class="stext-102 cl6 size-206">
+                                                     @foreach($product->getProductShoeSize() as $item)
+                                                         {{$item->shoe_size->name}},
+                                                     @endforeach
+                                                </span>
+                                            </li>
+                                        @endisset
                                     </ul>
                                 </div>
                             </div>

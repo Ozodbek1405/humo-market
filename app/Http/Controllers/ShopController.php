@@ -25,6 +25,7 @@ class ShopController extends Controller
         $product_count = $request->product_count;
         $product_color_id = $request->color;
         $product_size = $request->size;
+        $product_shoe_size = $request->shoe_size;
         $product = Product::find($product_id);
         Cart::instance('cart')
               ->add([
@@ -36,6 +37,7 @@ class ShopController extends Controller
                       'image' => $product->formatted_images[0],
                       'color_id' => $product_color_id,
                       'size_id' => $product_size,
+                      'shoe_size_id' => $product_shoe_size,
                   ]
                 ])->associate('App\Models\Product');
         return redirect()->route('shopping.cart')->with('message','Item has been successfully!');

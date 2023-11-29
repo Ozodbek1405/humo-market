@@ -24,8 +24,9 @@ class AddToCartRequest extends FormRequest
     {
         return [
             'product_count' => 'required|gt:0',
-            'color' => 'required',
-            'size' => 'required',
+            'color' => 'sometimes',
+            'size' => 'sometimes',
+            'shoe_size' => 'sometimes',
         ];
     }
 

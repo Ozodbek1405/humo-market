@@ -47,6 +47,11 @@ class Product extends Model
         return $this->belongsTo(ChildCategory::class);
     }
 
+    public function parent_category()
+    {
+        return $this->belongsTo(ParentCategory::class);
+    }
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);
