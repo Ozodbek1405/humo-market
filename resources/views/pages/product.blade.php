@@ -12,6 +12,11 @@
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
+            @if (session('message'))
+                <div class="alert alert-info">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">

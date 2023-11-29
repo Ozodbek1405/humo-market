@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
 @endpush
 @section('content')
-
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
+            @if (session('message'))
+                <div class="alert alert-info">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
@@ -137,30 +141,6 @@
                 }
             });
             $('#colors').val(colors);
-            $('#productFilter').submit();
-        }
-        function productByFilterSizes(){
-            let sizes = "";
-            $("input[name='product_size']:checked").each(function (){
-                if(sizes === ""){
-                    sizes += this.value;
-                }else{
-                    sizes += "," + this.value;
-                }
-            });
-            $('#q_sizes').val(sizes);
-            $('#productFilter').submit();
-        }
-        function productByFilterShoeSizes(){
-            let shoeSizes = "";
-            $("input[name='product_shoe_size']:checked").each(function (){
-                if(shoeSizes === ""){
-                    shoeSizes += this.value;
-                }else{
-                    shoeSizes += "," + this.value;
-                }
-            });
-            $('#q_shoe_sizes').val(shoeSizes);
             $('#productFilter').submit();
         }
     </script>

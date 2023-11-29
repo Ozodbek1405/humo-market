@@ -27,13 +27,27 @@
             <div class="product__item">
                 <div class="product__item__pic set-bg" data-setbg="{{asset('storage/uploads/'.$product->formatted_images[0])}}">
                     <ul class="product__hover">
-                        <li><a href="{{asset('storage/uploads/'.$product->formatted_images[0])}}" class="image-popup"><i class="zmdi zmdi-eye"></i></a></li>
+                        <li>
+                            <a href="{{asset('storage/uploads/'.$product->formatted_images[0])}}" class="image-popup">
+                                <i class="zmdi zmdi-eye"></i>
+                            </a>
+                        </li>
                         <li>
                             <a href="javascript:void(0)" onclick="event.preventDefault();document.getElementById('addToCart{{$product->name}}').submit()">
                                 <i class="zmdi zmdi-shopping-cart"></i>
                             </a>
                         </li>
-                        <li><a href="{{route('addWishlist',$product->id)}}"><i class="zmdi zmdi-favorite-outline"></i></a></li>
+                        <li>
+                            @if($product->IssetWishlist())
+                                <a href="{{route('removeItem.wishlist',$product->IssetWishlist()->rowId)}}">
+                                    <i class="zmdi zmdi-favorite"></i>
+                                </a>
+                            @else
+                                <a href="{{route('addWishlist',$product->id)}}">
+                                    <i class="zmdi zmdi-favorite-outline"></i>
+                                </a>
+                            @endif
+                        </li>
                     </ul>
                 </div>
                 <div class="product__item__text">
