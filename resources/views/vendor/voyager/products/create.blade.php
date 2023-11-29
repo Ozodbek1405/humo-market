@@ -4,13 +4,13 @@
     <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet">
     <section class="container">
         <div style="margin-bottom: 30px">
-            <h2>Create <b>Products</b></h2>
+            <h2>@if(empty($product)) Create @else Edit @endif <b>Products</b></h2>
         </div>
-        <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ $form_route }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="name" value="{{old('name')}}">
+                <input type="text" class="form-control" id="name" name="name" placeholder="name" value="{{old('name',$product->name??null)}}">
                 @error('name')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
@@ -20,7 +20,9 @@
                 <select class="form-control" id="company_id" name="company_id">
                     <option value="">Tanlang</option>
                     @foreach($companies as $company)
-                        <option value="{{$company->id}}">{{$company->name}}</option>
+                        <option value="{{$company->id}}" @selected($product->company_id??null == $company->id)>
+                            {{$company->name}}
+                        </option>
                     @endforeach
                 </select>
                 @error('company_id')
@@ -32,7 +34,9 @@
                 <select class="form-control" id="parent_category" name="parent_category_id">
                     <option value="">Tanlang</option>
                     @foreach($parent_categories as $parent_category)
-                        <option value="{{$parent_category->id}}">{{$parent_category->name}}</option>
+                        <option @selected($product->parent_category_id??null == $parent_category->id) value="{{$parent_category->id}}">
+                            {{$parent_category->name}}
+                        </option>
                     @endforeach
                 </select>
                 @error('parent_category_id')
@@ -50,49 +54,53 @@
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="number" class="form-control" id="price" name="price" placeholder="price" value="{{old('price')}}">
+                <input type="number" class="form-control" id="price" name="price" placeholder="price" value="{{old('price',$product->price??null)}}">
                 @error('price')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="discount">Chegirma narxi</label>
-                <input type="number" class="form-control" id="discount" name="discount" placeholder="discount" value="{{old('discount')}}">
+                <input type="number" class="form-control" id="discount" name="discount" placeholder="discount"
+                       value="{{old('discount',$product->discount??null)}}">
                 @error('discount')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="title" value="{{old('title')}}">
+                <input type="text" class="form-control" id="title" name="title" placeholder="title" value="{{old('title',$product->title??null)}}">
                 @error('title')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+                <textarea class="form-control" id="description" rows="3" name="description">{{$product->description??null}}</textarea>
                 @error('description')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="weight">Weight (kg)</label>
-                <input type="text" class="form-control" id="weight" name="weight" placeholder="weight" value="{{old('weight')}}">
+                <input type="text" class="form-control" id="weight" name="weight" placeholder="weight"
+                       value="{{old('weight',$product->weight??null)}}">
                 @error('weight')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="dimensions">O'lchamlari (sm x sm x sm)</label>
-                <input type="text" class="form-control" id="dimensions" name="dimensions" placeholder="dimensions" value="{{old('dimensions')}}">
+                <input type="text" class="form-control" id="dimensions" name="dimensions" placeholder="dimensions"
+                       value="{{old('dimensions',$product->dimensions??null)}}">
                 @error('dimensions')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="materials">Materials</label>
-                <input type="text" class="form-control" id="materials" name="materials" placeholder="materials" value="{{old('materials')}}">
+                <input type="text" class="form-control" id="materials" name="materials" placeholder="materials"
+                       value="{{old('materials',$product->materials??null)}}">
                 @error('materials')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
@@ -102,7 +110,9 @@
                 <select multiple class="form-control" id="product_color" name="color_id[]">
                     <option value="">Tanlang</option>
                     @foreach($product_colors as $product_color)
-                        <option value="{{$product_color->id}}">{{$product_color->name}}</option>
+                        <option value="{{$product_color->id}}" @selected(!empty($product) ? in_array($product_color->id,$product->getProductColorArray()) : '')>
+                            {{$product_color->name}}
+                        </option>
                     @endforeach
                 </select>
                 @error('color_id')
@@ -111,7 +121,8 @@
             </div>
             <div class="form-group">
                 <label for="count">Product count</label>
-                <input type="number" class="form-control" id="count" name="count" placeholder="count" value="{{old('count')}}">
+                <input type="number" class="form-control" id="count" name="count" placeholder="count"
+                       value="{{old('count',$product->count??null)}}">
                 @error('count')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
@@ -120,7 +131,9 @@
                 <label for="product_size">Product size</label>
                 <select multiple class="form-control" id="product_size" name="size_id[]">
                     @foreach($product_sizes as $product_size)
-                        <option value="{{$product_size->id}}">{{$product_size->name}}</option>
+                        <option @selected(!empty($product) ? in_array($product_size->id,$product->getProductSizeArray()) : '') value="{{$product_size->id}}">
+                            {{$product_size->name}}
+                        </option>
                     @endforeach
                 </select>
                 @error('size_id')
@@ -131,7 +144,9 @@
                 <label for="product_shoe_size">Product shoe size</label>
                 <select multiple class="form-control" id="product_shoe_size" name="shoe_size_id[]">
                     @foreach($product_shoe_sizes as $shoe_size)
-                        <option value="{{$shoe_size->id}}">{{$shoe_size->name}}</option>
+                        <option value="{{$shoe_size->id}}" @selected(!empty($product) ? in_array($shoe_size->id,$product->getProductShoeSizeArray()) : '')>
+                            {{$shoe_size->name}}
+                        </option>
                     @endforeach
                 </select>
                 @error('shoe_size_id')
@@ -143,7 +158,7 @@
                 <select class="form-control" id="brand" name="brand_id">
                     <option value="">Tanlang</option>
                     @foreach($brands as $brand)
-                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                        <option @selected($product->brand_id??null == $brand->id) value="{{$brand->id}}">{{$brand->name}}</option>
                     @endforeach
                 </select>
                 @error('brand_id')

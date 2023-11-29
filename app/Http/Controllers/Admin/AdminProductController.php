@@ -31,6 +31,7 @@ class AdminProductController extends Controller
         $parent_categories = ParentCategory::query()->get();
         $child_categories = ChildCategory::query()->get();
         $companies = Company::query()->get();
+        $form_route = route('products.store');
 
         return view('vendor.voyager.products.create',[
             'brands' => $brands,
@@ -40,6 +41,7 @@ class AdminProductController extends Controller
             'parent_categories' => $parent_categories,
             'child_categories' => $child_categories,
             'companies' => $companies,
+            'form_route' => $form_route
         ]);
     }
 
@@ -110,8 +112,9 @@ class AdminProductController extends Controller
         $child_categories = ChildCategory::query()->get();
         $product = Product::query()->where('id',$product_id)->first();
         $companies = Company::query()->get();
+        $form_route = route('product.update',$product->id);
 
-        return view('vendor.voyager.products.edit',[
+        return view('vendor.voyager.products.create',[
             'brands' => $brands,
             'product_colors' => $product_colors,
             'product_sizes' => $product_sizes,
@@ -119,7 +122,8 @@ class AdminProductController extends Controller
             'parent_categories' => $parent_categories,
             'child_categories' => $child_categories,
             'product' => $product,
-            'companies' => $companies
+            'companies' => $companies,
+            'form_route' => $form_route
         ]);
     }
 

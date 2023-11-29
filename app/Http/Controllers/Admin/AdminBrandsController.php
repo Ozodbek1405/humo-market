@@ -18,7 +18,8 @@ class AdminBrandsController extends Controller
     public function create()
     {
         $parent_categories = ParentCategory::query()->get();
-        return view('vendor.voyager.brands.create',compact('parent_categories'));
+        $form_route = route('brands.admin.store');
+        return view('vendor.voyager.brands.create',compact('parent_categories','form_route'));
     }
 
     public function store(BrandStoreRequest $request)
@@ -47,7 +48,8 @@ class AdminBrandsController extends Controller
     {
         $brand = Brand::find($brand_id);
         $parent_categories = ParentCategory::query()->get();
-        return view('vendor.voyager.brands.edit',compact('parent_categories','brand'));
+        $form_route = route('brands.admin.update',$brand_id);
+        return view('vendor.voyager.brands.create',compact('parent_categories','brand','form_route'));
     }
 
     public function update(BrandStoreRequest $request,$brand_id)
