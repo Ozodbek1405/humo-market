@@ -64,11 +64,7 @@
                                         </td>
                                         <td width="20%" class="price">{{$item->price}} so'm</td>
                                         <td width="20%">
-                                            <form id="addToCart{{$item->name}}" action="{{route('addToCart',$item->id)}}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="product_count" value="{{$item->qty}}">
-                                                <button class="round-black-btn small-btn">Add to Cart</button>
-                                            </form>
+                                            <button class="round-black-btn small-btn js-show-modal{{$item->id}}">Add to Cart</button>
                                         </td>
                                         <td width="20%">
                                             <a href="{{route('removeItem.wishlist',$item->rowId)}}">
@@ -76,6 +72,10 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    @php
+                                        $product = App\Models\Product::find($item->id);
+                                    @endphp
+                                    @include('pages.filters.modal')
                                 @endforeach
                                 </tbody>
                             </table>
@@ -89,6 +89,18 @@
             </div>
         </div>
     </div>
-
 @endsection
+@push('scripts')
+<script>
+    @foreach($wishlistItems as $item)
+        $('.js-show-modal{{$item->id}}').on('click',function(e){
+            e.preventDefault();
+            $('.js-modal{{$item->id}}').addClass('show-modal1');
+        });
 
+        $('.js-hide-modal{{$item->id}}').on('click',function(){
+            $('.js-modal{{$item->id}}').removeClass('show-modal1');
+        });
+    @endforeach
+</script>
+@endpush

@@ -33,14 +33,14 @@
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" onclick="event.preventDefault();document.getElementById('addToCart{{$product->name}}').submit()">
+                            <a href="#" class="js-show-modal{{$product->id}}">
                                 <i class="zmdi zmdi-shopping-cart"></i>
                             </a>
                         </li>
                         <li>
                             @if($product->IssetWishlist())
                                 <a href="{{route('removeItem.wishlist',$product->IssetWishlist()->rowId)}}">
-                                    <i class="zmdi zmdi-favorite"></i>
+                                    <i class="zmdi zmdi-favorite text-red-600 hover:text-gray-800"></i>
                                 </a>
                             @else
                                 <a href="{{route('addWishlist',$product->id)}}">
@@ -63,12 +63,23 @@
                 </div>
             </div>
         </div>
-        <form id="addToCart{{$product->name}}" action="{{route('addToCart',$product->id)}}" method="POST" class="hidden">
-            @csrf
-            <input type="number" name="product_count" value="1">
-        </form>
+        @include('pages.filters.modal',['item'=>$product->id])
     @endforeach
 </div>
 <div class="container d-flex justify-center">
     {{ $products->withQueryString()->links() }}
 </div>
+@push('scripts')
+    <script>
+        @foreach($products as $item)
+        $('.js-show-modal{{$item->id}}').on('click',function(e){
+            e.preventDefault();
+            $('.js-modal{{$item->id}}').addClass('show-modal1');
+        });
+
+        $('.js-hide-modal{{$item->id}}').on('click',function(){
+            $('.js-modal{{$item->id}}').removeClass('show-modal1');
+        });
+        @endforeach
+    </script>
+@endpush

@@ -556,9 +556,3 @@ ol {
 	border-color: #0d0d0d;
 	color: #ffffff;
 }
-
-@media only screen and (min-width: 1200px) {
-	.container {
-		max-width: 1170px;
-	}
-}
