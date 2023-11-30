@@ -32,7 +32,7 @@
 
             <div class="form-group">
                 <label for="parent_id">Parent category ID</label>
-                <select multiple class="form-control" id="parent_id" name="parent_id[]">
+                <select multiple class="form-control product_multiple_select" id="parent_id" name="parent_id[]">
                     @foreach($parent_categories as $parent_category)
                         <option value="{{$parent_category->id}}" @selected(!empty($brand) ? in_array($parent_category->id,$brand->getParentCategoryArray()) : '')>
                             {{$parent_category->name}}

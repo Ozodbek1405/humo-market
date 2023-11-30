@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/products',[AdminProductController::class,'index'])->name('product.admin.view');
     Route::get('/products/create',[AdminProductController::class,'create'])->name('product.create');
     Route::get('/get/childCategory',[AdminProductController::class,'getChildCategory'])->name('getChildCategory');
+    Route::get('/get/brands',[AdminProductController::class,'getBrands'])->name('getBrands');
     Route::post('/products/store',[AdminProductController::class,'productStore'])->name('products.store');
     Route::get('/products/delete/{product_id}',[AdminProductController::class,'productDelete'])->name('products.delete');
     Route::get('/products/edit/{product_id}',[AdminProductController::class,'edit'])->name('product.edit');

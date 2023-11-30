@@ -107,7 +107,7 @@
             </div>
             <div class="form-group">
                 <label for="product_color">Product color</label>
-                <select multiple class="form-control" id="product_color" name="color_id[]">
+                <select multiple class="form-control product_multiple_select" id="product_color" name="color_id[]">
                     <option value="">Tanlang</option>
                     @foreach($product_colors as $product_color)
                         <option value="{{$product_color->id}}" @selected(!empty($product) ? in_array($product_color->id,$product->getProductColorArray()) : '')>
@@ -129,7 +129,7 @@
             </div>
             <div class="form-group">
                 <label for="product_size">Product size</label>
-                <select multiple class="form-control" id="product_size" name="size_id[]">
+                <select multiple class="form-control product_multiple_select" id="product_size" name="size_id[]">
                     @foreach($product_sizes as $product_size)
                         <option @selected(!empty($product) ? in_array($product_size->id,$product->getProductSizeArray()) : '') value="{{$product_size->id}}">
                             {{$product_size->name}}
@@ -142,7 +142,7 @@
             </div>
             <div class="form-group">
                 <label for="product_shoe_size">Product shoe size</label>
-                <select multiple class="form-control" id="product_shoe_size" name="shoe_size_id[]">
+                <select multiple class="form-control product_multiple_select" id="product_shoe_size" name="shoe_size_id[]">
                     @foreach($product_shoe_sizes as $shoe_size)
                         <option value="{{$shoe_size->id}}" @selected(!empty($product) ? in_array($shoe_size->id,$product->getProductShoeSizeArray()) : '')>
                             {{$shoe_size->name}}
@@ -157,9 +157,6 @@
                 <label for="brand">Brands</label>
                 <select class="form-control" id="brand" name="brand_id">
                     <option value="">Tanlang</option>
-                    @foreach($brands as $brand)
-                        <option @selected($product->brand_id??null == $brand->id) value="{{$brand->id}}">{{$brand->name}}</option>
-                    @endforeach
                 </select>
                 @error('brand_id')
                 <p style="color: #f11313">{{ $message }}</p>

@@ -4,18 +4,34 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStoreRequest;
-use App\Models\Brand;
-use App\Models\ChildCategory;
-use App\Models\Company;
-use App\Models\ParentCategory;
-use App\Models\Product;
-use App\Models\Color;
-use App\Models\ShoeSize;
-use App\Models\Size;
+use App\Models\{Brand, ChildCategory, Company, ParentCategory, Product, Color, ShoeSize, Size};
 use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
 {
+
+    protected Product $product;
+    protected Brand $brand;
+    protected Color $color;
+    protected Company $company;
+    protected Size $size;
+    protected ShoeSize $shoeSize;
+    protected ParentCategory $parent_categories;
+    protected ChildCategory $child_categories;
+
+    public function __construct()
+    {
+        $this->product = new Product();
+        $this->brand = new Brand();
+        $this->color = new Color();
+        $this->company = new Company();
+        $this->size = new Size();
+        $this->shoeSize = new ShoeSize();
+        $this->parent_categories = new ParentCategory();
+        $this->child_categories = new ChildCategory();
+    }
+
+
     public function index()
     {
         $products = Product::query()->get();
@@ -24,22 +40,18 @@ class AdminProductController extends Controller
 
     public function create()
     {
-        $brands = Brand::query()->get();
-        $product_colors = Color::query()->get();
-        $product_sizes = Size::query()->get();
-        $product_shoe_sizes = ShoeSize::query()->get();
-        $parent_categories = ParentCategory::query()->get();
-        $child_categories = ChildCategory::query()->get();
-        $companies = Company::query()->get();
+        $product_colors = $this->color->get();
+        $product_sizes = $this->size->get();
+        $product_shoe_sizes = $this->shoeSize->get();
+        $parent_categories = $this->parent_categories->get();
+        $companies = $this->company->get();
         $form_route = route('products.store');
 
         return view('vendor.voyager.products.create',[
-            'brands' => $brands,
             'product_colors' => $product_colors,
             'product_sizes' => $product_sizes,
             'product_shoe_sizes' => $product_shoe_sizes,
             'parent_categories' => $parent_categories,
-            'child_categories' => $child_categories,
             'companies' => $companies,
             'form_route' => $form_route
         ]);
@@ -48,14 +60,23 @@ class AdminProductController extends Controller
     public function getChildCategory(Request $request)
     {
         $parent_id = $request->parent_id;
-        $data = ChildCategory::query()->where('parent_id',$parent_id)->get();
+        $data = $this->child_categories->where('parent_id',$parent_id)->get();
+        return ['data' => $data];
+    }
+
+    public function getBrands(Request $request)
+    {
+        $parent_id = $request->parent_id;
+        $data = $this->brand->whereHas('parent',function ($query) use ($parent_id){
+            $query->where('parent_id',$parent_id);
+        })->get();
         return ['data' => $data];
     }
 
     public function productStore(ProductStoreRequest $request)
     {
         $data = $request->validated();
-        $product = Product::query()->create([
+        $product = $this->product->create([
             'name' => $data['name'],
             'price' => $data['price'],
             'discount' => $data['discount']??null,
@@ -97,30 +118,26 @@ class AdminProductController extends Controller
     public function productDelete($product_id)
     {
 
-        $product = Product::find($product_id);
+        $product = $this->product->find($product_id);
         $product->delete();
         return redirect()->back()->with('success','Deleted successfully');
     }
 
     public function edit($product_id)
     {
-        $brands = Brand::query()->get();
-        $product_colors = Color::query()->get();
-        $product_sizes = Size::query()->get();
-        $product_shoe_sizes = ShoeSize::query()->get();
-        $parent_categories = ParentCategory::query()->get();
-        $child_categories = ChildCategory::query()->get();
-        $product = Product::query()->where('id',$product_id)->first();
-        $companies = Company::query()->get();
+        $product_colors = $this->color->get();
+        $product_sizes = $this->size->get();
+        $product_shoe_sizes = $this->shoeSize->get();
+        $parent_categories = $this->parent_categories->get();
+        $product = $this->product->where('id',$product_id)->first();
+        $companies = $this->company->get();
         $form_route = route('product.update',$product->id);
 
         return view('vendor.voyager.products.create',[
-            'brands' => $brands,
             'product_colors' => $product_colors,
             'product_sizes' => $product_sizes,
             'product_shoe_sizes' => $product_shoe_sizes,
             'parent_categories' => $parent_categories,
-            'child_categories' => $child_categories,
             'product' => $product,
             'companies' => $companies,
             'form_route' => $form_route
@@ -130,7 +147,7 @@ class AdminProductController extends Controller
     public function update(ProductStoreRequest $request, $product_id)
     {
         $data = $request->validated();
-        $product = Product::find($product_id);
+        $product = $this->product->find($product_id);
         $product->update([
             'name' => $data['name'],
             'price' => $data['price'],
