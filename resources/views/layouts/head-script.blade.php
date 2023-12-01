@@ -16,8 +16,8 @@
     })
 </script>
 <!--===============================================================================================-->
-<script src="{{asset('vendor/daterangepicker/moment.min.js')}}"></script>
-<script src="{{asset('vendor/daterangepicker/daterangepicker.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.js"></script>
 <!--===============================================================================================-->
 <script src="{{asset('vendor/slick/slick.min.js')}}"></script>
 <script src="{{asset('js/slick-custom.js')}}"></script>
@@ -27,7 +27,7 @@
     $('.parallax100').parallax100();
 </script>
 <!--===============================================================================================-->
-<script src="{{asset('vendor/MagnificPopup/jquery.magnific-popup.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 <script>
     $('.gallery-lb').each(function() { // the containers for all your galleries
         $(this).magnificPopup({
