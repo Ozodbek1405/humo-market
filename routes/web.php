@@ -9,6 +9,7 @@ use App\Http\Controllers\{AboutController,
     BlogController,
     ContactController,
     HomeController,
+    OrderController,
     ProductController,
     ProfileController,
     ReviewController,
@@ -103,6 +104,10 @@ Route::group(['prefix' => 'wishlist'], function () {
     Route::get('/removeItem/{rowId}',[WishlistController::class,'removeItem'])->name('removeItem.wishlist');
     Route::get('/add/{product_id}',[WishlistController::class,'addWishlist'])->name('addWishlist');
     Route::get('/clear',[WishlistController::class,'clear'])->name('clear.wishlist');
+});
+
+Route::group(['prefix' => 'order'], function () {
+    Route::get('/',[OrderController::class,'order'])->name('order.view');
 });
 
 

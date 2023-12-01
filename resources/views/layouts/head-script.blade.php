@@ -1,12 +1,12 @@
 <!--===============================================================================================-->
-<script src="{{asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!--===============================================================================================-->
 <script src="{{asset('vendor/animsition/js/animsition.min.js')}}"></script>
 <!--===============================================================================================-->
 <script src="{{asset('vendor/bootstrap/js/popper.js')}}"></script>
-<script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-<script src="{{asset('vendor/select2/select2.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
     $(".js-select2").each(function(){
         $(this).select2({
@@ -43,7 +43,7 @@
 <!--===============================================================================================-->
 <script src="{{asset('vendor/isotope/isotope.pkgd.min.js')}}"></script>
 <!--===============================================================================================-->
-<script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.5/perfect-scrollbar.min.js"></script>
 <script>
     $('.js-pscroll').each(function(){
         $(this).css('position','relative');

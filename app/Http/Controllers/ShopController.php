@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddToCartRequest;
 use App\Models\District;
 use App\Models\Product;
-use App\Models\Region;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -15,9 +14,8 @@ class ShopController extends Controller
 {
     public function shopping_cart()
     {
-        $regions = Region::query()->get();
         $cartItems = Cart::instance('cart')->content();
-        return view('pages.shopping-cart',compact('cartItems','regions'));
+        return view('pages.shopping-cart',compact('cartItems'));
     }
 
     public function addToCart(AddToCartRequest $request,$product_id)
@@ -40,7 +38,7 @@ class ShopController extends Controller
                       'shoe_size_id' => $product_shoe_size,
                   ]
                 ])->associate('App\Models\Product');
-        return redirect()->route('shopping.cart')->with('message','Item has been successfully!');
+        return redirect()->back()->with('message','Item has been successfully!');
     }
 
     public function removeItem($rowId)

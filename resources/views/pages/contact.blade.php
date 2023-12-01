@@ -44,14 +44,12 @@
                 <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
                     <div class="flex-w w-full p-b-42">
 						<span class="fs-18 cl5 txt-center size-211">
-							<span class="lnr lnr-map-marker"></span>
+							<i class="fa fa-map"></i>
 						</span>
-
                         <div class="size-212 p-t-2">
 							<span class="mtext-110 cl2">
 								Address
 							</span>
-
                             <p class="stext-115 cl6 size-213 p-t-18">
                                 {{setting('footer.site_address')}}
                             </p>
@@ -60,14 +58,12 @@
 
                     <div class="flex-w w-full p-b-42">
 						<span class="fs-18 cl5 txt-center size-211">
-							<span class="lnr lnr-phone-handset"></span>
+							<i class="fa fa-phone"></i>
 						</span>
-
                         <div class="size-212 p-t-2">
 							<span class="mtext-110 cl2">
 								Phone number
 							</span>
-
                             <p class="stext-115 cl1 size-213 p-t-18">
                                 {{setting('footer.site_phone')}}
                             </p>
@@ -76,14 +72,12 @@
 
                     <div class="flex-w w-full">
 						<span class="fs-18 cl5 txt-center size-211">
-							<span class="lnr lnr-envelope"></span>
+							<i class="fa fa-envelope"></i>
 						</span>
-
                         <div class="size-212 p-t-2">
 							<span class="mtext-110 cl2">
 								Sale Support
 							</span>
-
                             <p class="stext-115 cl1 size-213 p-t-18">
                                 {{setting('footer.site_email')}}
                             </p>
