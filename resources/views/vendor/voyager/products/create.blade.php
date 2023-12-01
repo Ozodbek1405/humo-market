@@ -20,7 +20,7 @@
                 <select class="form-control" id="company_id" name="company_id">
                     <option value="">Tanlang</option>
                     @foreach($companies as $company)
-                        <option value="{{$company->id}}" @selected($product->company_id??null == $company->id)>
+                        <option value="{{$company->id}}" @selected(!empty($product) ? $product->company_id == $company->id : '')>
                             {{$company->name}}
                         </option>
                     @endforeach
@@ -34,7 +34,7 @@
                 <select class="form-control" id="parent_category" name="parent_category_id">
                     <option value="">Tanlang</option>
                     @foreach($parent_categories as $parent_category)
-                        <option @selected($product->parent_category_id??null == $parent_category->id) value="{{$parent_category->id}}">
+                        <option  @selected(!empty($product) ? $product->parent_category_id == $parent_category->id : '') value="{{$parent_category->id}}">
                             {{$parent_category->name}}
                         </option>
                     @endforeach

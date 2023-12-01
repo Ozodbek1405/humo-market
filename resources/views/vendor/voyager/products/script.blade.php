@@ -37,6 +37,9 @@
         child_category.empty();
         for (var i = 0; i < data.data.length; i++) {
             var option = $('<option></option>').attr('value', data.data[i].id).text(data.data[i].name);
+            if (data.data[i].id === {{$product->child_category_id??0}}) {
+                option.attr('selected', 'selected');
+            }
             child_category.append(option);
         }
     }
@@ -59,6 +62,9 @@
         brands.empty();
         for (var i = 0; i < data.data.length; i++) {
             var option = $('<option></option>').attr('value', data.data[i].id).text(data.data[i].name);
+            if (data.data[i].id === {{$product->brand_id??0}}) {
+                option.attr('selected', 'selected');
+            }
             brands.append(option);
         }
     }
