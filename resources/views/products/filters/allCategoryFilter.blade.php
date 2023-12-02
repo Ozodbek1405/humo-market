@@ -35,7 +35,7 @@
     <div class="section-title">
         <h4>Shop Brands</h4>
     </div>
-    <div class="size__list">
+    <div class="size__list" >
         @foreach($brands as $brand)
             <label for="#{{$brand->name}}">
                 {{$brand->name}}
@@ -66,7 +66,7 @@
     <div class="section-title">
         <h4>Shop by Color</h4>
     </div>
-    <div class="size__list color__list">
+    <div class="size__list" id="content">
         @foreach($product_colors as $product_color)
             <label for="{{$product_color->name}}">
                 {{$product_color->name}}

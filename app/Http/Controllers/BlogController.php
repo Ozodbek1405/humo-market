@@ -11,13 +11,13 @@ class BlogController extends Controller
     {
         $blogs = Blog::query()->get();
         $products = Product::query()->orderByDesc('rate')->take(5)->get();
-        return view('pages.blog',compact('blogs','products'));
+        return view('blogs.blog',compact('blogs','products'));
     }
 
     public function blog_detail($blog_id)
     {
         $blog = Blog::find($blog_id);
         $products = Product::query()->orderByDesc('rate')->take(5)->get();
-        return view('pages.blog-detail',compact('blog','products'));
+        return view('blogs.blog-detail',compact('blog','products'));
     }
 }

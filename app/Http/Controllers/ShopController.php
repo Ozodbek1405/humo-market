@@ -15,7 +15,7 @@ class ShopController extends Controller
     public function shopping_cart()
     {
         $cartItems = Cart::instance('cart')->content();
-        return view('pages.shopping-cart',compact('cartItems'));
+        return view('carts.shopping-cart',compact('cartItems'));
     }
 
     public function addToCart(AddToCartRequest $request,$product_id)
@@ -69,7 +69,7 @@ class ShopController extends Controller
     public function getCalculateData()
     {
         $response = Http::withToken("935298cb32688cb0d8e828f33230b6c4ecf28e7d")
-            ->post('http://api.bts.uz:8080/index.php?r=v1/order/calculate', [
+            ->post('http://api.bts.uz:8080/index.php?r=v1/orders/calculate', [
             'senderCityId' => 197,
             'receiverCityId' => 46,
             'weight' => 40,

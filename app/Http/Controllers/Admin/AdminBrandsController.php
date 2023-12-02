@@ -27,7 +27,7 @@ class AdminBrandsController extends Controller
         $data = $request->validated();
         $brand = Brand::query()->create([
             'name' => $data['name'],
-            'order' => $data['order'],
+            'orders' => $data['orders'],
             'slug' => $data['slug'],
         ]);
         $brand->parent()->detach();
@@ -58,7 +58,7 @@ class AdminBrandsController extends Controller
         $brand = Brand::find($brand_id);
         $brand->update([
             'name' => $data['name'],
-            'order' => $data['order'],
+            'orders' => $data['orders'],
             'slug' => $data['slug'],
         ]);
         $brand->parent()->detach();

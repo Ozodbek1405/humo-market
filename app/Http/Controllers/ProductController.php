@@ -69,7 +69,7 @@ class ProductController extends Controller
         $parent_categories = $this->parent_categories->get();
         $child_categories = $this->child_categories->get();
 
-        return view('pages.productAll',[
+        return view('products.productAllCategory',[
             'products' => $products,
             'brands' => $brands,
             'product_colors' => $product_colors,
@@ -140,7 +140,7 @@ class ProductController extends Controller
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
 
-        return view('pages.product',[
+        return view('products.product',[
             'products' => $products,
             'brands' => $brands,
             'product_colors' => $product_colors,
@@ -168,6 +168,6 @@ class ProductController extends Controller
             ->where('parent_category_id',$product->parent_category_id)
             ->where('child_category_id',$product->child_category_id)
             ->take(10)->get();
-        return view('pages.product-detail',compact('reviews','product','related_products'));
+        return view('products.product-detail',compact('reviews','product','related_products'));
     }
 }

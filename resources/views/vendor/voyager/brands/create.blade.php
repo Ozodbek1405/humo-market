@@ -10,8 +10,8 @@
             @csrf
             <div class="form-group">
                 <label for="order">Order</label>
-                <input type="number" class="form-control" id="order" name="order" placeholder="order" value="{{old('order',$brand->order??null)}}">
-                @error('order')
+                <input type="number" class="form-control" id="order" name="order" placeholder="order" value="{{old('orders',$brand->order??null)}}">
+                @error('orders')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>

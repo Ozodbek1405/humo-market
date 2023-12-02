@@ -23,7 +23,7 @@ class BrandStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'order' => 'required|numeric',
+            'orders' => 'required|numeric',
             'name' => 'required',
             'slug' => 'required',
             'parent_id' => 'required|array'

@@ -25,7 +25,8 @@
     @foreach($products as $product)
         <div class="col-lg-4 col-md-6">
             <div class="product__item">
-                <div class="product__item__pic set-bg" data-setbg="{{asset('storage/uploads/'.$product->formatted_images[0])}}">
+                <div class="product__item__pic set-bg"
+                     data-setbg="{{asset('storage/uploads/'.$product->formatted_images[0])}}">
                     <ul class="product__hover">
                         <li>
                             <a href="{{asset('storage/uploads/'.$product->formatted_images[0])}}" class="image-popup">
@@ -63,7 +64,7 @@
                 </div>
             </div>
         </div>
-        @include('pages.filters.modal',['item'=>$product->id])
+        @include('products.filters.modal',['item'=>$product->id])
     @endforeach
 </div>
 <div class="container d-flex justify-center">
@@ -72,12 +73,12 @@
 @push('scripts')
     <script>
         @foreach($products as $item)
-        $('.js-show-modal{{$item->id}}').on('click',function(e){
+        $('.js-show-modal{{$item->id}}').on('click', function (e) {
             e.preventDefault();
             $('.js-modal{{$item->id}}').addClass('show-modal1');
         });
 
-        $('.js-hide-modal{{$item->id}}').on('click',function(){
+        $('.js-hide-modal{{$item->id}}').on('click', function () {
             $('.js-modal{{$item->id}}').removeClass('show-modal1');
         });
         @endforeach

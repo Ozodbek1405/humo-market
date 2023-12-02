@@ -10,6 +10,6 @@ class AboutController extends Controller
     public function about()
     {
         $abouts = About::query()->get();
-        return view('pages.about',compact('abouts'));
+        return view('about.about',compact('abouts'));
     }
 }

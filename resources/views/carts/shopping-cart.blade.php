@@ -91,7 +91,7 @@
                                 </div>
                             </div>
 
-                            <a href="{{route('order.view')}}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 trans-04 pointer mt-5">
+                            <a href="{{route('orders.view')}}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 trans-04 pointer mt-5">
                                 Buyurtma
                             </a>
                         </div>

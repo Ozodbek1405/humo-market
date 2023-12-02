@@ -53,7 +53,8 @@
                                         <td width="20%">
                                             <div class="display-flex align-center">
                                                 <div class="img-product">
-                                                    <img src="{{asset('storage/uploads/'.$item->options['image'])}}" alt="#" class="mCS_img_loaded">
+                                                    <img src="{{asset('storage/uploads/'.$item->options['image'])}}"
+                                                         alt="#" class="mCS_img_loaded">
                                                 </div>
                                             </div>
                                         </td>
@@ -64,7 +65,9 @@
                                         </td>
                                         <td width="20%" class="price">{{$item->price}} so'm</td>
                                         <td width="20%">
-                                            <button class="round-black-btn small-btn js-show-modal{{$item->id}}">Add to Cart</button>
+                                            <button class="round-black-btn small-btn js-show-modal{{$item->id}}">Add to
+                                                Cart
+                                            </button>
                                         </td>
                                         <td width="20%">
                                             <a href="{{route('removeItem.wishlist',$item->rowId)}}">
@@ -75,7 +78,7 @@
                                     @php
                                         $product = App\Models\Product::find($item->id);
                                     @endphp
-                                    @include('pages.filters.modal')
+                                    @include('products.filters.modal')
                                 @endforeach
                                 </tbody>
                             </table>
@@ -91,16 +94,16 @@
     </div>
 @endsection
 @push('scripts')
-<script>
-    @foreach($wishlistItems as $item)
-        $('.js-show-modal{{$item->id}}').on('click',function(e){
+    <script>
+        @foreach($wishlistItems as $item)
+        $('.js-show-modal{{$item->id}}').on('click', function (e) {
             e.preventDefault();
             $('.js-modal{{$item->id}}').addClass('show-modal1');
         });
 
-        $('.js-hide-modal{{$item->id}}').on('click',function(){
+        $('.js-hide-modal{{$item->id}}').on('click', function () {
             $('.js-modal{{$item->id}}').removeClass('show-modal1');
         });
-    @endforeach
-</script>
+        @endforeach
+    </script>
 @endpush

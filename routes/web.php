@@ -106,8 +106,8 @@ Route::group(['prefix' => 'wishlist'], function () {
     Route::get('/clear',[WishlistController::class,'clear'])->name('clear.wishlist');
 });
 
-Route::group(['prefix' => 'order'], function () {
-    Route::get('/',[OrderController::class,'order'])->name('order.view');
+Route::group(['prefix' => 'orders'], function () {
+    Route::get('/',[OrderController::class,'order'])->name('orders.view');
 });
 
 

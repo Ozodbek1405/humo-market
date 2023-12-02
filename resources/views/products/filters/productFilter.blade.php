@@ -105,7 +105,7 @@
     <div class="section-title">
         <h4>Shop by Color</h4>
     </div>
-    <div class="size__list color__list">
+    <div class="size__list">
         @foreach($product_colors as $product_color)
             <label for="{{$product_color->name}}">
                 {{$product_color->name}}
