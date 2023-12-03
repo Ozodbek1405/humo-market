@@ -8,6 +8,7 @@ use App\Http\Controllers\{AboutController,
     Auth\ResetController,
     BlogController,
     ContactController,
+    FaqController,
     HomeController,
     OrderController,
     ProductController,
@@ -82,6 +83,7 @@ Route::get('/contact',[ContactController::class,'contact'])->name('contact');
 Route::post('/contact/message',[ContactController::class,'send_message'])->name('contact.message');
 Route::get('/blog',[BlogController::class,'blog'])->name('blog');
 Route::get('/blog/detail/{blog_id}',[BlogController::class,'blog_detail'])->name('blog.detail');
+Route::get('faq-help',[FaqController::class,'index'])->name('faq.help');
 
 
 Route::get('/product/category/all',[ProductController::class,'productAll'])->name('product.category.all');
