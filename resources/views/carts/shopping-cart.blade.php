@@ -126,37 +126,5 @@
             $('#quantity').val($(qty).val())
             $('#updateCart').submit();
         }
-        $('#region_id').on('change', function() {
-            var region_id = $(this).val();
-            if (region_id !== "") {
-                fetchData(region_id);
-            }
-        });
-        function fetchData(region_id) {
-            $.ajax({
-                url: "{{route('cart.districts')}}",
-                method: 'GET',
-                data: { region_id: region_id },
-                dataType: 'json',
-                success: function(data) {
-                    getChildCategories(data);
-                },
-                error: function() {
-                    console.log('Error retrieving data.');
-                }
-            });
-        }
-        function getChildCategories(data) {
-            var districts = $('#districts');
-            districts.empty();
-            for (var i = 0; i < data.data.length; i++) {
-                var option = $('<option></option>').attr('value', data.data[i].district_id).text(data.data[i].name);
-                districts.append(option);
-            }
-        }
-        $(document).ready(function() {
-            var region_id = $('#region_id').val();
-            fetchData(region_id);
-        });
     </script>
 @endpush

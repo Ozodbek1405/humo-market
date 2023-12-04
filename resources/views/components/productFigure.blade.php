@@ -114,9 +114,6 @@
                             <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
                                 Add to cart
                             </button>
-                            <a href="{{route('orders.view')}}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 trans-04 pointer mt-5">
-                                Buyurtma
-                            </a>
                         </div>
                         @error('product_count')
                         <p style="color: #f11313">{{ $message }}</p>

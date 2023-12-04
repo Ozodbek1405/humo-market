@@ -68,4 +68,8 @@
         mask: '+999 99 999-99-99',
         removeMaskOnSubmit: true
     });
+    $('#card_number').inputmask({
+        mask: '9999 9999 9999 9999',
+        removeMaskOnSubmit: true
+    });
 </script>

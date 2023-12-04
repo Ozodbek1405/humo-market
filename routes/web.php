@@ -110,6 +110,7 @@ Route::group(['prefix' => 'wishlist'], function () {
 
 Route::group(['prefix' => 'orders'], function () {
     Route::get('/',[OrderController::class,'order'])->name('orders.view');
+    Route::get('/payment',[OrderController::class,'payment'])->name('payment.view');
 });
 
 
