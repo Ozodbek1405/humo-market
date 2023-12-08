@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Services\ProductFilterService;
 use App\Models\{Brand, Category, ChildCategory, ParentCategory, Product, Color, ShoeSize, Size, Review};
 use Illuminate\Http\Request;
 
@@ -18,6 +19,7 @@ class ProductController extends Controller
     protected Category $category;
     protected ParentCategory $parent_categories;
     protected ChildCategory $child_categories;
+    protected ProductFilterService $product_filter_service;
 
     public function __construct()
     {
@@ -30,6 +32,7 @@ class ProductController extends Controller
         $this->category = new Category();
         $this->parent_categories = new ParentCategory();
         $this->child_categories = new ChildCategory();
+        $this->product_filter_service = new ProductFilterService();
     }
 
     public function productAll(Request $request)
@@ -41,30 +44,7 @@ class ProductController extends Controller
         $q_max = $request->query('q_max');
         $search = $request->query('search');
         $products = $this->product;
-        if (isset($q_sort)){
-            $products = match ((int)$q_sort) {
-                1 => $products->latest(),
-                2 => $products->orderByDesc('views'),
-                3 => $products->orderByDesc('rate'),
-                default => $products->orderBy('created_at'),
-            };
-        }
-        if (isset($q_brands)){
-            $products = $products->where(function ($query) use ($q_brands){
-                $query->whereIn('brand_id',explode(',',$q_brands))->orWhereRaw("'".$q_brands."'=''");
-            });
-        }
-        if (isset($q_colors)){
-            $products = $products->whereHas("product_color", function ($query) use ($q_colors){
-                $query->whereIn('color_id',explode(',',$q_colors))->orWhereRaw("'".$q_colors."'=''");
-            });
-        }
-        if ($q_min != null && $q_max != null){
-            $products = $products->wherebetween('price',[$q_min,$q_max]);
-        }
-        if (isset($search)){
-            $products = $products->where('name', 'LIKE', "%{$search}%");
-        }
+        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,null,null,$search);
         $products = $products->paginate(21);
         $brands = $this->brand->get();
         $product_colors = $this->color->get();
@@ -94,37 +74,7 @@ class ProductController extends Controller
         $category = $this->category->where('slug',$slugName)->first();
         $parent_categories = $this->parent_categories->where('category_id',$category->id)->get();
         $products = $this->product;
-        if (isset($q_sort)){
-            $products = match ((int)$q_sort) {
-                1 => $products->latest(),
-                2 => $products->orderByDesc('views'),
-                3 => $products->orderByDesc('rate'),
-                default => $products->orderBy('created_at'),
-            };
-        }
-        if (isset($q_brands)){
-            $products = $products->where(function ($query) use ($q_brands){
-                $query->whereIn('brand_id',explode(',',$q_brands))->orWhereRaw("'".$q_brands."'=''");
-            });
-        }
-        if (isset($q_colors)){
-            $products = $products->whereHas("product_color", function ($query) use ($q_colors){
-                $query->whereIn('color_id',explode(',',$q_colors))->orWhereRaw("'".$q_colors."'=''");
-            });
-        }
-        if (isset($q_sizes)){
-            $products = $products->whereHas('size',function ($query) use ($q_sizes){
-                $query->whereIn('size_id',explode(',',$q_sizes))->orWhereRaw("'".$q_sizes."'=''");
-            });
-        }
-        if (isset($q_shoe_sizes)){
-            $products = $products->whereHas('shoe_size',function ($query) use ($q_shoe_sizes){
-                $query->whereIn('shoe_size_id',explode(',',$q_shoe_sizes))->orWhereRaw("'".$q_shoe_sizes."'=''");
-            });
-        }
-        if ($q_min != null && $q_max != null){
-            $products = $products->wherebetween('price',[$q_min,$q_max]);
-        }
+        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,null);
         $products = $products->where('category_id',$category->id);
         $products = $products->paginate(21);
         $category_id = $category->id;
@@ -166,37 +116,7 @@ class ProductController extends Controller
         $parent_category = $this->parent_categories->where('slug',$parentSlug)->first();
         $child_categories = $this->child_categories->where('parent_id',$parent_category->id)->get();
         $products = $this->product;
-        if (isset($q_sort)){
-            $products = match ((int)$q_sort) {
-                1 => $products->latest(),
-                2 => $products->orderByDesc('views'),
-                3 => $products->orderByDesc('rate'),
-                default => $products->orderBy('created_at'),
-            };
-        }
-        if (isset($q_brands)){
-            $products = $products->where(function ($query) use ($q_brands){
-                $query->whereIn('brand_id',explode(',',$q_brands))->orWhereRaw("'".$q_brands."'=''");
-            });
-        }
-        if (isset($q_colors)){
-            $products = $products->whereHas("product_color", function ($query) use ($q_colors){
-                $query->whereIn('color_id',explode(',',$q_colors))->orWhereRaw("'".$q_colors."'=''");
-            });
-        }
-        if (isset($q_sizes)){
-            $products = $products->whereHas('size',function ($query) use ($q_sizes){
-                $query->whereIn('size_id',explode(',',$q_sizes))->orWhereRaw("'".$q_sizes."'=''");
-            });
-        }
-        if (isset($q_shoe_sizes)){
-            $products = $products->whereHas('shoe_size',function ($query) use ($q_shoe_sizes){
-                $query->whereIn('shoe_size_id',explode(',',$q_shoe_sizes))->orWhereRaw("'".$q_shoe_sizes."'=''");
-            });
-        }
-        if ($q_min != null && $q_max != null){
-            $products = $products->wherebetween('price',[$q_min,$q_max]);
-        }
+        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,null);
         $products = $products
             ->where('category_id',$category->id)
             ->where('parent_category_id',$parent_category->id)
@@ -241,37 +161,7 @@ class ProductController extends Controller
         $parent_category = $this->parent_categories->where('slug',$parentSlug)->first();
         $category = $this->category->where('id',$parent_category->category_id)->first();
         $products = $this->product;
-        if (isset($q_sort)){
-            $products = match ((int)$q_sort) {
-                1 => $products->latest(),
-                2 => $products->orderByDesc('views'),
-                3 => $products->orderByDesc('rate'),
-                default => $products->orderBy('created_at'),
-            };
-        }
-        if (isset($q_brands)){
-            $products = $products->where(function ($query) use ($q_brands){
-                $query->whereIn('brand_id',explode(',',$q_brands))->orWhereRaw("'".$q_brands."'=''");
-            });
-        }
-        if (isset($q_colors)){
-            $products = $products->whereHas("product_color", function ($query) use ($q_colors){
-                $query->whereIn('color_id',explode(',',$q_colors))->orWhereRaw("'".$q_colors."'=''");
-            });
-        }
-        if (isset($q_sizes)){
-            $products = $products->whereHas('size',function ($query) use ($q_sizes){
-                $query->whereIn('size_id',explode(',',$q_sizes))->orWhereRaw("'".$q_sizes."'=''");
-            });
-        }
-        if (isset($q_shoe_sizes)){
-            $products = $products->whereHas('shoe_size',function ($query) use ($q_shoe_sizes){
-                $query->whereIn('shoe_size_id',explode(',',$q_shoe_sizes))->orWhereRaw("'".$q_shoe_sizes."'=''");
-            });
-        }
-        if ($q_min != null && $q_max != null){
-            $products = $products->wherebetween('price',[$q_min,$q_max]);
-        }
+        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,null);
         $products = $products
             ->where('parent_category_id',$parent_category->id)
             ->where('child_category_id',$child_category->id)
