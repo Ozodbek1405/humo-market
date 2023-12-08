@@ -196,9 +196,9 @@ class AdminProductController extends Controller
 
     public function getBrands(Request $request)
     {
-        $parent_id = $request->parent_id;
-        $data = $this->brand->whereHas('parent',function ($query) use ($parent_id){
-            $query->where('parent_id',$parent_id);
+        $category_id = $request->category_id;
+        $data = $this->brand->whereHas('category',function ($query) use ($category_id){
+            $query->where('category_id',$category_id);
         })->get();
         return ['data' => $data];
     }

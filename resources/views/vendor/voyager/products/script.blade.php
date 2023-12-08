@@ -15,6 +15,7 @@
         var category_id = $(this).val();
         if (category_id !== "") {
             fetchCategoryData(category_id);
+            getDataBrand(category_id);
         }
     });
     function fetchCategoryData(category_id) {
@@ -46,7 +47,6 @@
         var parent_id = $(this).val();
         if (parent_id !== "") {
             fetchData(parent_id);
-            getDataBrand(parent_id);
         }
     });
     function fetchData(parent_id) {
@@ -74,11 +74,11 @@
             child_category.append(option);
         }
     }
-    function getDataBrand(parent_id) {
+    function getDataBrand(category_id) {
         $.ajax({
             url: "{{route('getBrands')}}",
             method: 'GET',
-            data: { parent_id: parent_id },
+            data: { category_id: category_id },
             dataType: 'json',
             success: function(data) {
                 brandsValue(data);

@@ -24,6 +24,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Order</th>
                     <th>Name</th>
                     <th>Slug</th>
                     <th>Actions</th>
@@ -33,6 +34,7 @@
                 @foreach($brands as $brand)
                     <tr>
                         <td>{{$brand->id}}</td>
+                        <td>{{$brand->order}}</td>
                         <td>{{$brand->name}}</td>
                         <td>{{$brand->slug}}</td>
                         <td>

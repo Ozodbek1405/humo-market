@@ -10,8 +10,8 @@
             @csrf
             <div class="form-group">
                 <label for="order">Order</label>
-                <input type="number" class="form-control" id="order" name="order" placeholder="order" value="{{old('orders',$brand->order??null)}}">
-                @error('orders')
+                <input type="number" class="form-control" id="order" name="order" placeholder="order" value="{{old('order',$brand->order??null)}}">
+                @error('order')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>
@@ -31,11 +31,11 @@
             </div>
 
             <div class="form-group">
-                <label for="parent_id">Parent category ID</label>
-                <select multiple class="form-control product_multiple_select" id="parent_id" name="parent_id[]">
-                    @foreach($parent_categories as $parent_category)
-                        <option value="{{$parent_category->id}}" @selected(!empty($brand) ? in_array($parent_category->id,$brand->getParentCategoryArray()) : '')>
-                            {{$parent_category->name}}
+                <label for="category_id">Parent category ID</label>
+                <select multiple class="form-control product_multiple_select" id="category_id" name="category_id[]">
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}" @selected(!empty($brand) ? in_array($category->id,$brand->getParentCategoryArray()) : '')>
+                            {{$category->name}}
                         </option>
                     @endforeach
                 </select>

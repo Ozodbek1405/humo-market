@@ -11,7 +11,7 @@ class Brand extends Model
     protected $fillable = [
         'name',
         'slug',
-        'orders',
+        'order',
     ];
 
     public function products()
@@ -19,19 +19,19 @@ class Brand extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function parent()
+    public function category()
     {
-        return $this->belongsToMany( ParentCategory::class, 'brand_parent_categories', 'brand_id','parent_id')->withPivot(['brand_id', 'parent_id'])->withTimestamps();
+        return $this->belongsToMany( Category::class, 'brand_categories', 'brand_id','category_id')->withPivot(['brand_id', 'category_id'])->withTimestamps();
     }
 
     public function getParentCategory()
     {
-        return BrandParentCategory::query()->where('brand_id',$this->id)->get();
+        return BrandCategory::query()->where('brand_id',$this->id)->get();
     }
 
     public function getParentCategoryArray()
     {
-        return $this->getParentCategory()->pluck('parent_id')->toArray();
+        return $this->getParentCategory()->pluck('category_id')->toArray();
     }
 
 }

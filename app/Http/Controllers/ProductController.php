@@ -127,7 +127,10 @@ class ProductController extends Controller
         }
         $products = $products->where('category_id',$category->id);
         $products = $products->paginate(21);
-        $brands = $this->brand->get();
+        $category_id = $category->id;
+        $brands = $this->brand->whereHas('category',function ($query) use ($category_id){
+            $query->where('category_id',$category_id)->orWhereRaw("'".$category_id."'=''");
+        })->get();
         $product_colors = $this->color->get();
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
@@ -198,9 +201,9 @@ class ProductController extends Controller
             ->where('category_id',$category->id)
             ->where('parent_category_id',$parent_category->id)
             ->paginate(15);
-        $parent_id = $parent_category->id;
-        $brands = $this->brand->whereHas('parent',function ($query) use ($parent_id){
-            $query->where('parent_id',$parent_id)->orWhereRaw("'".$parent_id."'=''");
+        $category_id = $category->id;
+        $brands = $this->brand->whereHas('category',function ($query) use ($category_id){
+            $query->where('category_id',$category_id)->orWhereRaw("'".$category_id."'=''");
         })->get();
         $product_colors = $this->color->get();
         $product_sizes = $this->size->get();
@@ -273,9 +276,9 @@ class ProductController extends Controller
             ->where('parent_category_id',$parent_category->id)
             ->where('child_category_id',$child_category->id)
             ->paginate(15);
-        $parent_id = $parent_category->id;
-        $brands = $this->brand->whereHas('parent',function ($query) use ($parent_id){
-            $query->where('parent_id',$parent_id)->orWhereRaw("'".$parent_id."'=''");
+        $category_id = $category->id;
+        $brands = $this->brand->whereHas('category',function ($query) use ($category_id){
+            $query->where('category_id',$category_id)->orWhereRaw("'".$category_id."'=''");
         })->get();
         $product_colors = $this->color->get();
         $product_sizes = $this->size->get();

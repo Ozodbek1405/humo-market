@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandStoreRequest;
 use App\Models\Brand;
-use App\Models\ParentCategory;
+use App\Models\Category;
 
 class AdminBrandsController extends Controller
 {
@@ -17,9 +17,9 @@ class AdminBrandsController extends Controller
 
     public function create()
     {
-        $parent_categories = ParentCategory::query()->get();
+        $categories = Category::query()->get();
         $form_route = route('brands.admin.store');
-        return view('vendor.voyager.brands.create',compact('parent_categories','form_route'));
+        return view('vendor.voyager.brands.create',compact('categories','form_route'));
     }
 
     public function store(BrandStoreRequest $request)
@@ -27,12 +27,12 @@ class AdminBrandsController extends Controller
         $data = $request->validated();
         $brand = Brand::query()->create([
             'name' => $data['name'],
-            'orders' => $data['orders'],
+            'order' => $data['order'],
             'slug' => $data['slug'],
         ]);
-        $brand->parent()->detach();
-        if(isset($data['parent_id'])){
-            $brand->parent()->attach($data['parent_id']);
+        $brand->category()->detach();
+        if(isset($data['category_id'])){
+            $brand->category()->attach($data['category_id']);
         }
         return redirect()->route('brands.admin.view');
     }
@@ -47,9 +47,9 @@ class AdminBrandsController extends Controller
     public function edit($brand_id)
     {
         $brand = Brand::find($brand_id);
-        $parent_categories = ParentCategory::query()->get();
+        $categories = Category::query()->get();
         $form_route = route('brands.admin.update',$brand_id);
-        return view('vendor.voyager.brands.create',compact('parent_categories','brand','form_route'));
+        return view('vendor.voyager.brands.create',compact('categories','brand','form_route'));
     }
 
     public function update(BrandStoreRequest $request,$brand_id)
@@ -58,12 +58,12 @@ class AdminBrandsController extends Controller
         $brand = Brand::find($brand_id);
         $brand->update([
             'name' => $data['name'],
-            'orders' => $data['orders'],
+            'order' => $data['order'],
             'slug' => $data['slug'],
         ]);
-        $brand->parent()->detach();
-        if(isset($data['parent_id'])){
-            $brand->parent()->attach($data['parent_id']);
+        $brand->category()->detach();
+        if(isset($data['category_id'])){
+            $brand->category()->attach($data['category_id']);
         }
         return redirect()->route('brands.admin.view');
     }
