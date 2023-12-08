@@ -20,7 +20,9 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a>
-                        <span>Shop</span>
+                        <a href="{{route('product.category.all')}}">Categories</a>
+                        <a href="{{route('product.category',$category->slug)}}">{{$category->name}}</a>
+                        <span>{{$parent_category->name}}</span>
                     </div>
                 </div>
             </div>
@@ -34,7 +36,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="shop__sidebar">
-                        @include('products.filters.productFilter')
+                        @include('products.filters.parentFilter')
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-9">

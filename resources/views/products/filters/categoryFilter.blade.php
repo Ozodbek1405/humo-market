@@ -3,12 +3,18 @@
         <h4>Categories</h4>
     </div>
     <div class="categories__accordion">
-        <div class="accordion" id="accordionExample">
-            @foreach($categories as $category)
-                <div class="card">
-                    <div class="text-lg font-semibold">
-                        <a href="{{route('product.category',$category->slug)}}">
-                            {{$category->name}}
+        <div class="accordion">
+            <div class="mb-2 text-xl font-bold text-gray-800">
+                <a href="{{route('product.category.all')}}">Barcha kategoriyalar</a>
+            </div>
+            <div class="mb-3 text-xl font-bold text-gray-800">
+                <p>{{$category->name}}</p>
+            </div>
+            @foreach($parent_categories as $parent_category)
+                <div class="card ml-3">
+                    <div class="text-md font-semibold">
+                        <a href="{{route('product.category.parent',['slugName'=>$category->slug,'parentSlug'=>$parent_category->slug])}}">
+                            {{$parent_category->name}}
                         </a>
                     </div>
                 </div>
@@ -47,31 +53,14 @@
         </div>
     </div>
 </div>
-<div class="sidebar__color">
-    <div class="section-title">
-        <h4>Shop by Color</h4>
-    </div>
-    <div class="size__list" id="content">
-        @foreach($product_colors as $product_color)
-            <label for="{{$product_color->name}}">
-                {{$product_color->name}}
-                <input type="checkbox" @if(in_array($product_color->id, explode(',',$q_colors))) checked="checked" @endif
-                id="{{$product_color->name}}" name="product_color" value="{{$product_color->id}}"
-                       onchange="productByFilterColors()">
-                <span class="checkmark"></span>
-            </label>
-        @endforeach
-    </div>
-</div>
 <div>
-    <a href="{{route('product.category.all')}}">
+    <a href="{{route('product.category',$category->slug)}}">
         <button type="button" class="btn btn-danger">Clear</button>
     </a>
 </div>
-<form id="productFilter" action="{{route('product.category.all')}}" method="GET">
+<form id="productFilter" action="{{route('product.category',$category->slug)}}" method="GET">
     <input type="hidden" name="sort" id="sortable" value="0">
     <input type="hidden" name="brands" id="brands" value="{{$q_brands}}">
-    <input type="hidden" name="colors" id="colors" value="{{$q_colors}}">
     <input type="hidden" name="q_min" id="q_min" value="{{$q_min}}">
     <input type="hidden" name="q_max" id="q_max" value="{{$q_max}}">
     <button type="submit" name="productFilter"></button>

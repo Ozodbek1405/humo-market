@@ -4,8 +4,19 @@
         position: static !important;
     }
     .dropdown-menu {
-        margin-top: 20px !important;
-        width: 100% !important;
+        margin-top: 25px !important;
+        max-height: 600px;
+        overflow-y: scroll;
+    }
+    .navbar-dropdown{
+        border: 1px solid #3a3434;
+    }
+    .dropdown-menu::-webkit-scrollbar{
+        width: 5px;
+    }
+    .dropdown-menu::-webkit-scrollbar-thumb {
+        background-color: rgb(245, 158, 18);
+        border-radius: 10px;
     }
 </style>
 <header class="header-v4">
@@ -54,32 +65,39 @@
                                 Shop Category
                             </a>
                             <!--dropdown sub items of menu-->
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdown">
                                 @php
+                                    $categories = App\Services\GetCategories::getCategory();
                                     $parent_categories = App\Services\GetCategories::getParentCategory();
                                     $child_categories = App\Services\GetCategories::getChildCategory();
                                 @endphp
 
-                                <div class="container">
-                                    <div class="row my-3">
-                                        @foreach($parent_categories as $parent_category)
-                                            <div class="m-all-20">
-                                                <h1 class="font-bold text-xl my-2">{{$parent_category->name}}</h1>
-                                                <div>
-                                                    @foreach($child_categories as $child_category)
-                                                        @if($parent_category->id == $child_category->parent_id)
-                                                            <h1 class="font-medium my-3">
-                                                                <a href="{{route('product.view',['category' => $child_category->id])}}">
-                                                                    {{$child_category->name}}
-                                                                </a>
-                                                            </h1>
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        @endforeach
+                                @foreach($categories as $category)
+                                    <div class="container">
+                                        <div class="">
+                                            <a href="{{route('product.category',$category->slug)}}" class="font-bold text-2xl">{{$category->name}}</a>
+                                            @foreach($parent_categories as $parent_category)
+                                                @if($parent_category->category_id == $category->id)
+                                                    <div class="m-all-20">
+                                                        <a href="{{route('product.category.parent',['slugName' => $category->slug,'parentSlug'=>$parent_category->slug])}}"
+                                                           class="font-semibold text-lg my-2">{{$parent_category->name}}</a>
+                                                        <div>
+                                                            @foreach($child_categories as $child_category)
+                                                                @if($parent_category->id == $child_category->parent_id)
+                                                                    <h1 class="text-sm font-medium my-3">
+                                                                        <a href="{{route('product.category.child',['parentSlug'=>$parent_category->slug,'childSlug' => $child_category->slug])}}">
+                                                                            {{$child_category->name}}
+                                                                        </a>
+                                                                    </h1>
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                         </li>
                         <li id="blog">

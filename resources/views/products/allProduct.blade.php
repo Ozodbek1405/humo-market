@@ -19,7 +19,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a>
-                        <span>Shop</span>
+                        <span>Categories</span>
                     </div>
                 </div>
             </div>

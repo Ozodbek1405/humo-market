@@ -1,7 +1,6 @@
 <style>
     .menu_item {
-        margin-top: 20px !important;
-        width: 30% !important;
+        overflow-y: visible;
     }
 </style>
 <div class="dropdown mb-4">

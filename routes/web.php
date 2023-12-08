@@ -85,11 +85,14 @@ Route::get('/blog',[BlogController::class,'blog'])->name('blog');
 Route::get('/blog/detail/{blog_id}',[BlogController::class,'blog_detail'])->name('blog.detail');
 Route::get('faq-help',[FaqController::class,'index'])->name('faq.help');
 
-
-Route::get('/product/category/all',[ProductController::class,'productAll'])->name('product.category.all');
-Route::get('/products',[ProductController::class,'product'])->name('product.view');
-Route::get('/products/detail/{product_id}',[ProductController::class,'product_detail'])->name('product.detail');
-Route::post('/review',[ReviewController::class,'review'])->name('review');
+Route::group(['prefix' => 'products'], function () {
+    Route::get('/all',[ProductController::class,'productAll'])->name('product.category.all');
+    Route::get('/{slugName}',[ProductController::class,'categoryProduct'])->name('product.category');
+    Route::get('/{slugName}/{parentSlug}',[ProductController::class,'parentProduct'])->name('product.category.parent');
+    Route::get('/child/{parentSlug}/{childSlug}',[ProductController::class,'childProduct'])->name('product.category.child');
+    Route::get('/detail/{product_id}',[ProductController::class,'product_detail'])->name('product.detail');
+    Route::post('/review',[ReviewController::class,'review'])->name('review');
+});
 
 Route::group(['prefix' => 'cart'], function () {
     Route::get('/',[ShopController::class,'shopping_cart'])->name('shopping.cart');

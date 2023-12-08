@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('parent_categories', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
-            $table->integer('category_id')->nullable();
-            $table->bigInteger('min')->nullable();
-            $table->bigInteger('max')->nullable();
-            $table->boolean('dress_size')->nullable();
-            $table->boolean('shoe_size')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('parent_categories');
+        Schema::dropIfExists('categories');
     }
 };

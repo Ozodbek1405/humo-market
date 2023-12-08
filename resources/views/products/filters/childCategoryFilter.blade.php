@@ -2,31 +2,22 @@
     <div class="section-title">
         <h4>Categories</h4>
     </div>
-    <div class="mb-2">
-        <a href="{{route('product.category.all')}}">Barcha kategoriyalar</a>
-    </div>
     <div class="categories__accordion">
-        <div class="accordion" id="accordionExample">
-            <div class="card">
-                <div class="card-heading active">
-                    <a data-toggle="collapse" data-target="#collapseOne">
-                        {{$parent_category->name}}
-                    </a>
-                </div>
-                <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <ul>
-                            @foreach($child_categories as $child_category)
-                                @if($parent_category->id == $child_category->parent_id)
-                                    <li>
-                                        <a href="{{route('product.view',['category' => $child_category->id])}}">
-                                            {{$child_category->name}}
-                                        </a>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </div>
+        <div class="accordion">
+            <div class="mb-3 text-xl font-bold text-gray-800">
+                <a href="{{route('product.category.all')}}">Barcha kategoriyalar</a>
+            </div>
+            <div class="mb-3 text-xl font-bold text-gray-800">
+                <a href="{{route('product.category',$category->slug)}}">{{$category->name}}</a>
+            </div>
+            <div class="mb-3 text-xl font-bold text-gray-800">
+                <a href="{{route('product.category.parent',['slugName' => $category->slug,'parentSlug'=>$parent_category->slug])}}">
+                    {{$parent_category->name}}
+                </a>
+            </div>
+            <div class="card ml-3">
+                <div class="text-md font-semibold">
+                    <p>{{$child_category->name}}</p>
                 </div>
             </div>
         </div>
@@ -118,11 +109,11 @@
     </div>
 </div>
 <div>
-    <a href="{{route('product.category.all')}}">
+    <a href="{{route('product.category.child',['parentSlug'=>$parent_category->slug,'childSlug' => $child_category->slug])}}">
         <button type="button" class="btn btn-danger">Clear</button>
     </a>
 </div>
-<form id="productFilter" action="{{route('product.view')}}" method="GET">
+<form id="productFilter" action="{{route('product.category.child',['parentSlug'=>$parent_category->slug,'childSlug' => $child_category->slug])}}" method="GET">
     <input type="hidden" name="sort" id="sortable" value="0">
     <input type="hidden" name="category" id="category" value="{{request()->category}}">
     <input type="hidden" name="brands" id="brands" value="{{$q_brands}}">
