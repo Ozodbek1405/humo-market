@@ -37,7 +37,7 @@
             <div class="p-t-33">
                 <form action="{{route('addToCart',$product->id)}}" method="POST">
                     @csrf
-                    @if($product->parent_category->dress_size == 1 && count($product->getProductSize())>0)
+                    @if($product->category->dress_size == 1 && count($product->getProductSize())>0)
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203 flex-c-m respon6">
                                 Size
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                     @endif
-                    @if($product->parent_category->shoe_size == 1 && count($product->getProductShoeSize())>0)
+                    @if($product->category->shoe_size == 1 && count($product->getProductShoeSize())>0)
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203 flex-c-m respon6">
                                 Shoe Size

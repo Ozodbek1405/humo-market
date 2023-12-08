@@ -30,14 +30,23 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="category">Categories</label>
+                <select class="form-control" id="category" name="category_id">
+                    <option value="">Tanlang</option>
+                    @foreach($categories as $category)
+                        <option  @selected(!empty($product) ? $product->category_id == $category->id : '') value="{{$category->id}}">
+                            {{$category->name}}
+                        </option>
+                    @endforeach
+                </select>
+                @error('category_id')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="parent_category">Parent category</label>
                 <select class="form-control" id="parent_category" name="parent_category_id">
                     <option value="">Tanlang</option>
-                    @foreach($parent_categories as $parent_category)
-                        <option  @selected(!empty($product) ? $product->parent_category_id == $parent_category->id : '') value="{{$parent_category->id}}">
-                            {{$parent_category->name}}
-                        </option>
-                    @endforeach
                 </select>
                 @error('parent_category_id')
                 <p style="color: #f11313">{{ $message }}</p>

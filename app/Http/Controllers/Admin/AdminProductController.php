@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStoreRequest;
-use App\Models\{Brand, ChildCategory, Company, ParentCategory, Product, Color, ShoeSize, Size};
+use App\Models\{Brand, Category, ChildCategory, Company, ParentCategory, Product, Color, ShoeSize, Size};
 use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
@@ -16,6 +16,7 @@ class AdminProductController extends Controller
     protected Company $company;
     protected Size $size;
     protected ShoeSize $shoeSize;
+    protected Category $categories;
     protected ParentCategory $parent_categories;
     protected ChildCategory $child_categories;
 
@@ -27,6 +28,7 @@ class AdminProductController extends Controller
         $this->company = new Company();
         $this->size = new Size();
         $this->shoeSize = new ShoeSize();
+        $this->categories = new Category();
         $this->parent_categories = new ParentCategory();
         $this->child_categories = new ChildCategory();
     }
@@ -43,7 +45,7 @@ class AdminProductController extends Controller
         $product_colors = $this->color->get();
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
-        $parent_categories = $this->parent_categories->get();
+        $categories = $this->categories->get();
         $companies = $this->company->get();
         $form_route = route('products.store');
 
@@ -51,26 +53,10 @@ class AdminProductController extends Controller
             'product_colors' => $product_colors,
             'product_sizes' => $product_sizes,
             'product_shoe_sizes' => $product_shoe_sizes,
-            'parent_categories' => $parent_categories,
+            'categories' => $categories,
             'companies' => $companies,
             'form_route' => $form_route
         ]);
-    }
-
-    public function getChildCategory(Request $request)
-    {
-        $parent_id = $request->parent_id;
-        $data = $this->child_categories->where('parent_id',$parent_id)->get();
-        return ['data' => $data];
-    }
-
-    public function getBrands(Request $request)
-    {
-        $parent_id = $request->parent_id;
-        $data = $this->brand->whereHas('parent',function ($query) use ($parent_id){
-            $query->where('parent_id',$parent_id);
-        })->get();
-        return ['data' => $data];
     }
 
     public function productStore(ProductStoreRequest $request)
@@ -83,6 +69,7 @@ class AdminProductController extends Controller
             'description' => $data['description'],
             'title' =>  $data['title'],
             'brand_id' =>  $data['brand_id'],
+            'category_id' =>  $data['category_id'],
             'parent_category_id' =>  $data['parent_category_id'],
             'child_category_id' =>  $data['child_category_id'],
             'count' =>  $data['count'],
@@ -115,29 +102,21 @@ class AdminProductController extends Controller
         return redirect()->route('product.admin.view');
     }
 
-    public function productDelete($product_id)
-    {
-
-        $product = $this->product->find($product_id);
-        $product->delete();
-        return redirect()->back()->with('success','Deleted successfully');
-    }
-
     public function edit($product_id)
     {
         $product_colors = $this->color->get();
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
-        $parent_categories = $this->parent_categories->get();
         $product = $this->product->where('id',$product_id)->first();
         $companies = $this->company->get();
+        $categories = $this->categories->get();
         $form_route = route('product.update',$product->id);
 
         return view('vendor.voyager.products.create',[
             'product_colors' => $product_colors,
             'product_sizes' => $product_sizes,
             'product_shoe_sizes' => $product_shoe_sizes,
-            'parent_categories' => $parent_categories,
+            'categories' => $categories,
             'product' => $product,
             'companies' => $companies,
             'form_route' => $form_route
@@ -155,6 +134,7 @@ class AdminProductController extends Controller
             'description' => $data['description'],
             'title' =>  $data['title'],
             'brand_id' =>  $data['brand_id'],
+            'category_id' =>  $data['category_id'],
             'parent_category_id' =>  $data['parent_category_id'],
             'child_category_id' =>  $data['child_category_id'],
             'count' =>  $data['count'],
@@ -190,6 +170,37 @@ class AdminProductController extends Controller
         }
 
         return redirect()->route('product.admin.view');
+    }
+
+    public function productDelete($product_id)
+    {
+
+        $product = $this->product->find($product_id);
+        $product->delete();
+        return redirect()->back()->with('success','Deleted successfully');
+    }
+
+    public function getParentCategory(Request $request)
+    {
+        $category_id = $request->category_id;
+        $data = $this->parent_categories->where('category_id',$category_id)->get();
+        return ['data' => $data];
+    }
+
+    public function getChildCategory(Request $request)
+    {
+        $parent_id = $request->parent_id;
+        $data = $this->child_categories->where('parent_id',$parent_id)->get();
+        return ['data' => $data];
+    }
+
+    public function getBrands(Request $request)
+    {
+        $parent_id = $request->parent_id;
+        $data = $this->brand->whereHas('parent',function ($query) use ($parent_id){
+            $query->where('parent_id',$parent_id);
+        })->get();
+        return ['data' => $data];
     }
 
 }

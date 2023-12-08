@@ -11,6 +11,37 @@
             });
         });
     });
+    $('#category').on('change', function() {
+        var category_id = $(this).val();
+        if (category_id !== "") {
+            fetchCategoryData(category_id);
+        }
+    });
+    function fetchCategoryData(category_id) {
+        $.ajax({
+            url: "{{route('getParentCategory')}}",
+            method: 'GET',
+            data: { category_id: category_id },
+            dataType: 'json',
+            success: function(data) {
+                getParentCategories(data);
+            },
+            error: function() {
+                console.log('Error retrieving data.');
+            }
+        });
+    }
+    function getParentCategories(data) {
+        var parent_category = $('#parent_category');
+        parent_category.empty();
+        for (var i = 0; i < data.data.length; i++) {
+            var option = $('<option></option>').attr('value', data.data[i].id).text(data.data[i].name);
+            if (data.data[i].id === {{$product->parent_category_id??0}}) {
+                option.attr('selected', 'selected');
+            }
+            parent_category.append(option);
+        }
+    }
     $('#parent_category').on('change', function() {
         var parent_id = $(this).val();
         if (parent_id !== "") {
@@ -69,8 +100,10 @@
         }
     }
     $(document).ready(function() {
+        var category_id = $('#category').val();
         var parent_id = $('#parent_category').val();
-        fetchData(parent_id);
+        fetchCategoryData(category_id);
+        fetchCategoryData(parent_id);
         getDataBrand(parent_id);
     });
 </script>

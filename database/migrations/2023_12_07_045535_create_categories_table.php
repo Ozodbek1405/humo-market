@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
+            $table->bigInteger('min')->nullable();
+            $table->bigInteger('max')->nullable();
+            $table->boolean('dress_size')->nullable();
+            $table->boolean('shoe_size')->nullable();
             $table->timestamps();
         });
     }

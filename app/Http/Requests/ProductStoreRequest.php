@@ -33,6 +33,7 @@ class ProductStoreRequest extends FormRequest
             'size_id' => 'sometimes|array',
             'shoe_size_id' => 'sometimes|array',
             'brand_id' => 'required',
+            'category_id' => 'required',
             'parent_category_id' => 'required',
             'child_category_id' => 'required',
             'count' => 'required',

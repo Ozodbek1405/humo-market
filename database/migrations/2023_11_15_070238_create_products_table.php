@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->longText('images')->nullable();
             $table->integer('brand_id')->nullable();
+            $table->integer('category_id')->nullable();
             $table->integer('parent_category_id')->nullable();
             $table->integer('child_category_id')->nullable();
             $table->integer('views')->nullable();
