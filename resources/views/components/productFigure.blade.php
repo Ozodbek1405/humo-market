@@ -6,7 +6,7 @@
                 <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
                 <div class="slick3 gallery-lb">
                     @foreach($product->formatted_images as $image)
-                        <div class="item-slick3" data-thumb="{{asset('storage/uploads/'.$image)}}">
+                        <div class="border item-slick3" data-thumb="{{asset('storage/uploads/'.$image)}}">
                             <div class="wrap-pic-w pos-relative">
                                 <img style="width: 550px;height: 600px" src="{{asset('storage/uploads/'.$image)}}" alt="IMG-PRODUCT">
                                 <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('storage/uploads/'.$image)}}">
@@ -29,10 +29,10 @@
                 {{$product->formatted_price}} so'm
             </span>
             <p class="stext-102 cl3 p-t-23">
-                {{$product->title}}
+                <span class="font-bold">Brand : </span> {{$product->brand->name}}
             </p>
             <p class="stext-102 cl3 p-t-23">
-                Brand name : {{$product->brand->name}}
+                {{$product->title}}
             </p>
             <div class="p-t-33">
                 <form action="{{route('addToCart',$product->id)}}" method="POST">

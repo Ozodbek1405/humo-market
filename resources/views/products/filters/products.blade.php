@@ -22,9 +22,9 @@
 </div>
 <div class="row">
     @foreach($products as $product)
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-3 col-md-4">
             <div class="product__item">
-                <div class="product__item__pic set-bg"
+                <div class="product__item__pic set-bg bor7"
                      data-setbg="{{asset('storage/uploads/'.$product->formatted_images[0])}}">
                     <ul class="product__hover">
                         <li>
@@ -51,7 +51,7 @@
                     </ul>
                 </div>
                 <div class="product__item__text">
-                    <h6>
+                    <h6 class="text-gray-800">
                         <a href="{{route('product.detail',$product->id)}}" class="hover:text-gray-700">
                             {{$product->name}}
                         </a>

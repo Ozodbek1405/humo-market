@@ -91,9 +91,10 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/{slugName}',[ProductController::class,'categoryProduct'])->name('product.category');
     Route::get('/{slugName}/{parentSlug}',[ProductController::class,'parentProduct'])->name('product.category.parent');
     Route::get('/child/{parentSlug}/{childSlug}',[ProductController::class,'childProduct'])->name('product.category.child');
-    Route::get('/detail/{product_id}',[ProductController::class,'product_detail'])->name('product.detail');
     Route::post('/review',[ReviewController::class,'review'])->name('review');
 });
+Route::get('product/detail/{product_id}',[ProductController::class,'product_detail'])->name('product.detail');
+
 
 Route::group(['prefix' => 'cart'], function () {
     Route::get('/',[ShopController::class,'shopping_cart'])->name('shopping.cart');

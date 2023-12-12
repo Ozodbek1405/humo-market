@@ -31,13 +31,17 @@
         @endforeach
     </div>
 </div>
+@php
+    $minPrice = App\Services\ProductFilterService::minPrice();
+    $maxPrice = App\Services\ProductFilterService::maxPrice();
+@endphp
 <div class="sidebar__filter">
     <div class="section-title">
         <h4>Shop by price</h4>
     </div>
     <div class="filter-range-wrap">
         <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-             data-min="1000" data-max="20000000"></div>
+             data-min="{{$minPrice}}" data-max="{{$maxPrice}}"></div>
         <div class="range-slider">
             <div class="price-input">
                 <p>Price:</p>

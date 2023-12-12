@@ -3,6 +3,8 @@
 namespace App\Services;
 
 
+use App\Models\Category;
+
 class ProductFilterService
 {
     public function filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,$search)
@@ -42,6 +44,18 @@ class ProductFilterService
             $products = $products->where('name', 'LIKE', "%{$search}%");
         }
         return $products;
+    }
+
+    public static function minPrice()
+    {
+        $minPrice = Category::query()->pluck('min')->toArray();
+        return min($minPrice);
+    }
+
+    public static function maxPrice()
+    {
+        $maxPrice = Category::query()->pluck('max')->toArray();
+        return max($maxPrice);
     }
 
 }

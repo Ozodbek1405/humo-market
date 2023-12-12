@@ -157,8 +157,10 @@ class ProductController extends Controller
         $q_min = (int)$request->query('q_min');
         $q_max = (int)$request->query('q_max');
 
-        $child_category = $this->child_categories->where('slug',$childSlug)->first();
         $parent_category = $this->parent_categories->where('slug',$parentSlug)->first();
+        $child_category = $this->child_categories
+            ->where('parent_id',$parent_category->id)
+            ->where('slug',$childSlug)->first();
         $category = $this->category->where('id',$parent_category->category_id)->first();
         $products = $this->product;
         $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,null);
