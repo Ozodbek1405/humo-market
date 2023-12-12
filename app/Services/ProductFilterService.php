@@ -3,7 +3,7 @@
 namespace App\Services;
 
 
-use App\Models\Category;
+use App\Models\Product;
 
 class ProductFilterService
 {
@@ -48,13 +48,13 @@ class ProductFilterService
 
     public static function minPrice()
     {
-        $minPrice = Category::query()->pluck('min')->toArray();
+        $minPrice = Product::query()->pluck('price')->toArray();
         return min($minPrice);
     }
 
     public static function maxPrice()
     {
-        $maxPrice = Category::query()->pluck('max')->toArray();
+        $maxPrice = Product::query()->pluck('price')->toArray();
         return max($maxPrice);
     }
 
