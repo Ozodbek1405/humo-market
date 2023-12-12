@@ -15,6 +15,10 @@
         var category_id = $(this).val();
         fetchCategoryData(category_id);
         getDataBrand(category_id);
+        setTimeout(()=>{
+            var parent_id = $('#parent_category').val();
+            fetchData(parent_id);
+        },300);
     });
     function fetchCategoryData(category_id) {
         $.ajax({
