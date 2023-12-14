@@ -8,6 +8,7 @@ use App\Http\Controllers\{AboutController,
     Auth\ResetController,
     BlogController,
     ContactController,
+    DpdServiceController,
     FaqController,
     HomeController,
     OrderController,
@@ -103,7 +104,6 @@ Route::group(['prefix' => 'cart'], function () {
     Route::put('/update',[ShopController::class,'updateCart'])->name('updateCart');
     Route::get('/removeItem/{rowId}',[ShopController::class,'removeItem'])->name('removeItem');
     Route::get('/districts',[ShopController::class,'getDistricts'])->name('cart.districts');
-    Route::get('/calculateData',[ShopController::class,'getCalculateData'])->name('calculate.data');
 });
 
 Route::group(['prefix' => 'wishlist'], function () {
@@ -117,5 +117,5 @@ Route::group(['prefix' => 'orders'], function () {
     Route::get('/',[OrderController::class,'order'])->name('orders.view');
     Route::get('/payment',[OrderController::class,'payment'])->name('payment.view');
 });
-
+Route::get('/getData',[DpdServiceController::class,'getServiceCost']);
 

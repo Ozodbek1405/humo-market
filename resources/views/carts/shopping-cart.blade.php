@@ -78,10 +78,14 @@
                             <h4 class="mtext-109 cl2 p-b-30">
                                 Cart Totals
                             </h4>
+                            <div class="flex-w flex-t p-b-18">
+                                <h1 class="text-xl text-gray-800">Savatda {{count($cartItems)}} ta tovar bor</h1>
+                            </div>
+
                             <div class="flex-w flex-t bor12 p-b-13">
                                 <div class="size-208">
 								<span class="stext-110 cl2">
-									Total:
+									Umumiy qiymati:
 								</span>
                                 </div>
                                 <div class="size-209">

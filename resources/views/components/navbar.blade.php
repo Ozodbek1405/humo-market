@@ -100,6 +100,9 @@
                                 @endforeach
                             </div>
                         </li>
+                        <li id="shop">
+                            <a href="{{route('product.category.all')}}">Shop</a>
+                        </li>
                         <li id="blog">
                             <a href="{{route('blog')}}">Blog</a>
                         </li>
@@ -237,7 +240,7 @@
         if (link[3] == '') {
             $("#home").addClass("active-menu");
         }
-        else if (link[3] == 'product') {
+        else if (link[4] == 'all') {
             $("#shop").addClass("active-menu");
         }
         else if (link[3] == 'blog') {

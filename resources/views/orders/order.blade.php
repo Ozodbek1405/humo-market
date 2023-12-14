@@ -64,24 +64,38 @@
             </div>
 
             <div class="col-md-4 mt-4">
+                <div>
+
+                </div>
                 <div class="bor14 border-2 mx-4 text-center p-6 bg-gray-100">
                     <h4 class="text-xl font-semibold text-blue-500 p-b-30 text-2xl">
-                        Savatda 2 ta mahsulot bor
+                        Savatda {{count($cartItems)}} ta mahsulot bor
                     </h4>
-                    <div class="flex-col text-2xl">
-                        <h1 class="font-semibold">Mahsulotning umumiy narxi</h1>
-                        <h2 class="my-2 text-purple-600">8 559 000 so'm</h2>
+                    <div class="flex-col text-md">
+                        <h1 class="font-semibold">Mahsulotning narxi : </h1>
+                        <h2 class="my-2 text-purple-600">{{Gloudemans\Shoppingcart\Facades\Cart::instance('cart')->subtotal()}} so'm</h2>
                     </div>
-                    <div class="flex my-3">
-                        <div class="col-md-4">
-                            <img src="{{asset('images/product-15.jpg')}}" alt="#" style="width: 70px;height: 70px;border-radius: 10px">
-                        </div>
-                        <div class="col-md-8 text-center">
-                            <p class="text-gray-600">Blalala</p>
-                            <p class="">2 ta</p>
-                            <h1 class="product_proce">8 559 000 so'm</h1>
-                        </div>
+                    <div class="flex-col text-md">
+                        <h1 class="font-semibold">Yetkazib berish narxi : </h1>
+                        <h2 class="my-2 text-purple-600">20000 so'm</h2>
                     </div>
+                    <div class="flex-col text-md">
+                        <h1 class="font-semibold">Umumiy qiymat : </h1>
+                        <h2 class="my-2 text-purple-600 text-xl">2,420,000.00 so'm</h2>
+                    </div>
+                    @foreach($cartItems as $cartItem)
+                        <div class="flex my-3">
+                            <div class="col-md-4">
+                                <img src="{{asset('storage/uploads/'.$cartItem->options['image'])}}" alt="#"
+                                     style="width: 70px;height: 70px;border-radius: 10px">
+                            </div>
+                            <div class="col-md-8 text-center">
+                                <p class="text-gray-600">{{$cartItem->name}}</p>
+                                <p class="">{{$cartItem->qty}} ta</p>
+                                <h1 class="product_proce">{{$cartItem->price}} so'm</h1>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

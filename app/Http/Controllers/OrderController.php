@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Region;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class OrderController extends Controller
 {
     public function order()
     {
         $regions = Region::query()->get();
-        return view('orders.order', compact('regions'));
+        $cartItems = Cart::instance('cart')->content();
+        if (count($cartItems)<1){
+            return redirect()->back();
+        }
+        return view('orders.order', compact('regions','cartItems'));
     }
 
     public function payment()

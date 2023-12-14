@@ -58,7 +58,12 @@
                     </h6>
                     <div class="flex-row inline-flex my-1" id="stars{{$product->id}}"></div>
                     <div class="product__price">
-                        {{$product->formatted_price}} so'm <br><span> {{$product->formatted_discount}} so'm</span>
+                        {{$product->formatted_price}} so'm <br>
+                        @if($product->formatted_discount)
+                            <span>
+                                {{$product->formatted_discount}} so'm
+                            </span>
+                        @endif
                     </div>
                 </div>
             </div>

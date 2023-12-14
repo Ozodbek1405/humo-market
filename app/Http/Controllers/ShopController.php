@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddToCartRequest;
 use App\Models\District;
 use App\Models\Product;
-use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class ShopController extends Controller
 {
@@ -64,21 +62,6 @@ class ShopController extends Controller
         $region_id = $request->region_id;
         $districts = District::query()->where('region_id',$region_id)->get();
         return ['data' => $districts];
-    }
-
-    public function getCalculateData()
-    {
-        $response = Http::withToken("935298cb32688cb0d8e828f33230b6c4ecf28e7d")
-            ->post('http://api.bts.uz:8080/index.php?r=v1/orders/calculate', [
-            'senderCityId' => 197,
-            'receiverCityId' => 46,
-            'weight' => 40,
-            'volume' => null,
-            'senderDate' => Carbon::now()->format('Y-m-d'),
-            'senderDelivery' => 2,
-            'receiverDelivery' => 2
-        ]);
-        return $response->json();
     }
 
 }
