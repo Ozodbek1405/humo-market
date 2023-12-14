@@ -19,7 +19,7 @@
     </div>
     <div class="filter-range-wrap">
         <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-             data-min="{{$category->min}}" data-max="{{$category->max}}"></div>
+             data-min="{{$minPrice}}" data-max="{{$maxPrice}}"></div>
         <div class="range-slider">
             <div class="price-input">
                 <p>Price:</p>

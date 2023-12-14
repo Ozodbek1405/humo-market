@@ -31,10 +31,7 @@
         @endforeach
     </div>
 </div>
-@php
-    $minPrice = App\Services\ProductFilterService::minPrice();
-    $maxPrice = App\Services\ProductFilterService::maxPrice();
-@endphp
+
 <div class="sidebar__filter">
     <div class="section-title">
         <h4>Shop by price</h4>

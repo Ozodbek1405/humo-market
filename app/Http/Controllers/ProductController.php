@@ -49,6 +49,9 @@ class ProductController extends Controller
         $brands = $this->brand->get();
         $product_colors = $this->color->get();
         $categories = $this->category->get();
+        $priceArray = $this->product->pluck('price')->toArray();
+        $minPrice = $priceArray ? min($priceArray) : 2000;
+        $maxPrice = $priceArray ? max($priceArray) : 2000000;
 
         return view('products.allProduct',[
             'products' => $products,
@@ -59,6 +62,8 @@ class ProductController extends Controller
             'q_colors' => $q_colors,
             'q_min' => $q_min,
             'q_max' => $q_max,
+            'minPrice'=> $minPrice,
+            'maxPrice'=> $maxPrice,
         ]);
     }
 
@@ -84,6 +89,9 @@ class ProductController extends Controller
         $product_colors = $this->color->get();
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
+        $priceArray = $this->product->where('category_id',$category->id)->pluck('price')->toArray();
+        $minPrice = $priceArray ? min($priceArray) : 2000;
+        $maxPrice = $priceArray ? max($priceArray) : 2000000;
 
         return view('products.categoryProduct',[
             'products' => $products,
@@ -99,6 +107,8 @@ class ProductController extends Controller
             'q_shoe_sizes' => $q_shoe_sizes,
             'q_min' => $q_min,
             'q_max' => $q_max,
+            'minPrice'=> $minPrice,
+            'maxPrice'=> $maxPrice,
         ]);
     }
 
@@ -128,6 +138,9 @@ class ProductController extends Controller
         $product_colors = $this->color->get();
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
+        $priceArray = $this->product->where('parent_category_id',$parent_category->id)->pluck('price')->toArray();
+        $minPrice = $priceArray ? min($priceArray) : 2000;
+        $maxPrice = $priceArray ? max($priceArray) : 2000000;
 
         return view('products.parentProduct',[
             'products' => $products,
@@ -144,6 +157,8 @@ class ProductController extends Controller
             'q_shoe_sizes' => $q_shoe_sizes,
             'q_min' => $q_min,
             'q_max' => $q_max,
+            'minPrice'=> $minPrice,
+            'maxPrice'=> $maxPrice,
         ]);
     }
 
@@ -175,6 +190,9 @@ class ProductController extends Controller
         $product_colors = $this->color->get();
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
+        $priceArray = $this->product->where('child_category_id',$child_category->id)->pluck('price')->toArray();
+        $minPrice = $priceArray ? min($priceArray) : 2000;
+        $maxPrice = $priceArray ? max($priceArray) : 2000000;
 
         return view('products.childProduct',[
             'products' => $products,
@@ -191,6 +209,8 @@ class ProductController extends Controller
             'q_shoe_sizes' => $q_shoe_sizes,
             'q_min' => $q_min,
             'q_max' => $q_max,
+            'minPrice'=> $minPrice,
+            'maxPrice'=> $maxPrice,
         ]);
     }
 
