@@ -33,9 +33,19 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="js-show-modal{{$product->id}}">
-                                <i class="zmdi zmdi-shopping-cart"></i>
-                            </a>
+                            @if(count($product->getProductSize()) <= 1 && count($product->getProductShoeSize()) <= 1 && count($product->getProductColor()) <= 1)
+                                <a href="#" onclick="document.getElementById('addToCartForm').submit()">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                </a>
+                                <form id="addToCartForm" action="{{route('addToCart',$product->id)}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_count" value="1">
+                                </form>
+                            @else
+                                <a href="#" class="js-show-modal{{$product->id}}">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                </a>
+                            @endif
                         </li>
                         <li>
                             @if($product->IssetWishlist())
@@ -68,7 +78,7 @@
                 </div>
             </div>
         </div>
-        @include('products.filters.modal',['item'=>$product->id])
+        @include('products.filters.modal')
     @endforeach
 </div>
 <div class="container d-flex justify-center">
