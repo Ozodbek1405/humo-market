@@ -95,6 +95,9 @@
                                 <h1 class="product_proce">{{$cartItem->price}} so'm</h1>
                             </div>
                         </div>
+                        <a href="{{route('removeItem',$cartItem->rowId)}}">
+                            <i class="fa fa-trash"></i><span class="mx-2">o'chirish</span>
+                        </a>
                     @endforeach
                 </div>
             </div>

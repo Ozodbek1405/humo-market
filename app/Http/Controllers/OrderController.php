@@ -12,7 +12,7 @@ class OrderController extends Controller
         $regions = Region::query()->get();
         $cartItems = Cart::instance('cart')->content();
         if (count($cartItems)<1){
-            return redirect()->back();
+            return redirect()->route('home');
         }
         return view('orders.order', compact('regions','cartItems'));
     }

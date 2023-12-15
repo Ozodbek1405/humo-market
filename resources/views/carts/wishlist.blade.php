@@ -65,9 +65,22 @@
                                         </td>
                                         <td width="20%" class="price">{{$item->price}} so'm</td>
                                         <td width="20%">
-                                            <button class="round-black-btn small-btn js-show-modal{{$item->id}}">Add to
-                                                Cart
-                                            </button>
+                                            @php
+                                                $product = App\Models\Product::find($item->id);
+                                            @endphp
+                                            @if(count($product->getProductSize()) <= 1 && count($product->getProductShoeSize()) <= 1 && count($product->getProductColor()) <= 1)
+                                                <button class="round-black-btn small-btn" onclick="document.getElementById('addToCartForm').submit()">
+                                                    Add to Cart
+                                                </button>
+                                                <form id="addToCartForm" action="{{route('addToCart',$item->id)}}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="product_count" value="1">
+                                                </form>
+                                            @else
+                                                <button class="round-black-btn small-btn js-show-modal{{$item->id}}">
+                                                    Add to Cart
+                                                </button>
+                                            @endif
                                         </td>
                                         <td width="20%">
                                             <a href="{{route('removeItem.wishlist',$item->rowId)}}">
@@ -75,9 +88,6 @@
                                             </a>
                                         </td>
                                     </tr>
-                                    @php
-                                        $product = App\Models\Product::find($item->id);
-                                    @endphp
                                     @include('products.filters.modal')
                                 @endforeach
                                 </tbody>
