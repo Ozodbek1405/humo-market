@@ -135,13 +135,13 @@
                         </a>
                     @endif
                 </div>
-                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://humo-market.uz/product/detail/{{$product->id}}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
                     <i class="fa fa-facebook"></i>
                 </a>
-                <a target="_blank" href="https://twitter.com/intent/tweet?text={{ url()->current() }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                <a target="_blank" href="https://twitter.com/intent/tweet?text=https://humo-market.uz/product/detail/{{$product->id}}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
                     <i class="fa fa-twitter"></i>
                 </a>
-                <a target="_blank" href="https://t.me/share/url?url={{ url()->current() }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Telegram">
+                <a target="_blank" href="https://t.me/share/url?url=https://humo-market.uz/product/detail/{{$product->id}}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Telegram">
                     <i class="fa fa-telegram"></i>
                 </a>
             </div>
