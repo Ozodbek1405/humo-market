@@ -115,6 +115,18 @@
                     </ul>
                 </div>
 
+                <div class="wrap-icon-header flex-c-b">
+                    @if(session('lang') == "en")
+                        <a href="{{ url('index/uz') }}">UZ</a>
+                        <span class="ml-2 mr-2">|</span>
+                        <p class="text-blue-500">ENG</p>
+                    @else
+                        <p class="text-blue-500">UZ</p>
+                        <span class="ml-2 mr-2">|</span>
+                        <a href="{{ url('index/en') }}">ENG</a>
+                    @endif
+                </div>
+
                 <!-- Icon header -->
                 <div class="wrap-icon-header flex-w flex-r-m">
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">

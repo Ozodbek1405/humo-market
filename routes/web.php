@@ -30,6 +30,7 @@ use TCG\Voyager\Facades\Voyager;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('index/{locale}', [HomeController::class, 'lang']);
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
