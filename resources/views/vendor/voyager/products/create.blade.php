@@ -129,6 +129,20 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="characteristic">Product characteristic</label>
+                <select multiple class="form-control product_multiple_select" id="characteristic" name="characteristic_id[]">
+                    <option value="">Tanlang</option>
+                    @foreach($characteristics as $characteristic)
+                        <option value="{{$characteristic->id}}" @selected(!empty($product) ? in_array($characteristic->id,$product->getProductCharacteristicArray()) : '')>
+                            {{$characteristic->name}}
+                        </option>
+                    @endforeach
+                </select>
+                @error('characteristic_id')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="count">Product count</label>
                 <input type="number" class="form-control" id="count" name="count" placeholder="count"
                        value="{{old('count',$product->count??null)}}">

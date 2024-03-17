@@ -29,6 +29,22 @@
         </div>
     </div>
 </div>
+<div class="sidebar__color">
+    <div class="section-title">
+        <h4>Shop by Characteristic</h4>
+    </div>
+    <div class="size__list" id="content">
+        @foreach($characteristics as $characteristic)
+            <label for="{{$characteristic->name}}">
+                {{$characteristic->name}}
+                <input type="checkbox" @if(in_array($characteristic->id, explode(',',$q_characteristic))) checked="checked" @endif
+                id="{{$characteristic->name}}" name="characteristic" value="{{$characteristic->id}}"
+                       onchange="productByCharacteristic()">
+                <span class="checkmark"></span>
+            </label>
+        @endforeach
+    </div>
+</div>
 @if($category->dress_size == 1)
     <div class="sidebar__sizes">
         <div class="section-title">

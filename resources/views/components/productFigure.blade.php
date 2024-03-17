@@ -100,6 +100,27 @@
                             </div>
                         </div>
                     @endif
+                    @if(count($product->getProductCharacteristic())>0)
+                        <div class="flex-w flex-r-m p-b-10">
+                            <div class="size-203 flex-c-m respon6">
+                                Characteristic
+                            </div>
+                            <div class="size-204 respon6-next">
+                                <div class="rs1-select2 bor8 bg0">
+                                    <select class="js-select2" name="characteristic" required>
+                                        <option value="">Choose an option</option>
+                                        @foreach($product->getProductCharacteristic() as $item)
+                                            <option value="{{$item->characteristic_id}}">{{$item->characteristic->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="dropDownSelect2"></div>
+                                </div>
+                                @error('characteristic')
+                                <p style="color: #f11313">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    @endif
                     <div class="flex-w flex-r-m p-b-10">
                         <div class="size-204 flex-w flex-m respon6-next">
                             <div class="wrap-num-product flex-w m-r-20 m-tb-10">

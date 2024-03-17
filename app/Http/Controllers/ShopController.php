@@ -22,6 +22,7 @@ class ShopController extends Controller
         $product_color_id = $request->color;
         $product_size = $request->size;
         $product_shoe_size = $request->shoe_size;
+        $product_characteristic = $request->characteristic;
         $product = Product::find($product_id);
         Cart::instance('cart')
               ->add([
@@ -34,6 +35,7 @@ class ShopController extends Controller
                       'color_id' => $product_color_id,
                       'size_id' => $product_size,
                       'shoe_size_id' => $product_shoe_size,
+                      'characteristic_id' => $product_characteristic,
                   ]
                 ])->associate('App\Models\Product');
         return redirect()->back()->with('message','Item has been successfully!');

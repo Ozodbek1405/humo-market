@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Services\ProductFilterService;
-use App\Models\{Brand, Category, ChildCategory, ParentCategory, Product, Color, ShoeSize, Size, Review};
+use App\Models\{Brand, Category, Characteristic, ChildCategory, ParentCategory, Product, Color, ShoeSize, Size, Review};
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -19,6 +19,7 @@ class ProductController extends Controller
     protected Category $category;
     protected ParentCategory $parent_categories;
     protected ChildCategory $child_categories;
+    protected Characteristic $characteristic;
     protected ProductFilterService $product_filter_service;
 
     public function __construct()
@@ -32,6 +33,7 @@ class ProductController extends Controller
         $this->category = new Category();
         $this->parent_categories = new ParentCategory();
         $this->child_categories = new ChildCategory();
+        $this->characteristic = new Characteristic();
         $this->product_filter_service = new ProductFilterService();
     }
 
@@ -39,16 +41,19 @@ class ProductController extends Controller
     {
         $q_brands = $request->query('brands');
         $q_colors = $request->query('colors');
+        $q_characteristic = $request->query('characteristics');
         $q_sort = $request->query('sort');
         $q_min = $request->query('q_min');
         $q_max = $request->query('q_max');
         $search = $request->query('search');
         $products = $this->product;
-        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,null,null,$search);
+        $products = $this->product_filter_service
+            ->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,null,null,$search,$q_characteristic);
         $products = $products->paginate(21);
         $brands = $this->brand->get();
         $product_colors = $this->color->get();
         $categories = $this->category->get();
+        $characteristics = $this->characteristic->get();
         $priceArray = $this->product->pluck('price')->toArray();
         $minPrice = $priceArray ? min($priceArray) : 2000;
         $maxPrice = $priceArray ? max($priceArray) : 2000000;
@@ -62,6 +67,8 @@ class ProductController extends Controller
             'q_colors' => $q_colors,
             'q_min' => $q_min,
             'q_max' => $q_max,
+            'characteristics' => $characteristics,
+            'q_characteristic' => $q_characteristic,
             'minPrice'=> $minPrice,
             'maxPrice'=> $maxPrice,
         ]);
@@ -71,6 +78,7 @@ class ProductController extends Controller
     {
         $q_brands = $request->query('brands');
         $q_colors = $request->query('colors');
+        $q_characteristic = $request->query('characteristics');
         $q_sizes = $request->query('q_sizes');
         $q_shoe_sizes = $request->query('q_shoe_sizes');
         $q_sort = $request->query('sort');
@@ -79,7 +87,7 @@ class ProductController extends Controller
         $category = $this->category->where('slug',$slugName)->first();
         $parent_categories = $this->parent_categories->where('category_id',$category->id)->get();
         $products = $this->product;
-        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,null);
+        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,null,$q_characteristic);
         $products = $products->where('category_id',$category->id);
         $products = $products->paginate(21);
         $category_id = $category->id;
@@ -87,6 +95,7 @@ class ProductController extends Controller
             $query->where('category_id',$category_id)->orWhereRaw("'".$category_id."'=''");
         })->get();
         $product_colors = $this->color->get();
+        $characteristics = $this->characteristic->get();
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
         $priceArray = $this->product->where('category_id',$category->id)->pluck('price')->toArray();
@@ -107,6 +116,8 @@ class ProductController extends Controller
             'q_shoe_sizes' => $q_shoe_sizes,
             'q_min' => $q_min,
             'q_max' => $q_max,
+            'characteristics' => $characteristics,
+            'q_characteristic' => $q_characteristic,
             'minPrice'=> $minPrice,
             'maxPrice'=> $maxPrice,
         ]);
@@ -116,6 +127,7 @@ class ProductController extends Controller
     {
         $q_brands = $request->query('brands');
         $q_colors = $request->query('colors');
+        $q_characteristic = $request->query('characteristics');
         $q_sort = $request->query('sort');
         $q_sizes = $request->query('q_sizes');
         $q_shoe_sizes = $request->query('q_shoe_sizes');
@@ -126,7 +138,7 @@ class ProductController extends Controller
         $parent_category = $this->parent_categories->where('slug',$parentSlug)->first();
         $child_categories = $this->child_categories->where('parent_id',$parent_category->id)->get();
         $products = $this->product;
-        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,null);
+        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,null,$q_characteristic);
         $products = $products
             ->where('category_id',$category->id)
             ->where('parent_category_id',$parent_category->id)
@@ -136,6 +148,7 @@ class ProductController extends Controller
             $query->where('category_id',$category_id)->orWhereRaw("'".$category_id."'=''");
         })->get();
         $product_colors = $this->color->get();
+        $characteristics = $this->characteristic->get();
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
         $priceArray = $this->product->where('parent_category_id',$parent_category->id)->pluck('price')->toArray();
@@ -157,6 +170,8 @@ class ProductController extends Controller
             'q_shoe_sizes' => $q_shoe_sizes,
             'q_min' => $q_min,
             'q_max' => $q_max,
+            'characteristics' => $characteristics,
+            'q_characteristic' => $q_characteristic,
             'minPrice'=> $minPrice,
             'maxPrice'=> $maxPrice,
         ]);
@@ -166,6 +181,7 @@ class ProductController extends Controller
     {
         $q_brands = $request->query('brands');
         $q_colors = $request->query('colors');
+        $q_characteristic = $request->query('characteristics');
         $q_sort = $request->query('sort');
         $q_sizes = $request->query('q_sizes');
         $q_shoe_sizes = $request->query('q_shoe_sizes');
@@ -178,7 +194,7 @@ class ProductController extends Controller
             ->where('slug',$childSlug)->first();
         $category = $this->category->where('id',$parent_category->category_id)->first();
         $products = $this->product;
-        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,null);
+        $products = $this->product_filter_service->filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,null,$q_characteristic);
         $products = $products
             ->where('parent_category_id',$parent_category->id)
             ->where('child_category_id',$child_category->id)
@@ -188,6 +204,7 @@ class ProductController extends Controller
             $query->where('category_id',$category_id)->orWhereRaw("'".$category_id."'=''");
         })->get();
         $product_colors = $this->color->get();
+        $characteristics = $this->characteristic->get();
         $product_sizes = $this->size->get();
         $product_shoe_sizes = $this->shoeSize->get();
         $priceArray = $this->product->where('child_category_id',$child_category->id)->pluck('price')->toArray();
@@ -209,6 +226,8 @@ class ProductController extends Controller
             'q_shoe_sizes' => $q_shoe_sizes,
             'q_min' => $q_min,
             'q_max' => $q_max,
+            'characteristics' => $characteristics,
+            'q_characteristic' => $q_characteristic,
             'minPrice'=> $minPrice,
             'maxPrice'=> $maxPrice,
         ]);

@@ -12,7 +12,10 @@ class AdminBrandsController extends Controller
     public function brands()
     {
         $brands = Brand::query()->get();
-        return view('vendor.voyager.brands.browse',compact('brands'));
+        if (auth()->user()->role_id == 1){
+            return view('vendor.voyager.brands.browse',compact('brands'));
+        }
+        abort(404);
     }
 
     public function create()

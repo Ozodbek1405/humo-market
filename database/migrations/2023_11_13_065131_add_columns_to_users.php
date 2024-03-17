@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('verify_code')->nullable();
             $table->timestamp('verify_expiration')->nullable();
             $table->string('google_id')->nullable();
+            $table->integer('company_id')->nullable();
         });
     }
 
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->dropColumn('verify_code');
             $table->dropColumn('verify_expiration');
             $table->dropColumn('google_id');
+            $table->dropColumn('company_id');
         });
     }
 };

@@ -41,6 +41,7 @@ class ProductStoreRequest extends FormRequest
             'weight' => '',
             'materials' => '',
             'company_id' => 'required',
+            'characteristic_id' => 'required',
         ];
     }
 

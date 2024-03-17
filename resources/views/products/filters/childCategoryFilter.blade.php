@@ -43,4 +43,5 @@
     @endif
     <input type="hidden" name="q_min" id="q_min" value="{{$q_min}}">
     <input type="hidden" name="q_max" id="q_max" value="{{$q_max}}">
+    <input type="hidden" name="characteristics" id="characteristics" value="{{$q_characteristic}}">
 </form>

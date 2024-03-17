@@ -43,6 +43,11 @@ class Product extends Model
         return $this->belongsToMany(Color::class, 'product_colors', 'product_id')->withPivot(['product_id', 'color_id'])->withTimestamps();
     }
 
+    public function product_characteristic()
+    {
+        return $this->belongsToMany(Characteristic::class, 'product_characteristics', 'product_id')->withPivot(['product_id', 'characteristic_id'])->withTimestamps();
+    }
+
     public function child_category()
     {
         return $this->belongsTo(ChildCategory::class);
@@ -92,6 +97,16 @@ class Product extends Model
     public function getProductColorArray()
     {
         return $this->getProductColor()->pluck('color_id')->toArray();
+    }
+
+    public function getProductCharacteristic()
+    {
+        return ProductCharacteristic::query()->where('product_id',$this->id)->get();
+    }
+
+    public function getProductCharacteristicArray()
+    {
+        return $this->getProductCharacteristic()->pluck('characteristic_id')->toArray();
     }
 
     public function getFormattedImagesAttribute()

@@ -31,7 +31,6 @@
         @endforeach
     </div>
 </div>
-
 <div class="sidebar__filter">
     <div class="section-title">
         <h4>Shop by price</h4>
@@ -46,6 +45,22 @@
                 <input type="number" id="maxamount" class="border py-1 px-2" name="maxamount">
             </div>
         </div>
+    </div>
+</div>
+<div class="sidebar__color">
+    <div class="section-title">
+        <h4>Shop by Characteristic</h4>
+    </div>
+    <div class="size__list" id="content">
+        @foreach($characteristics as $characteristic)
+            <label for="{{$characteristic->name}}">
+                {{$characteristic->name}}
+                <input type="checkbox" @if(in_array($characteristic->id, explode(',',$q_characteristic))) checked="checked" @endif
+                id="{{$characteristic->name}}" name="characteristic" value="{{$characteristic->id}}"
+                       onchange="productByCharacteristic()">
+                <span class="checkmark"></span>
+            </label>
+        @endforeach
     </div>
 </div>
 <div class="sidebar__color">
@@ -73,6 +88,7 @@
     <input type="hidden" name="sort" id="sortable" value="0">
     <input type="hidden" name="brands" id="brands" value="{{$q_brands}}">
     <input type="hidden" name="colors" id="colors" value="{{$q_colors}}">
+    <input type="hidden" name="characteristics" id="characteristics" value="{{$q_characteristic}}">
     <input type="hidden" name="q_min" id="q_min" value="{{$q_min}}">
     <input type="hidden" name="q_max" id="q_max" value="{{$q_max}}">
     <button type="submit" name="productFilter"></button>

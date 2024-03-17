@@ -5,7 +5,7 @@ namespace App\Services;
 
 class ProductFilterService
 {
-    public function filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,$search)
+    public function filters($products,$q_sort,$q_brands,$q_colors,$q_min,$q_max,$q_sizes,$q_shoe_sizes,$search,$q_characteristic)
     {
         if (isset($q_sort)){
             $products = match ((int)$q_sort) {
@@ -23,6 +23,11 @@ class ProductFilterService
         if (isset($q_colors)){
             $products = $products->whereHas("product_color", function ($query) use ($q_colors){
                 $query->whereIn('color_id',explode(',',$q_colors))->orWhereRaw("'".$q_colors."'=''");
+            });
+        }
+        if (isset($q_characteristic)){
+            $products = $products->whereHas("product_characteristic", function ($query) use ($q_characteristic){
+                $query->whereIn('characteristic_id',explode(',',$q_characteristic))->orWhereRaw("'".$q_characteristic."'=''");
             });
         }
         if (isset($q_sizes) && $q_sizes != null){

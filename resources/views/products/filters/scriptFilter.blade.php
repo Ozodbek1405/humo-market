@@ -135,4 +135,16 @@
         $('#q_shoe_sizes').val(shoeSizes);
         $('#productFilter').submit();
     }
+    function productByCharacteristic(){
+        let characteristic = "";
+        $("input[name='characteristic']:checked").each(function (){
+            if(characteristic === ""){
+                characteristic += this.value;
+            }else{
+                characteristic += "," + this.value;
+            }
+        });
+        $('#characteristics').val(characteristic);
+        $('#productFilter').submit();
+    }
 </script>
