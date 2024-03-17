@@ -20,7 +20,7 @@
             </a>
 
             <span class="stext-109 cl4">
-				{{$blog->title}}
+				{{$blog->getTranslatedAttribute('title')}}
 			</span>
         </div>
     </div>
@@ -47,10 +47,10 @@
 
                         <div class="p-t-32">
                             <h4 class="ltext-109 cl2 p-b-28">
-                                {{$blog->title}}
+                                {{$blog->getTranslatedAttribute('title')}}
                             </h4>
                             <p class="stext-117 cl6 p-b-26">
-                                {{$blog->text}}
+                                {{$blog->getTranslatedAttribute('text')}}
                             </p>
                         </div>
                     </div>
@@ -69,7 +69,11 @@
                                     </a>
                                     <div class="size-215 flex-col-t p-t-8">
                                         <a href="{{route('product.detail',$product->id)}}" class="stext-116 cl8 hov-cl1 trans-04">
-                                            {{$product->name}}
+                                            @if(session('lang') == "uz")
+                                                {{$product->name_uz}}
+                                            @else
+                                                {{$product->name_en}}
+                                            @endif
                                         </a>
                                         <span class="stext-116 cl6 p-t-20">
 											{{$product->formatted_price}} so'm

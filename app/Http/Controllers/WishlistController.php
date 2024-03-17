@@ -19,7 +19,8 @@ class WishlistController extends Controller
         Cart::instance('wishlist')
             ->add([
                 'id' => $product->id,
-                'name' => $product->name,
+                'name_uz' => $product->name_uz,
+                'name_en' => $product->name_en,
                 'price' => $product->formatted_price,
                 'qty' => 1,
                 'options' => ['image' => $product->formatted_images[0]]

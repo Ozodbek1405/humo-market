@@ -23,9 +23,9 @@
                             <a href="{{route('product.category.all')}}">Categories</a>
                             <a href="{{route('product.category',$category->slug)}}">{{$category->name}}</a>
                             <a href="{{route('product.category.parent',['slugName' => $category->slug,'parentSlug'=>$parent_category->slug])}}">
-                                {{$parent_category->name}}
+                                {{$parent_category->getTranslatedAttribute('name')}}
                             </a>
-                            <span>{{$child_category->name}}</span>
+                            <span>{{$child_category->getTranslatedAttribute('name')}}</span>
                         </div>
                     </div>
                 </div>

@@ -63,7 +63,11 @@
                 <div class="product__item__text">
                     <h6 class="text-gray-800">
                         <a href="{{route('product.detail',$product->id)}}" class="hover:text-gray-700">
-                            {{$product->name}}
+                            @if(session('lang') == "uz")
+                                {{$product->name_uz}}
+                            @else
+                                {{$product->name_en}}
+                            @endif
                         </a>
                     </h6>
                     <div class="flex-row inline-flex my-1" id="stars{{$product->id}}"></div>

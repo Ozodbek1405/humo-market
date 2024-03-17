@@ -8,13 +8,13 @@
                 <a href="{{route('product.category.all')}}">Barcha kategoriyalar</a>
             </div>
             <div class="mb-3 text-xl font-bold text-gray-800">
-                <p>{{$category->name}}</p>
+                <p>{{$category->getTranslatedAttribute('name')}}</p>
             </div>
             @foreach($parent_categories as $parent_category)
                 <div class="card ml-3">
                     <div class="text-md font-semibold">
                         <a href="{{route('product.category.parent',['slugName'=>$category->slug,'parentSlug'=>$parent_category->slug])}}">
-                            {{$parent_category->name}}
+                            {{$parent_category->getTranslatedAttribute('name')}}
                         </a>
                     </div>
                 </div>

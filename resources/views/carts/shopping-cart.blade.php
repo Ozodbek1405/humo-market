@@ -51,7 +51,13 @@
                                                 </div>
                                             </td>
                                             <td class="column-2">
-                                                <a href="{{route('product.detail',$cartItem->id)}}">{{$cartItem->name}}</a>
+                                                <a href="{{route('product.detail',$cartItem->id)}}">
+                                                    @if(session('lang') == "uz")
+                                                        {{$cartItem->name_uz}}
+                                                    @else
+                                                        {{$cartItem->name_en}}
+                                                    @endif
+                                                </a>
                                             </td>
                                             <td class="column-3">{{$cartItem->price}} so'm</td>
                                             <td class="column-4">

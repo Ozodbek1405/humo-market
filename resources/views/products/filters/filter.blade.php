@@ -36,7 +36,7 @@
     <div class="size__list" id="content">
         @foreach($characteristics as $characteristic)
             <label for="{{$characteristic->name}}">
-                {{$characteristic->name}}
+                {{$characteristic->getTranslatedAttribute('name')}}
                 <input type="checkbox" @if(in_array($characteristic->id, explode(',',$q_characteristic))) checked="checked" @endif
                 id="{{$characteristic->name}}" name="characteristic" value="{{$characteristic->id}}"
                        onchange="productByCharacteristic()">
@@ -88,7 +88,7 @@
     <div class="size__list">
         @foreach($product_colors as $product_color)
             <label for="{{$product_color->name}}">
-                {{$product_color->name}}
+                {{$product_color->getTranslatedAttribute('name')}}
                 <input type="checkbox" @if(in_array($product_color->id, explode(',',$q_colors))) checked="checked" @endif
                 id="{{$product_color->name}}" name="product_color" value="{{$product_color->id}}"
                        onchange="productByFilterColors()">

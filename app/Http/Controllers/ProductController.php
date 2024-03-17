@@ -244,6 +244,7 @@ class ProductController extends Controller
             ->where('category_id',$product->category_id)
             ->where('parent_category_id',$product->parent_category_id)
             ->where('child_category_id',$product->child_category_id)
+            ->where('company_id',$product->company_id)
             ->take(10)->get();
         return view('products.product-detail',compact('reviews','product','related_products'));
     }

@@ -75,18 +75,18 @@
                                 @foreach($categories as $category)
                                     <div class="container">
                                         <div class="">
-                                            <a href="{{route('product.category',$category->slug)}}" class="font-bold text-2xl">{{$category->name}}</a>
+                                            <a href="{{route('product.category',$category->slug)}}" class="font-bold text-2xl">{{$category->getTranslatedAttribute('name')}}</a>
                                             @foreach($parent_categories as $parent_category)
                                                 @if($parent_category->category_id == $category->id)
                                                     <div class="m-all-20">
                                                         <a href="{{route('product.category.parent',['slugName' => $category->slug,'parentSlug'=>$parent_category->slug])}}"
-                                                           class="font-semibold text-lg my-2">{{$parent_category->name}}</a>
+                                                           class="font-semibold text-lg my-2">{{$parent_category->getTranslatedAttribute('name')}}</a>
                                                         <div>
                                                             @foreach($child_categories as $child_category)
                                                                 @if($parent_category->id == $child_category->parent_id)
                                                                     <h1 class="text-sm font-medium my-3">
                                                                         <a href="{{route('product.category.child',['parentSlug'=>$parent_category->slug,'childSlug' => $child_category->slug])}}">
-                                                                            {{$child_category->name}}
+                                                                            {{$child_category->getTranslatedAttribute('name')}}
                                                                         </a>
                                                                     </h1>
                                                                 @endif
@@ -116,14 +116,14 @@
                 </div>
 
                 <div class="wrap-icon-header flex-c-b">
-                    @if(session('lang') == "en")
-                        <a href="{{ url('index/uz') }}">UZ</a>
-                        <span class="ml-2 mr-2">|</span>
-                        <p class="text-blue-500">ENG</p>
-                    @else
+                    @if(session('lang') == "uz")
                         <p class="text-blue-500">UZ</p>
                         <span class="ml-2 mr-2">|</span>
                         <a href="{{ url('index/en') }}">ENG</a>
+                    @else
+                        <a href="{{ url('index/uz') }}">UZ</a>
+                        <span class="ml-2 mr-2">|</span>
+                        <p class="text-blue-500">ENG</p>
                     @endif
                 </div>
 

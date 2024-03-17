@@ -9,9 +9,18 @@
         <form action="{{ $form_route }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="name" value="{{old('name',$product->name??null)}}">
-                @error('name')
+                <label for="name_uz">Name uz</label>
+                <input type="text" class="form-control" id="name_uz" name="name_uz"
+                       placeholder="name_uz" value="{{old('name_uz',$product->name_uz??null)}}">
+                @error('name_uz')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="name_en">Name en</label>
+                <input type="text" class="form-control" id="name_en" name="name_en"
+                       placeholder="name_en" value="{{old('name_en',$product->name_en??null)}}">
+                @error('name_en')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>
@@ -77,16 +86,32 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="title" value="{{old('title',$product->title??null)}}">
-                @error('title')
+                <label for="title_uz">Title uz</label>
+                <input type="text" class="form-control" id="title_uz" name="title_uz"
+                       placeholder="title_uz" value="{{old('title_uz',$product->title_uz??null)}}">
+                @error('title_uz')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" rows="3" name="description">{{$product->description??null}}</textarea>
-                @error('description')
+                <label for="title">Title en</label>
+                <input type="text" class="form-control" id="title_en" name="title_en"
+                       placeholder="title_en" value="{{old('title_en',$product->title_en??null)}}">
+                @error('title_en')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="desc_uz">Description uz</label>
+                <textarea class="form-control" id="desc_uz" rows="3" name="desc_uz">{{$product->desc_uz??null}}</textarea>
+                @error('desc_uz')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="desc_en">Description en</label>
+                <textarea class="form-control" id="desc_en" rows="3" name="desc_en">{{$product->desc_en??null}}</textarea>
+                @error('desc_en')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>

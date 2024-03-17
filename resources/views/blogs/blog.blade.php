@@ -37,11 +37,11 @@
                                 <div class="p-t-32">
                                     <h4 class="p-b-15">
                                         <a href="{{route('blog.detail',$blog->id)}}" class="ltext-108 cl2 hov-cl1 trans-04">
-                                            {{$blog->title}}
+                                            {{$blog->getTranslatedAttribute('title')}}
                                         </a>
                                     </h4>
                                     <p class="stext-117 cl6">
-                                        {{$blog->desc}}
+                                        {{$blog->getTranslatedAttribute('desc')}}
                                     </p>
                                 </div>
                             </div>
@@ -62,7 +62,11 @@
                                     </a>
                                     <div class="size-215 flex-col-t p-t-8">
                                         <a href="{{route('product.detail',$product->id)}}" class="stext-116 cl8 hov-cl1 trans-04">
-                                            {{$product->name}}
+                                            @if(session('lang') == "uz")
+                                                {{$product->name_uz}}
+                                            @else
+                                                {{$product->name_en}}
+                                            @endif
                                         </a>
                                         <span class="stext-116 cl6 p-t-20">
 											{{$product->formatted_price}} so'm

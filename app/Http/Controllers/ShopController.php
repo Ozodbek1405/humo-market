@@ -27,7 +27,8 @@ class ShopController extends Controller
         Cart::instance('cart')
               ->add([
                   'id' => $product->id,
-                  'name' => $product->name,
+                  'name_uz' => $product->name_uz,
+                  'name_en' => $product->name_en,
                   'qty' => $product_count,
                   'price' => $product->formatted_price,
                   'options' => [

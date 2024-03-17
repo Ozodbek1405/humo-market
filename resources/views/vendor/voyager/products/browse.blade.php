@@ -38,7 +38,11 @@
                 @foreach($products as $product)
                     <tr>
                         <td>{{$product->id}}</td>
-                        <td>{{$product->name}}</td>
+                        @if(session('lang') == "uz")
+                            <td>{{$product->name_uz}}</td>
+                        @else
+                            <td>{{$product->name_en}}</td>
+                        @endif
                         <td>{{$product->price}}</td>
                         <td>{{$product->discount}}</td>
                         <td>{{$product->title}}</td>

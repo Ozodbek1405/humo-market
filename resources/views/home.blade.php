@@ -171,7 +171,11 @@
                                             <div class="block2-txt flex-w flex-t p-t-14">
                                                 <div class="block2-txt-child1 flex-col-l ">
                                                     <a href="{{route('product.detail',$related_product->id)}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                        {{$related_product->name}}
+                                                        @if(session('lang') == "uz")
+                                                            {{$related_product->name_uz}}
+                                                        @else
+                                                            {{$related_product->name_en}}
+                                                        @endif
                                                     </a>
                                                     <span class="stext-105 cl3">
                                                         {{$related_product->formatted_price}} so'm

@@ -21,8 +21,10 @@
                     <div class="breadcrumb__links">
                         <a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a>
                         <a href="{{route('product.category.all')}}">Categories</a>
-                        <a href="{{route('product.category',$category->slug)}}">{{$category->name}}</a>
-                        <span>{{$parent_category->name}}</span>
+                        <a href="{{route('product.category',$category->slug)}}">
+                            {{$category->getTranslatedAttribute('name')}}
+                        </a>
+                        <span>{{$parent_category->getTranslatedAttribute('name')}}</span>
                     </div>
                 </div>
             </div>

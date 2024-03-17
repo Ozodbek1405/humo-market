@@ -60,7 +60,13 @@
                                         </td>
                                         <td width="20%" class="price">
                                             <div class="name-product">
-                                                <a href="{{route('product.detail',$item->id)}}">{{$item->name}}</a>
+                                                <a href="{{route('product.detail',$item->id)}}">
+                                                    @if(session('lang') == "uz")
+                                                        {{$item->name_uz}}
+                                                    @else
+                                                        {{$item->name_en}}
+                                                    @endif
+                                                </a>
                                             </div>
                                         </td>
                                         <td width="20%" class="price">{{$item->price}} so'm</td>

@@ -81,11 +81,14 @@ class AdminProductController extends Controller
     {
         $data = $request->validated();
         $product = $this->product->create([
-            'name' => $data['name'],
+            'name_uz' => $data['name_uz'],
+            'name_en' => $data['name_en'],
             'price' => $data['price'],
             'discount' => $data['discount']??null,
-            'description' => $data['description'],
-            'title' =>  $data['title'],
+            'desc_en' => $data['desc_en'],
+            'desc_uz' => $data['desc_uz'],
+            'title_uz' =>  $data['title_uz'],
+            'title_en' =>  $data['title_en'],
             'brand_id' =>  $data['brand_id'],
             'category_id' =>  $data['category_id'],
             'parent_category_id' =>  $data['parent_category_id'],
@@ -152,11 +155,14 @@ class AdminProductController extends Controller
         $data = $request->validated();
         $product = $this->product->find($product_id);
         $product->update([
-            'name' => $data['name'],
+            'name_en' => $data['name_en'],
+            'name_uz' => $data['name_uz'],
             'price' => $data['price'],
             'discount' => $data['discount']??null,
-            'description' => $data['description'],
-            'title' =>  $data['title'],
+            'desc_uz' => $data['desc_uz'],
+            'desc_en' => $data['desc_en'],
+            'title_uz' =>  $data['title_uz'],
+            'title_en' =>  $data['title_en'],
             'brand_id' =>  $data['brand_id'],
             'category_id' =>  $data['category_id'],
             'parent_category_id' =>  $data['parent_category_id'],

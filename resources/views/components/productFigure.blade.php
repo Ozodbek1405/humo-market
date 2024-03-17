@@ -23,7 +23,11 @@
     <div class="col-md-6 col-lg-5 p-b-30">
         <div class="p-r-50 p-t-5 p-lr-0-lg">
             <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                {{$product->name}}
+                @if(session('lang') == "uz")
+                    {{$product->name_uz}}
+                @else
+                    {{$product->name_en}}
+                @endif
             </h4>
             <span class="mtext-106 cl2">
                 {{$product->formatted_price}} so'm
@@ -32,7 +36,11 @@
                 <span class="font-bold">Brand : </span> {{$product->brand->name}}
             </p>
             <p class="stext-102 cl3 p-t-23">
-                {{$product->title}}
+                @if(session('lang') == "uz")
+                    {{$product->title_uz}}
+                @else
+                    {{$product->title_en}}
+                @endif
             </p>
             <div class="p-t-33">
                 <form action="{{route('addToCart',$product->id)}}" method="POST">

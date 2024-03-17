@@ -20,7 +20,7 @@
                     <div class="breadcrumb__links">
                         <a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a>
                         <a href="{{route('product.category.all')}}">Categories</a>
-                        <span>{{$category->name}}</span>
+                        <span>{{$category->getTranslatedAttribute('name')}}</span>
                     </div>
                 </div>
             </div>
