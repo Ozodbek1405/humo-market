@@ -15,12 +15,16 @@
                             <li class="breadcrumb-item active" aria-current="page">User Profile</li>
                         </ol>
                     </nav>
-                    <button class="alert alert-info">
-                        <a href="{{route('change.profile.password',auth()->id())}}">Change password</a>
-                    </button>
-                    <button class="alert alert-primary">
-                        <a href="{{route('logout.perform')}}">Logout</a>
-                    </button>
+                    <a href="{{route('change.profile.password',auth()->id())}}">
+                        <button class="alert alert-info">
+                            Change password
+                        </button>
+                    </a>
+                    <a href="{{route('logout.perform')}}">
+                        <button class="alert alert-primary">
+                            Logout
+                        </button>
+                    </a>
                 </div>
             </div>
 

@@ -28,8 +28,8 @@
                      data-setbg="{{asset('storage/uploads/'.$product->formatted_images[0])}}">
                     <ul class="product__hover">
                         <li>
-                            <a href="{{asset('storage/uploads/'.$product->formatted_images[0])}}" class="image-popup">
-                                <i class="zmdi zmdi-eye"></i>
+                            <a href="/chat/{{$product->user_id}}" class="image">
+                                <i class="zmdi zmdi-comments"></i>
                             </a>
                         </li>
                         <li>

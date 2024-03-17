@@ -17,6 +17,7 @@ return new class extends Migration
             $table->timestamp('verify_expiration')->nullable();
             $table->string('google_id')->nullable();
             $table->integer('company_id')->nullable();
+            $table->integer('user_id')->nullable();
         });
     }
 
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->dropColumn('verify_expiration');
             $table->dropColumn('google_id');
             $table->dropColumn('company_id');
+            $table->dropColumn('user_id');
         });
     }
 };
