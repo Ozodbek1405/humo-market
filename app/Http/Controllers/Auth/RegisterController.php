@@ -19,6 +19,11 @@ class RegisterController extends Controller
         /** @var User $user */
         $user = User::query()->create($data);
         auth()->login($user);
+        if (session()->has('redirectTo')) {
+            $url = session()->get('redirectTo');
+            session()->forget('redirectTo');
+            return redirect($url);
+        }
         return redirect()->route('home');
     }
 }

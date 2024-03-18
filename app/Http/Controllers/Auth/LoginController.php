@@ -27,6 +27,11 @@ class LoginController extends Controller
             return redirect()->back()->with('error', 'The phone number or password is incorrect');
         }
         auth()->login($user);
+        if (session()->has('redirectTo')) {
+            $url = session()->get('redirectTo');
+            session()->forget('redirectTo');
+            return redirect($url);
+        }
         return redirect()->route('home');
     }
 
