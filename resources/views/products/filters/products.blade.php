@@ -65,6 +65,8 @@
                         <a href="{{route('product.detail',$product->id)}}" class="hover:text-gray-700">
                             @if(session('lang') == "uz")
                                 {{$product->name_uz}}
+                            @elseif(session('lang') == "ru")
+                                {{$product->name_ru}}
                             @else
                                 {{$product->name_en}}
                             @endif

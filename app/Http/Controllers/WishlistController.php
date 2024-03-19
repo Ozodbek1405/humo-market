@@ -21,6 +21,7 @@ class WishlistController extends Controller
                 'id' => $product->id,
                 'name_uz' => $product->name_uz,
                 'name_en' => $product->name_en,
+                'name_ru' => $product->name_ru,
                 'price' => $product->formatted_price,
                 'qty' => 1,
                 'options' => ['image' => $product->formatted_images[0]]

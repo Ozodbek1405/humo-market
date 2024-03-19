@@ -112,6 +112,7 @@ return [
         'locales' => [
             'en',
             'uz',
+            'ru',
         ],
     ],
 

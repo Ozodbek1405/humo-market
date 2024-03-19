@@ -25,6 +25,14 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="name_ru">Name ru</label>
+                <input type="text" class="form-control" id="name_ru" name="name_ru"
+                       placeholder="name_ru" value="{{old('name_ru',$product->name_ru??null)}}">
+                @error('name_ru')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="company_id">Company name</label>
                 <select class="form-control" id="company_id" name="company_id">
                     <option value="">Tanlang</option>
@@ -102,6 +110,14 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="title">Title ru</label>
+                <input type="text" class="form-control" id="title_ru" name="title_ru"
+                       placeholder="title_ru" value="{{old('title_ru',$product->title_ru ?? null)}}">
+                @error('title_ru')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="desc_uz">Description uz</label>
                 <textarea class="form-control" id="desc_uz" rows="3" name="desc_uz">{{$product->desc_uz??null}}</textarea>
                 @error('desc_uz')
@@ -112,6 +128,13 @@
                 <label for="desc_en">Description en</label>
                 <textarea class="form-control" id="desc_en" rows="3" name="desc_en">{{$product->desc_en??null}}</textarea>
                 @error('desc_en')
+                <p style="color: #f11313">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="desc_ru">Description ru</label>
+                <textarea class="form-control" id="desc_ru" rows="3" name="desc_ru">{{$product->desc_ru??null}}</textarea>
+                @error('desc_ru')
                 <p style="color: #f11313">{{ $message }}</p>
                 @enderror
             </div>

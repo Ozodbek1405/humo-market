@@ -25,6 +25,8 @@
             <h4 class="mtext-105 cl2 js-name-detail p-b-14">
                 @if(session('lang') == "uz")
                     {{$product->name_uz}}
+                @elseif(session('lang') == "ru")
+                    {{$product->name_ru}}
                 @else
                     {{$product->name_en}}
                 @endif

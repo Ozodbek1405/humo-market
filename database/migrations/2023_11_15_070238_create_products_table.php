@@ -15,12 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name_uz');
             $table->string('name_en');
+            $table->string('name_ru');
             $table->string('price')->nullable();
             $table->string('discount')->nullable();
             $table->string('title_uz')->nullable();
             $table->string('title_en')->nullable();
+            $table->string('title_ru')->nullable();
             $table->string('desc_uz')->nullable();
             $table->string('desc_en')->nullable();
+            $table->string('desc_ru')->nullable();
             $table->longText('images')->nullable();
             $table->integer('brand_id')->nullable();
             $table->integer('category_id')->nullable();

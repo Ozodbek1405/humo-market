@@ -120,10 +120,20 @@
                         <p class="text-blue-500">UZ</p>
                         <span class="ml-2 mr-2">|</span>
                         <a href="{{ url('index/en') }}">ENG</a>
+                        <span class="ml-2 mr-2">|</span>
+                        <a href="{{ url('index/ru') }}">RU</a>
+                    @elseif(session('lang') == "ru")
+                        <a href="{{ url('index/uz') }}">UZ</a>
+                        <span class="ml-2 mr-2">|</span>
+                        <a href="{{ url('index/en') }}">ENG</a>
+                        <span class="ml-2 mr-2">|</span>
+                        <p class="text-blue-500">RU</p>
                     @else
                         <a href="{{ url('index/uz') }}">UZ</a>
                         <span class="ml-2 mr-2">|</span>
                         <p class="text-blue-500">ENG</p>
+                        <span class="ml-2 mr-2">|</span>
+                        <a href="{{ url('index/ru') }}">RU</a>
                     @endif
                 </div>
 

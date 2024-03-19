@@ -3,6 +3,7 @@
 <script>
     CKEDITOR.replace('desc_en');
     CKEDITOR.replace('desc_uz');
+    CKEDITOR.replace('desc_ru');
     $(function () {
         $('.product_multiple_select').each(function () {
             $(this).select2({

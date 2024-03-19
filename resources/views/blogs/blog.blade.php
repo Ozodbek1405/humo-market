@@ -64,6 +64,8 @@
                                         <a href="{{route('product.detail',$product->id)}}" class="stext-116 cl8 hov-cl1 trans-04">
                                             @if(session('lang') == "uz")
                                                 {{$product->name_uz}}
+                                            @elseif(session('lang') == "ru")
+                                                {{$product->name_ru}}
                                             @else
                                                 {{$product->name_en}}
                                             @endif

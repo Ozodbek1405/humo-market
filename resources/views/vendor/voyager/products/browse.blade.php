@@ -40,6 +40,8 @@
                         <td>{{$product->id}}</td>
                         @if(session('lang') == "uz")
                             <td>{{$product->name_uz}}</td>
+                        @elseif(session('lang') == "ru")
+                            <td>{{$product->name_ru}}</td>
                         @else
                             <td>{{$product->name_en}}</td>
                         @endif

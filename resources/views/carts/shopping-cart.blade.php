@@ -54,6 +54,8 @@
                                                 <a href="{{route('product.detail',$cartItem->id)}}">
                                                     @if(session('lang') == "uz")
                                                         {{$cartItem->name_uz}}
+                                                    @elseif(session('lang') == "ru")
+                                                        {{$cartItem->name_ru}}
                                                     @else
                                                         {{$cartItem->name_en}}
                                                     @endif

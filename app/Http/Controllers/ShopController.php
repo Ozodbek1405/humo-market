@@ -29,6 +29,7 @@ class ShopController extends Controller
                   'id' => $product->id,
                   'name_uz' => $product->name_uz,
                   'name_en' => $product->name_en,
+                  'name_ru' => $product->name_ru,
                   'qty' => $product_count,
                   'price' => $product->formatted_price,
                   'options' => [
