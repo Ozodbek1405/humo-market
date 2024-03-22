@@ -28,7 +28,7 @@
                      data-setbg="{{asset('storage/uploads/'.$product->formatted_images[0])}}">
                     <ul class="product__hover">
                         <li>
-                            <a href="/chat/{{$product->user_id}}" class="image">
+                            <a href="/chat/{{$product->user_id}}" class="image" title="Chatga o'tish">
                                 <i class="zmdi zmdi-comments"></i>
                             </a>
                         </li>

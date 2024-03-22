@@ -8,7 +8,7 @@
     <meta name="robots" content="noindex">
     <meta name="googlebot-news" content="noindex">
     <meta property="og:title" content="Humo market" />
-    <meta property="og:description" content="Humo market ulgurji savdo" />
+    <meta property="og:description" content="Humo ulgurji" />
     <meta name="author" content="Ro`ziqulov Baxtiyor">
     <meta
         name="keywords"
